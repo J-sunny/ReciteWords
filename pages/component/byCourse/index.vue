@@ -1,0 +1,336 @@
+<template>
+	<view class="byCourseBox">
+		<!-- 分类 -->
+		<view class="byList">
+			<!-- 分类标题 -->
+			<view class="courseNavBox">
+				<view class="courseType" @tap=actives1()>
+					<label class="typeTitle" for="">大学四级</label>
+					<uni-icon class='typeIcon' :type="active1==1?'arrowdown ':'arrowup'" style='font-size: 20rpx;'></uni-icon>
+				</view>
+				<view class="courseType courseBorder" @tap=actives2()>
+					<label class="typeTitle" for="">第三章</label>
+					<uni-icon class='typeIcon' :type="active2==1?'arrowdown ':'arrowup'"></uni-icon>
+				</view>
+				<view class="courseType" @tap=actives3()>
+					<label class="typeTitle" for="">第四节</label>
+					<uni-icon class='typeIcon' :type="active3==1?'arrowdown ':'arrowup'"></uni-icon>
+				</view>
+			</view>
+			<!-- 分类选项 -->
+			<view class="courseOptions" v-if='show'>
+				<view class="options" v-for="(item,index) in 3" :key='item' @tap="optionsActive(index)">{{item}}</view>
+				<view class="options">四级核心词汇</view>
+				<view class="options">大学六级</view>
+				<view class="options">六级核心词汇</view>
+				<view class="options">专业四级</view>
+			</view>
+		</view>
+
+		<!-- 内容 -->
+		<view class="courseConBox">
+			<!-- <view class="courseList">
+				<view class="Title"><label for="" class="bigTitle">四级核心词汇</label><label class="smallTitle" for="">chapter 1-Lesson
+						2</label></view>
+				<view class="listCon" v-for="item in 5" :key='item'>
+					<view class="listConRadio">
+						<checkbox value="cb" color="#FFBB00" style="transform:scale(1)" />
+					</view>
+					<view class="listConWord">
+						<view for="" class="word">abandon</view>
+						<view for="" class="Interpretation">n.同谋，从犯；附件</view>
+					</view>
+				</view>
+			</view> -->
+
+			<view class="courseList" v-for="i in 4" :key=i>
+				<view class="Title"><label class="bigTitle">四级核心词汇</label><label class="smallTitle" for="">chapter 1-Lesson
+						2</label></view>
+				<van-checkbox-group :value="result" @change="onChanges()">
+					<view class="checkedBox" v-for="(item , index2) in list" :key="index2">
+						<view class="box" :style="{height:'160rpx',padding:'40rpx 24rpx' ,'border-radius':'16rpx','margin-top':'32rpx',background:'#fff','box-sizing': 'border-box'}">
+							<van-checkbox class="vanCheckBox" :name="item" checked-color="#FFBB00">
+								<view class="words">
+									<view for="" class="word">{{item}}</view>
+									<view for="" class="Interpretation">n.同谋，从犯；附件</view>
+								</view>
+							</van-checkbox>
+						</view>
+					</view>
+				</van-checkbox-group>
+			</view>
+		</view>
+		<!-- 底部全选 -->
+		<view class="allCheck">
+			<!-- <label class="radio"> -->
+			<!-- <checkbox  color="#FFBB00" style="transform:scale(1)" @tap="checkAll=!checkAll" :checked="checkAll"/>全选 -->
+			<van-checkbox class="radio" :value="checkAll" @change="onChange()" checked-color="#FFBB00">全选</van-checkbox>
+			<!-- </label> -->
+			<navigator url='/pages/view/home/arrangementTasks/checkSelected' class="lookCheck" :class="checkAll==true?'lookActive':''">
+				查看已选（4）
+			</navigator>
+		</view>
+	</view>
+</template>
+
+<script>
+	// import uniIcon from "../../../components/uni-icon/uni-icon.vue"
+	import {
+		uniIcon
+	} from '@dcloudio/uni-ui/lib/uni-icon/uni-icon.vue'
+	export default {
+		data() {
+			return {
+				active1: 1,
+				active2: 1,
+				active3: 1,
+				show: false,
+				checkAll: false,
+				list: ['a', 'b', 'c'],
+				result: ['a', 'b'],
+
+			};
+		},
+		components: {
+			uniIcon
+		},
+		methods: {
+			actives1() {
+				this.active1 = !this.active1
+				this.show = !this.show
+				console.log(this.active1)
+			},
+			actives2() {
+				this.active2 = !this.active2
+				this.show = !this.show
+				console.log(this.active2)
+			},
+			actives3() {
+				this.active3 = !this.active3
+				this.show = !this.show
+				console.log(this.active3)
+			},
+			optionsActive(val) {
+				console.log(val)
+				this.show = false
+				this.active1 = !this.active1
+			},
+			onChange(event) {
+				console.log(event.detail)
+				this.checkAll = event.detail
+			},
+			onChanges(event) {
+				this.result = event.detail
+				console.log(this.result)
+			}
+		},
+	}
+</script>
+
+<style lang="scss">
+	.byCourseBox {
+		position: relative;
+
+		.van-checkbox {
+			height: 160rpx;
+		}
+
+		.word {
+			font-size: 32rpx;
+			font-weight: bold;
+			color: rgba(46, 53, 72, 1);
+		}
+
+		.van-checkbox__icon-wrap {
+			// margin-top: 20rpx;
+
+		}
+
+
+		.Interpretation {
+			font-size: 24rpx;
+			font-weight: 400;
+			color: rgba(151, 157, 171, 1);
+			margin-top: 12rpx;
+		}
+
+		// 分类
+		.byList {
+			position: fixed;
+			top: 288rpx;
+			z-index: 100;
+			background-color: #FBFBFB;
+			margin-bottom: 32rpx;
+
+			// 分类标题
+			.courseNavBox {
+				border-bottom: 1rpx solid #F5F7F7;
+				overflow: hidden;
+				padding: 24rpx 0 18rpx 0;
+				background: rgba(255, 255, 255, 1);
+
+				.courseBorder {
+					border-left: 2rpx solid #F5F7F7;
+					border-right: 2rpx solid #F5F7F7;
+				}
+
+				.courseType {
+					// padding: 24rpx 0 18rpx 0;
+					width: 248rpx;
+					height: 48rpx;
+					line-height: 48rpx;
+					background: rgba(255, 255, 255, 1);
+					font-size: 30rpx;
+					font-weight: 400;
+					color: #5C6371;
+					text-align: center;
+					float: left;
+
+					.typeTitle {
+						margin-right: -12rpx;
+					}
+
+					.typeIcon {
+						float: right;
+						margin-right: 30rpx;
+					}
+				}
+			}
+
+			// 分类选项
+			.courseOptions {
+				padding-bottom: 16rpx;
+				border-radius: 0px 0px 20rpx 20rpx;
+				background-color: #fff;
+				box-shadow: 0px 30rpx 40rpx rgba(201, 201, 201, 0.3);
+				position: absolute;
+				// position: fixed;
+				// top:90rpx;
+				// left: 0;
+				z-index: 50;
+				width: 100%;
+
+				.options {
+					width: 100%;
+					height: 96rpx;
+					background: rgba(255, 255, 255, 1);
+					text-align: center;
+					line-height: 96rpx;
+					font-size: 30rpx;
+					font-weight: 400;
+					color: #5C6371;
+
+
+				}
+			}
+		}
+
+		// 内容
+		.courseConBox {
+			padding: 0 32rpx 120rpx 32rpx;
+			box-sizing: border-box;
+			margin-top: 410rpx;
+
+
+			.courseList {
+				.Title {
+					margin-top: 32rpx;
+
+					.bigTitle {
+						font-size: 32rpx;
+						font-weight: bold;
+						color: rgba(46, 53, 72, 1);
+					}
+
+					.smallTitle {
+						font-size: 26rpx;
+						font-weight: 500;
+						color: rgba(92, 99, 113, 1);
+						margin-left: 24rpx;
+					}
+				}
+
+				.listCon {
+					margin-top: 16rpx;
+					width: 100%;
+					height: 138rpx;
+					background: rgba(255, 255, 255, 1);
+					border-radius: 16rpx;
+					padding: 24rpx;
+					box-sizing: border-box;
+
+					.listConRadio {
+						// height: 100%;
+						float: left;
+						line-height: 90rpx;
+					}
+
+					.listConWord {
+						float: left;
+						margin-left: 24rpx;
+
+						.word {
+							font-size: 32rpx;
+							font-weight: bold;
+							color: rgba(46, 53, 72, 1);
+						}
+
+						.Interpretation {
+							font-size: 24rpx;
+							font-weight: 400;
+							color: rgba(151, 157, 171, 1);
+							margin-top: 12rpx;
+						}
+					}
+				}
+
+			}
+		}
+
+		// 底部全选
+		.allCheck {
+			padding: 0 32rpx;
+			box-sizing: border-box;
+			position: fixed;
+			bottom: 0;
+			width: 100%;
+			height: 112rpx;
+			background: #FFFFFF;
+			box-shadow: 0px -6rpx 24rpx rgba(201, 201, 201, 1);
+			opacity: 1;
+			z-index: 99999999;
+
+			.radio {
+				line-height: 112rpx;
+				font-size: 32rpx;
+				font-weight: 500;
+				color: rgba(46, 53, 72, 1);
+				margin-top: 40rpx;
+				display: inline-block;
+			}
+
+			.lookCheck {
+				display: inline-block;
+				width: 456rpx;
+				height: 84rpx;
+				opacity: 1;
+				border-radius: 44rpx;
+				float: right;
+				text-align: center;
+				font-size: 32rpx;
+				font-weight: 400;
+				line-height: 84rpx;
+				opacity: 1;
+				margin-top: 14rpx;
+				background-color: #EFEFF1;
+				color: #979DAB;
+
+			}
+
+			.lookActive {
+				background: rgba(255, 187, 0, 1);
+				color: rgba(255, 255, 255, 1);
+			}
+		}
+	}
+</style>

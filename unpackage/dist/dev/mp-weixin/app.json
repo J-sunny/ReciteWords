@@ -1,0 +1,49 @@
+{
+  "pages": [
+    "pages/view/home/index/index",
+    "pages/view/home/arrangementTasks/index",
+    "pages/view/mine/myInformation/index",
+    "pages/view/mine/myInformation/changePassword",
+    "pages/view/login/index",
+    "pages/view/mine/approvalStudents/index",
+    "pages/view/mine/classManagement/seeDetails",
+    "pages/view/mine/classManagement/index",
+    "pages/view/home/arrangementTasks/checkSelected",
+    "pages/component/byLetter/index",
+    "pages/component/byCourse/index",
+    "components/lee-select/lee-select/lee-select",
+    "pages/view/home/details/ranking",
+    "pages/view/home/details/studentDetails",
+    "pages/view/home/details/operationalDetails",
+    "pages/view/mine/index/index"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8",
+    "navigationStyle": "custom"
+  },
+  "tabBar": {
+    "color": "#979DAB",
+    "selectedColor": "#FFBB00",
+    "borderStyle": "white",
+    "list": [
+      {
+        "selectedIconPath": "static/images/homeTB.png",
+        "iconPath": "static/images/home.png",
+        "pagePath": "pages/view/home/index/index",
+        "text": "首页"
+      },
+      {
+        "selectedIconPath": "static/images/myTB.png",
+        "iconPath": "static/images/my.png",
+        "pagePath": "pages/view/mine/index/index",
+        "text": "我的"
+      }
+    ]
+  },
+  "usingComponents": {},
+  "sitemapLocation": "sitemap16.json"
+}

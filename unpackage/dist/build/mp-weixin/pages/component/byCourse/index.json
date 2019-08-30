@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "布置任务-按班级选择",
+  "usingComponents": {
+    "van-checkbox": "../../../wxcomponents/dist/checkbox/index",
+    "van-checkbox-group": "../../../wxcomponents/dist/checkbox-group/index",
+    "uni-icon": "/node-modules/@dcloudio/uni-ui/lib/uni-icon/uni-icon"
+  }
+}

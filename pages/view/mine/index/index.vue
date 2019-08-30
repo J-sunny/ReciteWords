@@ -1,0 +1,205 @@
+<template>
+	<view class="myIndexBOx">
+		<!-- 顶部导航背景图 -->
+		<image class='site-img' src="../../../../static/images/BJ.png" catchtap='navmap'></image>
+		<view class="navTitle">我的</view>
+		<!--用户信息  -->
+		<navigator hover-class='none' url="../myInformation/index" class="userInfoBox">
+			<image class="userPic" src="../../../../static/images/touXiang%20(1).png" mode=""></image>
+			<view class="userText">
+				<text class="userName">吴琳</text><br>
+				<label class="userUni">华中师范大学 XF20120125</label>
+			</view>
+		</navigator>
+		<!-- 内容 -->
+		<view class="conBox">
+			<navigator hover-class='none' url="../classManagement/seeDetails" class="classManagement">
+				<view class="conTitle">班级管理</view>
+				<view class="conIdes">管理班级，学生</view>
+			</navigator>
+			<navigator hover-class='none' url="../approvalStudents/index" class="examinationStu">
+				<view class="conTitle">审批学生</view>
+				<view class="conIdes">审核学生信息</view>
+			</navigator>
+			<!-- 推退出登录 -->
+			<view class="loginOutBox">
+				<label class="loginOut" @click="bindClick('1')">退出登录</label>
+			</view>
+		</view>
+
+		<!-- 退出登录弹出框 -->
+		<neil-modal :show="show1" @close="closeModal('1')" align="center" @confirm='confirm()' @cancel='cancel()' content="是否确定退出登录？">
+		</neil-modal>
+	</view>
+</template>
+
+<script>
+	import neilModal from '../../../../components/neilModal/neil-modal.vue';
+	export default {
+		data() {
+			return {
+				show1: false,
+			}
+		},
+		components: {
+			neilModal
+		},
+		methods: {
+			// 返回
+			goBack() {
+				uni.navigateBack({
+					delta: 1
+				});
+			},
+			bindClick(type) {
+				console.log(this[`show${type}`])
+				this[`show${type}`] = true
+				console.log(this[`show${type}`])
+			},
+			closeModal(type) {
+				console.log(`监听到close`)
+				this[`show${type}`] = false
+			},
+			confirm() {
+				console.log(`监听到点击确认`)
+			},
+			cancel() {
+				console.log(`监听到点击取消`)
+			}
+
+		},
+	}
+</script>
+
+<style lang="scss">
+	.myIndexBOx {
+		position: relative;
+
+		// 顶部导航背景图
+		.site-img {
+			width: 100%;
+			height: 454rpx;
+		}
+
+		.navTitle {
+			width: 100%;
+			position: absolute;
+			text-align: center;
+			top: 58rpx;
+			font-size: 36rpx;
+			font-weight: 800;
+			color: rgba(255, 255, 255, 1);
+		}
+
+		// 用户信息
+		.userInfoBox {
+			position: absolute;
+			overflow: hidden;
+			top: 192rpx;
+
+			.userPic {
+				width: 96rpx;
+				height: 96rpx;
+				border: 6rpx solid rgba(255, 220, 122, 1);
+				border-radius: 50%;
+				opacity: 1;
+				float: left;
+				margin-left: 48rpx;
+			}
+
+			.userText {
+				color: rgba(255, 255, 255, 1);
+				float: left;
+				margin-left: 32rpx;
+
+				.userName {
+					font-size: 36rpx;
+					font-weight: bold;
+				}
+
+				.userUni {
+					font-size: 24rpx;
+					font-weight: 500;
+				}
+			}
+		}
+
+		// 内容
+		.conBox {
+			width: 100%;
+			background: rgba(251, 251, 251, 1);
+			border-radius: 20rpx 20rpx 0px 0px;
+			padding-top: 50rpx;
+			padding-left: 18rpx;
+			box-sizing: border-box;
+			position: absolute;
+			top: 368rpx;
+			left: 0;
+			width: 100%;
+			overflow: hidden;
+
+			padding-bottom: 36rpx;
+
+			.conTitle {
+				font-size: 32rpx;
+				font-weight: bold;
+				color: rgba(255, 255, 255, 1);
+				margin-top: 66rpx;
+			}
+
+			.conIdes {
+
+				font-size: 24rpx;
+				font-weight: 300;
+				color: rgba(255, 255, 255, 1);
+				margin-top: 8rpx;
+			}
+
+			.classManagement {
+				width: 100%;
+				height: 236rpx;
+				background-image: url('../../../../static/images/beijing.png');
+				background-size: 100% 100%;
+				padding-left: 54rpx;
+				box-sizing: border-box;
+				overflow: hidden;
+			}
+
+			.examinationStu {
+				width: 100%;
+				height: 236rpx;
+				background-image: url('../../../../static/images/beijing2.png');
+				padding-left: 54rpx;
+				box-sizing: border-box;
+				overflow: hidden;
+				background-size: 100% 100%;
+			}
+
+			// 退出登录
+			.loginOutBox {
+				width: 100%;
+				// background: rgba(255, 255, 255, 1);
+				line-height: 108rpx;
+				text-align: center;
+				padding: 0 40rpx;
+				box-sizing: border-box;
+				// position: fixed;
+				// bottom: 36rpx;
+				margin-top: 214rpx;
+				overflow: hidden;
+				box-sizing: border-box;
+
+				.loginOut {
+					display: inline-block;
+					height: 108rpx;
+					width: 100%;
+					background-color: #FFFFFF;
+					font-size: 32rpx;
+					font-weight: 400;
+					border-radius: 20rpx;
+					color: rgba(46, 53, 72, 1);
+				}
+			}
+		}
+	}
+</style>

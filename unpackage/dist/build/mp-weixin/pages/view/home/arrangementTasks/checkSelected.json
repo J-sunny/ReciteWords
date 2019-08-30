@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "查看已选单词",
+  "usingComponents": {
+    "van-checkbox": "../../../wxcomponents/dist/checkbox/index",
+    "van-checkbox-group": "../../../wxcomponents/dist/checkbox-group/index",
+    "van-popup": "../../../wxcomponents/dist/popup/index",
+    "popup-layer": "/components/popup-layer"
+  }
+}

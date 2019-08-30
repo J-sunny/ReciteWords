@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "布置任务-按字母选择--索引列表",
+  "usingComponents": {
+    "van-checkbox": "../../../wxcomponents/dist/checkbox/index",
+    "van-checkbox-group": "../../../wxcomponents/dist/checkbox-group/index",
+    "base-classes": "/components/lee-select/base-classes/base-classes"
+  }
+}

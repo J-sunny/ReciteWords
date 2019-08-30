@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "布置任务",
+  "usingComponents": {
+    "by-course": "/pages/component/byCourse/index",
+    "bu-letter": "/pages/component/byLetter/index"
+  }
+}

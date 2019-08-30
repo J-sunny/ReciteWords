@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "布置任务-按字母选择",
+  "usingComponents": {
+    "van-search": "../../../wxcomponents/dist/search/index",
+    "van-checkbox": "../../../wxcomponents/dist/checkbox/index",
+    "van-checkbox-group": "../../../wxcomponents/dist/checkbox-group/index",
+    "uni-indexed-list": "/node-modules/@dcloudio/uni-ui/lib/uni-indexed-list/uni-indexed-list",
+    "lee-select": "/components/lee-select/lee-select/lee-select",
+    "uni-select": "/components/lee-selectIndex/lee-select/lee-select"
+  }
+}

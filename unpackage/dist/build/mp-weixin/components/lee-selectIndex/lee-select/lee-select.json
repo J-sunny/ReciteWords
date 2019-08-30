@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "base-classes": "/components/lee-selectIndex/base-classes/base-classes"
+  },
+  "component": true
+}
