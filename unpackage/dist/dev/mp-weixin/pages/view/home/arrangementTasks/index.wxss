@@ -59,6 +59,7 @@
         border-right: 2rpx solid #F5F7F7;
 }
 .byCourseBox .byList .courseNavBox .courseType {
+        display: inline-block;
         width: 248rpx;
         height: 48rpx;
         line-height: 48rpx;
@@ -71,6 +72,12 @@
 }
 .byCourseBox .byList .courseNavBox .courseType .typeTitle {
           margin-right: -12rpx;
+          width: 200rpx;
+          overflow: hidden;
+          -o-text-overflow: ellipsis;
+             text-overflow: ellipsis;
+          white-space: nowrap;
+          display: inline-block;
 }
 .byCourseBox .byList .courseNavBox .courseType .typeIcon {
           float: right;
@@ -399,7 +406,7 @@
   z-index: 100;
   background-color: #FBFBFB;
   width: 100%;
-  padding-bottom: 38rpx;
+  padding-bottom: 28rpx;
 }
 .byLetterBox .searchs .searchBox {
     padding: 0 32rpx;

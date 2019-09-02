@@ -14,7 +14,7 @@
 		</view>
 		<!-- 词汇量 -->
 		<view class="vocabularyBox" v-if="true">
-			<view class="vocabulary" v-for="item in 6" :key=item>
+			<view class="vocabulary" v-for="(item,index) in 6" :key=item>
 				<!-- 左边 -->
 				<view style="float: left;">
 					<view class='vocTitle'>任务词汇量：<span class='yellowColor'>10个</span></view>
@@ -22,7 +22,7 @@
 					<view class='vocData'>7-10 15:00:00</view>
 				</view>
 				<!-- 右边   查看详情 -->
-				<navigator hover-class='none' class='seeDetails' url='../details/operationalDetails'>查看详情</navigator>
+				<label hover-class='none' class='seeDetails' @click="linkTo(index)">查看详情</label>
 			</view>
 		</view>
 		<!-- 暂无任务 -->
@@ -48,16 +48,61 @@
 			uniCalendar
 		},
 		data() {
-			return {};
-		},
-		methods: {
-			change(e) {
-				// console.log(e);
+			return {
+				taskCalendarList: [],
+				dayOfMissionList: [],
+				year: '',
+				month: '',
+				day: '',
 			}
 		},
-		created() {
-			
-		}
+		methods: {
+			// 日历
+			change(e) {
+				console.log(e)
+				this.year = e.year,
+					this.month = e.month,
+					this.day = e.date,
+					this.taskCalendar()
+				this.getDayOfMissionList()
+			},
+			// 获取任务日历数据
+			taskCalendar() {
+				uni.request({
+					url: 'http://192.168.2.107:8089/backwordSystem/teacher/main/taskCalendar',
+					data: {
+						year: this.year,
+						month: this.month,
+					},
+					success: (data) => {
+						console.log(data)
+						this.taskCalendarList = data.data
+					}
+				})
+			},
+			// 单日任务详情列表
+			getDayOfMissionList() {
+				uni.request({
+					url: 'http://192.168.2.107:8089/backwordSystem/teacher/main/dayOfMissionList',
+					data: {
+						month: this.month,
+						year: this.year,
+						day: this.day,
+					},
+					success: (data) => {
+						console.log(data)
+						this.dayOfMissionList = data.data
+					}
+				})
+			},
+			// 页面跳转
+			linkTo(taskId) {							
+				uni.navigateTo({
+					url: '../details/operationalDetails?taskId=' + taskId
+				})
+			}
+		},
+		created() {}
 
 	};
 </script>

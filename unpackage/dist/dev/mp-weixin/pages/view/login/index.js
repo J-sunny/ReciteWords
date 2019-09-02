@@ -105,7 +105,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
 //
 //
 //
@@ -133,12 +133,26 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 var _default =
 {
   data: function data() {
-    return {};
+    return {
+      password: '',
+      username: '' };
+
   },
   methods: {
-    login: function login() {
+    // 登录
+    loginByAccount: function loginByAccount() {
+      uni.request({
+        url: 'http://192.168.2.107:8089/backwordSystem/loginByAccount',
+        data: {
+          password: this.password,
+          username: this.username },
+
+        success: function success(data) {
+          console.log(data);
+        } });
 
     } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

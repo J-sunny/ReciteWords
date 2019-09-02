@@ -142,17 +142,43 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 var _default =
 {
   data: function data() {
     return {
       pwdType1: 'password',
-      pwdType2: 'password' };
+      pwdType2: 'password',
+      isPassword1: true,
+      isPassword2: true,
+      oldPwd: '',
+      newPwd: '',
+      showOld: false,
+      showNew: false };
 
   },
   components: {},
 
 
+  watch: {
+
+    // oldPwd(){
+    // 	if(this.oldPwd!=''){
+    // 		console.log(this.oldPwd)
+    // 		this.showOld==true
+    // 	}
+    // 	
+    // 	console.log(this.showOld)
+    // 	console.log(this.oldPwd)
+    // },
+    // newPwd(){
+    // 	if(this.newPwd!=''){
+    // 		this.showNew==true
+    // 	}
+    // 	
+    // 	console.log(this.showNew)
+    // }
+  },
   methods: {
     // 返回
     goBack: function goBack() {
@@ -162,18 +188,22 @@ var _default =
     },
     // 切换input框类型
     lookPwd1: function lookPwd1() {
+      // var isPassword=!this.isPassword
+      this.isPassword1 = !this.isPassword1;
+      console.log(this.isPassword1, '111’');
+
       if (this.pwdType1 == 'password') {
         this.pwdType1 = 'text';
-      } else
-      if (this.pwdType1 == 'text') {
+      } else if (this.pwdType1 == 'text') {
         this.pwdType1 = 'password';
       }
     },
     lookPwd2: function lookPwd2() {
+      this.isPassword2 = !this.isPassword2;
+      console.log(this.isPassword2, '111’');
       if (this.pwdType2 == 'password') {
         this.pwdType2 = 'text';
-      } else
-      if (this.pwdType2 == 'text') {
+      } else if (this.pwdType2 == 'text') {
         this.pwdType2 = 'password';
       }
     } } };exports.default = _default;

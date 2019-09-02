@@ -11,13 +11,13 @@
 		<view class="loginCon">
 			<view class="userNameBox">
 				<image class="pwdPic" src="../../../static/images/userName@2x.png" mode=""></image>
-				<input class="nameInput" type="text" placeholder="请输入用户名">
+				<input class="nameInput" v-model="username" type="text" placeholder="请输入用户名">
 			</view>
 			<view class="userNameBox">
 				<image class="pwdPic" src="../../../static/images/pwd@2x.png" mode=""></image>
-				<input class="nameInput" type="text" placeholder="请输入密码">
+				<input class="nameInput" v-model="password" type="text" placeholder="请输入密码">
 			</view>
-			<view class="loginBtn" @tap="login()">登录</view>
+			<view class="loginBtn" @tap="loginByAccount()">登录</view>
 		</view>
 	</view>
 
@@ -26,11 +26,24 @@
 <script>
 	export default {
 		data() {
-			return {}
+			return {
+				password: '',
+				username: ''
+			}
 		},
-		methods:{
-			login(){
-				
+		methods: {
+			// 登录
+			loginByAccount() {
+				uni.request({
+					url: 'http://192.168.2.107:8089/backwordSystem/loginByAccount',
+					data: {
+						password: this.password,
+						username: this.username,
+					},
+					success: (data) => {
+						console.log(data)
+					}
+				})
 			}
 		}
 	}

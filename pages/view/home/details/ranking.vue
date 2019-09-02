@@ -18,9 +18,9 @@
 					<view class="danText">参与人数</view>
 				</view>
 			</view>
-			
+
 		</view>
-	
+
 		<!-- 内容 -->
 		<view class="conBox">
 			<!-- 我的排名 -->
@@ -95,7 +95,7 @@
 						<label for="times">00:20:36</label>
 					</view>
 				</view>
-				
+
 			</view>
 		</view>
 	</view>
@@ -103,13 +103,33 @@
 
 <script>
 	export default {
+		data() {
+			return {
+				taskId: '',
+				taskRankList: []
+			}
+		},
 		methods: {
+			// 返回
 			goBack() {
 				uni.navigateBack({
 					delta: 1,
 					animationType: 'pop-out',
 					animationDuration: 200
 				});
+			},
+			// 查看任务排名
+			getDayOfMissionList() {
+				uni.request({
+					url: 'http://192.168.2.107:8089/backwordSystem/student/task/taskRank',
+					data: {
+						taskId: this.taskId,
+					},
+					success: (data) => {
+						console.log(data)
+						this.taskRankList = data.data
+					}
+				})
 			}
 		},
 		created() {
@@ -124,84 +144,85 @@
 		position: relative;
 		overflow: hidden;
 
-.headBox{
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 326rpx;
-	// 顶部背景图片
-	.site-img {
-		width: 100%;
-		position: absolute;
-		left: 0;
-		top: 0;
-		height: 326rpx;
-		z-index: 10;
-	}
-	
-	// 返回按钮
-	.arrow {
-		position: fixed;
-		left: 40rpx;
-		top: 73rpx;
-		display: flex;
-		width: 20rpx;
-		height: 20rpx;
-		border-left: 4rpx solid #fff;
-		border-top: 4rpx solid #fff;
-		transform: rotate(-45deg);
-		z-index: 20;
-	}
-	
-	// 标题
-	.title {
-		width: 100%;
-		text-align: center;
-		position: absolute;
-		left: 0;
-		top: 60rpx;
-		font-size: 36rpx;
-		font-weight: 800;
-		color: rgba(255, 255, 255, 1);
-		opacity: 1;
-		z-index: 15;
-	}
-	
-	// 排行
-	.wordNum {
-		position: fixed;
-		top: 160rpx;
-		z-index: 30;
-		padding: 0 50rpx;
-		box-sizing: border-box;
-		width: 100%;
-		color: #fff;
-		text-align: center;
-	
-		.lines {
-			border-right: 2rpx solid #FFFFFF;
-		}
-	
-		.danCi {
-			float: left;
-			width: 49%;
-	
-			.danNum {
-				font-size: 48rpx;
-				font-weight: 500;
+		.headBox {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 326rpx;
+
+			// 顶部背景图片
+			.site-img {
+				width: 100%;
+				position: absolute;
+				left: 0;
+				top: 0;
+				height: 326rpx;
+				z-index: 10;
 			}
-	
-			.danText {
-				font-size: 28rpx;
-				font-weight: 500;
+
+			// 返回按钮
+			.arrow {
+				position: fixed;
+				left: 40rpx;
+				top: 73rpx;
+				display: flex;
+				width: 20rpx;
+				height: 20rpx;
+				border-left: 4rpx solid #fff;
+				border-top: 4rpx solid #fff;
+				transform: rotate(-45deg);
+				z-index: 20;
 			}
+
+			// 标题
+			.title {
+				width: 100%;
+				text-align: center;
+				position: absolute;
+				left: 0;
+				top: 60rpx;
+				font-size: 36rpx;
+				font-weight: 800;
+				color: rgba(255, 255, 255, 1);
+				opacity: 1;
+				z-index: 15;
+			}
+
+			// 排行
+			.wordNum {
+				position: fixed;
+				top: 160rpx;
+				z-index: 30;
+				padding: 0 50rpx;
+				box-sizing: border-box;
+				width: 100%;
+				color: #fff;
+				text-align: center;
+
+				.lines {
+					border-right: 2rpx solid #FFFFFF;
+				}
+
+				.danCi {
+					float: left;
+					width: 49%;
+
+					.danNum {
+						font-size: 48rpx;
+						font-weight: 500;
+					}
+
+					.danText {
+						font-size: 28rpx;
+						font-weight: 500;
+					}
+				}
+			}
+
+
 		}
-	}
-	
-	
-}
-	
+
 		// 内容	
 		.conBox {
 			margin-top: 326rpx;

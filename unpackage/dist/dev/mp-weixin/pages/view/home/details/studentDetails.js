@@ -169,74 +169,57 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _uCharts = _interopRequireDefault(__webpack_require__(/*! ../../../../components/u-charts/u-charts.js */ 124));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var myCharts = function myCharts() {return __webpack_require__.e(/*! import() | components/u-charts/component */ "components/u-charts/component").then(__webpack_require__.bind(null, /*! ../../../../components/u-charts/component */ 186));}; // import echarts from 'echarts';
+var _uCharts = _interopRequireDefault(__webpack_require__(/*! ../../../../components/u-charts/u-charts.js */ 124));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var myCharts = function myCharts() {return __webpack_require__.e(/*! import() | components/u-charts/component */ "components/u-charts/component").then(__webpack_require__.bind(null, /*! ../../../../components/u-charts/component */ 186));};
+
+// import echarts from 'echarts';
 // import mpvueEcharts from 'mpvue-echarts';
-var _self;var canvaColumn = null;var _default = { components: { myCharts: myCharts }, data: function data() {return { cWidth: '', cHeight: '', pixelRatio: 1, serverData: '' };}, onLoad: function onLoad() {_self = this;this.cWidth = uni.upx2px(750);this.cHeight = uni.upx2px(500);this.getServerData();}, methods: { goBack: function goBack() {uni.navigateBack({ delta: 1 });}, getServerData: function getServerData() {uni.request({ url: 'https://www.ucharts.cn/data.json', data: {}, success: function success(res) {//下面这个根据需要保存后台数据，我是为了模拟更新柱状图，所以存下来了
-          _self.serverData = res.data.data;var ColumnStack = { categories: [], series: [] }; //这里我后台返回的是数组，所以用等于，如果您后台返回的是单条数据，需要push进去
-          ColumnStack.categories = res.data.data.ColumnStack.categories;ColumnStack.series = res.data.data.ColumnStack.series;_self.showColumnStack("canvasColumnStack", ColumnStack);}, fail: function fail() {_self.tips = "网络错误，小程序端请检查合法域名";} });}, // 			showColumnStack(canvasId, chartData) {
+
+var _self;
+var canvaColumn = null;var _default = _defineProperty({
+
+
+  components: { myCharts: myCharts },
+  data: function data() {
+    return {
+      cWidth: '',
+      cHeight: '',
+      pixelRatio: 1,
+      serverData: '',
+      studentId: '' };
+
+  },
+  onLoad: function onLoad() {
+    _self = this;
+    this.cWidth = uni.upx2px(750);
+    this.cHeight = uni.upx2px(500);
+    this.getServerData();
+  },
+  methods: {
+    goBack: function goBack() {
+      uni.navigateBack({ delta: 1 });
+    },
+    getServerData: function getServerData() {
+      uni.request({
+        url: 'https://www.ucharts.cn/data.json',
+        data: {},
+        success: function success(res) {
+          //下面这个根据需要保存后台数据，我是为了模拟更新柱状图，所以存下来了
+          _self.serverData = res.data.data;
+          var ColumnStack = {
+            categories: [],
+            series: [] };
+
+          //这里我后台返回的是数组，所以用等于，如果您后台返回的是单条数据，需要push进去
+          ColumnStack.categories = res.data.data.ColumnStack.categories;
+          ColumnStack.series = res.data.data.ColumnStack.series;
+          _self.showColumnStack("canvasColumnStack", ColumnStack);
+        },
+        fail: function fail() {
+          _self.tips = "网络错误，小程序端请检查合法域名";
+        } });
+
+    },
+    // 			showColumnStack(canvasId, chartData) {
     // 				canvaColumn = new uCharts({
     // 					$this: _self,
     // 					canvasId: canvasId,
@@ -279,7 +262,21 @@ var _self;var canvaColumn = null;var _default = { components: { myCharts: myChar
     // 				});
     // 
     // 			},
-    touchColumn: function touchColumn(e) {canvaColumn.showToolTip(e, { format: function format(item, category) {return category + ' ' + item.name + ':' + item.data;} });} }, created: function created() {} };exports.default = _default;
+    touchColumn: function touchColumn(e) {
+      canvaColumn.showToolTip(e, {
+        format: function format(item, category) {
+          return category + ' ' + item.name + ':' + item.data;
+        } });
+
+    } },
+
+  created: function created() {
+
+  } }, "onLoad", function onLoad(
+options) {
+  console.log(options);
+  this.studentId = options.studentId;
+});exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

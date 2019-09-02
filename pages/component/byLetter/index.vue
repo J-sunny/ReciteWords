@@ -103,7 +103,7 @@
 			background-color: #FBFBFB;
 			// margin-bottom: 32rpx;
 			width: 100%;
-			padding-bottom: 38rpx;
+			padding-bottom: 28rpx;
 
 			// 搜索框
 			.searchBox {

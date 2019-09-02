@@ -113,7 +113,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var uniCalendar = function uniCalendar() {return Promise.all(/*! import() | components/uni-calendar/uni-calendar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-calendar/uni-calendar")]).then(__webpack_require__.bind(null, /*! ../../../../components/uni-calendar/uni-calendar */ 143));};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var uniCalendar = function uniCalendar() {return Promise.all(/*! import() | components/uni-calendar/uni-calendar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-calendar/uni-calendar")]).then(__webpack_require__.bind(null, /*! ../../../../components/uni-calendar/uni-calendar */ 143));};var _default =
 
 
 
@@ -163,16 +163,62 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     uniCalendar: uniCalendar },
 
   data: function data() {
-    return {};
+    return {
+      taskCalendarList: [],
+      dayOfMissionList: [],
+      year: '',
+      month: '',
+      day: '' };
+
   },
   methods: {
+    // 日历
     change: function change(e) {
-      // console.log(e);
+      console.log(e);
+      this.year = e.year,
+      this.month = e.month,
+      this.day = e.date,
+      this.taskCalendar();
+      this.getDayOfMissionList();
+    },
+    // 获取任务日历数据
+    taskCalendar: function taskCalendar() {var _this = this;
+      uni.request({
+        url: 'http://192.168.2.107:8089/backwordSystem/teacher/main/taskCalendar',
+        data: {
+          year: this.year,
+          month: this.month },
+
+        success: function success(data) {
+          console.log(data);
+          _this.taskCalendarList = data.data;
+        } });
+
+    },
+    // 单日任务详情列表
+    getDayOfMissionList: function getDayOfMissionList() {var _this2 = this;
+      uni.request({
+        url: 'http://192.168.2.107:8089/backwordSystem/teacher/main/dayOfMissionList',
+        data: {
+          month: this.month,
+          year: this.year,
+          day: this.day },
+
+        success: function success(data) {
+          console.log(data);
+          _this2.dayOfMissionList = data.data;
+        } });
+
+    },
+    // 页面跳转
+    linkTo: function linkTo(taskId) {
+      uni.navigateTo({
+        url: '../details/operationalDetails?taskId=' + taskId });
+
     } },
 
-  created: function created() {
-
-  } };exports.default = _default;
+  created: function created() {} };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 /* 18 */

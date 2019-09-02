@@ -210,12 +210,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 var _default =
 {
+  data: function data() {
+    return {
+      taskId: '',
+      taskRankList: [] };
+
+  },
   methods: {
+    // 返回
     goBack: function goBack() {
       uni.navigateBack({
         delta: 1,
         animationType: 'pop-out',
         animationDuration: 200 });
+
+    },
+    // 查看任务排名
+    getDayOfMissionList: function getDayOfMissionList() {var _this = this;
+      uni.request({
+        url: 'http://192.168.2.107:8089/backwordSystem/student/task/taskRank',
+        data: {
+          taskId: this.taskId },
+
+        success: function success(data) {
+          console.log(data);
+          _this.taskRankList = data.data;
+        } });
 
     } },
 

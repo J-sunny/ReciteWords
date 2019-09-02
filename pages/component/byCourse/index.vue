@@ -4,15 +4,15 @@
 		<view class="byList">
 			<!-- 分类标题 -->
 			<view class="courseNavBox">
-				<view class="courseType" @tap=actives1()>
-					<label class="typeTitle" for="">大学四级</label>
+				<view class="courseType" @tap=actives(1)>
+					<label class="typeTitle" for="">大学四级大学四级</label>
 					<uni-icon class='typeIcon' :type="active1==1?'arrowdown ':'arrowup'" style='font-size: 20rpx;'></uni-icon>
 				</view>
-				<view class="courseType courseBorder" @tap=actives2()>
-					<label class="typeTitle" for="">第三章</label>
+				<view class="courseType courseBorder" @tap=actives(2)>
+					<label class="typeTitle" for="">第三章第三章第三章</label>
 					<uni-icon class='typeIcon' :type="active2==1?'arrowdown ':'arrowup'"></uni-icon>
 				</view>
-				<view class="courseType" @tap=actives3()>
+				<view class="courseType" @tap=actives(3)>
 					<label class="typeTitle" for="">第四节</label>
 					<uni-icon class='typeIcon' :type="active3==1?'arrowdown ':'arrowup'"></uni-icon>
 				</view>
@@ -88,6 +88,8 @@
 				checkAll: false,
 				list: ['a', 'b', 'c'],
 				result: ['a', 'b'],
+				thesaurusLists: [],
+				chapterLists: []
 
 			};
 		},
@@ -95,6 +97,12 @@
 			uniIcon
 		},
 		methods: {
+			actives(val) {
+				console.log(val)
+				this.val = !this.val
+				this.show = !this.show
+				console.log(this.val)
+			},
 			actives1() {
 				this.active1 = !this.active1
 				this.show = !this.show
@@ -122,8 +130,33 @@
 			onChanges(event) {
 				this.result = event.detail
 				console.log(this.result)
-			}
+			},
+			// 获取课程下拉列表
+			thesaurusList() {
+				uni.request({
+					url: 'http://192.168.2.107:8089/backwordSystem/teacher/task/thesaurusList',
+					data: {},
+					success: (data) => {
+						console.log(data)
+						this.thesaurusLists = data.data
+					}
+				})
+			},
+			// 获取章节下拉列表
+			chapterList() {
+				uni.request({
+					url: 'http://192.168.2.107:8089/backwordSystem/teacher/task/chapterList',
+					data: {},
+					success: (data) => {
+						console.log(data)
+						this.chapterLists = data.data
+					}
+				})
+			},
 		},
+		created() {
+			this.thesaurusList()
+		}
 	}
 </script>
 
@@ -176,6 +209,7 @@
 
 				.courseType {
 					// padding: 24rpx 0 18rpx 0;
+					display: inline-block;
 					width: 248rpx;
 					height: 48rpx;
 					line-height: 48rpx;
@@ -186,8 +220,15 @@
 					text-align: center;
 					float: left;
 
+
+
 					.typeTitle {
 						margin-right: -12rpx;
+						width: 200rpx;
+						overflow: hidden;
+						text-overflow: ellipsis;
+						white-space: nowrap;
+						display: inline-block;
 					}
 
 					.typeIcon {

@@ -290,7 +290,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var uniIcon = function uniIcon() {return __webpack_require__.e(/*! import() | node-modules/@dcloudio/uni-ui/lib/uni-icon/uni-icon */ "node-modules/@dcloudio/uni-ui/lib/uni-icon/uni-icon").then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-icon/uni-icon.vue */ 151));};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var uniIcon = function uniIcon() {return __webpack_require__.e(/*! import() | node-modules/@dcloudio/uni-ui/lib/uni-icon/uni-icon */ "node-modules/@dcloudio/uni-ui/lib/uni-icon/uni-icon").then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-icon/uni-icon.vue */ 151));};var _default =
 
 
 
@@ -379,7 +379,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       show: false,
       checkAll: false,
       list: ['a', 'b', 'c'],
-      result: ['a', 'b'] };
+      result: ['a', 'b'],
+      thesaurusLists: [],
+      chapterLists: [] };
 
 
   },
@@ -387,6 +389,12 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     uniIcon: uniIcon },
 
   methods: {
+    actives: function actives(val) {
+      console.log(val);
+      this.val = !this.val;
+      this.show = !this.show;
+      console.log(this.val);
+    },
     actives1: function actives1() {
       this.active1 = !this.active1;
       this.show = !this.show;
@@ -414,7 +422,34 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     onChanges: function onChanges(event) {
       this.result = event.detail;
       console.log(this.result);
-    } } };exports.default = _default;
+    },
+    // 获取课程下拉列表
+    thesaurusList: function thesaurusList() {var _this = this;
+      uni.request({
+        url: 'http://192.168.2.107:8089/backwordSystem/teacher/task/thesaurusList',
+        data: {},
+        success: function success(data) {
+          console.log(data);
+          _this.thesaurusLists = data.data;
+        } });
+
+    },
+    // 获取章节下拉列表
+    chapterList: function chapterList() {var _this2 = this;
+      uni.request({
+        url: 'http://192.168.2.107:8089/backwordSystem/teacher/task/chapterList',
+        data: {},
+        success: function success(data) {
+          console.log(data);
+          _this2.chapterLists = data.data;
+        } });
+
+    } },
+
+  created: function created() {
+    this.thesaurusList();
+  } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 /* 31 */

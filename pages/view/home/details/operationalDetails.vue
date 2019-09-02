@@ -28,14 +28,14 @@
 				班级：<label class='major'> XX专业XX系301班（ <label class='yellowColor'>0</label> /21人）</label>
 			</view>
 			<!-- 框框 -->
-			<view class="frame" v-for="item in 10" :key='item'>
+			<view class="frame" v-for="(item,index) in 10" :key='item'>
 				<!-- 左边 -->
 				<view class="frameLeft">
 					<view class="stuName">姓名：<label class="stuNames">刘泽琪</label><label class="completionStatus do">已完成</label></view>
 					<view class="stuName">学号：<label class="stuNames">20181227</label></view>
 				</view>
 				<!-- 右边查看详情按钮 -->
-				<navigator hover-class='none' class="frameRightBtn" url='studentDetails'>查看详情</navigator>
+				<label  class="frameRightBtn" @click="linkTo(index)">查看详情</label>
 			</view>
 		</view>
 
@@ -44,26 +44,36 @@
 
 <script>
 	export default {
+		data() {
+			return {
+				taskId: ''
+			}
+		},
 		methods: {
+			// 返回
 			goBack() {
 				uni.navigateBack({
 					delta: 1
 				});
+			},
+			// 班级成员跳转
+			linkTo(studentId) {
+				uni.navigateTo({
+					url: 'studentDetails?studentId=' + studentId
+				})
 			}
+
 		},
 		created() {
 
+		},
+
+		onLoad(options) {
+			// var data = JSON.parse(options.index); // 字符串转对象
+			console.log(options)
+			this.taskId = options.taskId
 		}
-
 	}
-
-
-	// uni.navigateBack({
-	// 		// console.log(11);
-	// 	delta: 1,
-	// 	animationType: 'pop-out',
-	// 	animationDuration: 200
-	// });
 </script>
 
 <style lang="scss">
@@ -71,12 +81,13 @@
 		position: relative;
 		overflow: hidden;
 
-.headBox{
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-}
+		.headBox {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+		}
+
 		// 顶部背景图片
 		.site-img {
 			width: 100%;

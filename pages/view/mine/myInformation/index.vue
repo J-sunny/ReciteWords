@@ -22,19 +22,19 @@
 			<view class="conBox">
 				<label class="name">工号</label><label class="con">XF20120125</label>
 			</view>
-			<view class="conBox">
+			<view class="conBox" @tap="show1('gender')">
 				<label class="name">性别</label><label class="con cons">{{sex}}</label><label class="arrowRight" @tap="show1('gender')"></label>
 			</view>
-			<view class="conBox">
+			<view class="conBox" @tap="show2('')">
 				<label class="name">生日</label><label class="con cons">{{birthday}}</label><label class="arrowRight" @tap="show2('')"></label>
 			</view>
 			<view class="conBox">
 				<label class="name">学校</label><label class="con">XX学校</label>
 			</view>
-			<view class="conBox">
+			<navigator url="changePassword" class="conBox">
 				<label class="name">修改密码</label>
 				<navigator url="changePassword" class="arrowRight"></navigator>
-			</view>
+			</navigator>
 		</view>
 
 		<!-- 头像弹出框 -->

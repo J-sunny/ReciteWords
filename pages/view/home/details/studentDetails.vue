@@ -78,6 +78,7 @@
 				cHeight: '',
 				pixelRatio: 1,
 				serverData: '',
+				studentId:''
 			}
 		},
 		onLoad() {
@@ -165,6 +166,10 @@
 		created(){
 			
 		},
+		onLoad(options) {
+			console.log(options)
+			this.studentId = options.studentId
+		}
 	}
 </script>
 

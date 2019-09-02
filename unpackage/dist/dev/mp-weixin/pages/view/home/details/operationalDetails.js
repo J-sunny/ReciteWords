@@ -151,27 +151,35 @@ __webpack_require__.r(__webpack_exports__);
 //
 var _default =
 {
+  data: function data() {
+    return {
+      taskId: '' };
+
+  },
   methods: {
+    // 返回
     goBack: function goBack() {
       uni.navigateBack({
         delta: 1 });
 
+    },
+    // 班级成员跳转
+    linkTo: function linkTo(studentId) {
+      uni.navigateTo({
+        url: 'studentDetails?studentId=' + studentId });
+
     } },
+
 
   created: function created() {
 
-  } };
+  },
 
-
-
-
-// uni.navigateBack({
-// 		// console.log(11);
-// 	delta: 1,
-// 	animationType: 'pop-out',
-// 	animationDuration: 200
-// });
-exports.default = _default;
+  onLoad: function onLoad(options) {
+    // var data = JSON.parse(options.index); // 字符串转对象
+    console.log(options);
+    this.taskId = options.taskId;
+  } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
