@@ -59,7 +59,7 @@
 		methods: {
 			// 日历
 			change(e) {
-				console.log(e)
+				// console.log(e)
 				this.year = e.year,
 					this.month = e.month,
 					this.day = e.date,
@@ -68,41 +68,38 @@
 			},
 			// 获取任务日历数据
 			taskCalendar() {
-				uni.request({
-					url: 'http://192.168.2.107:8089/backwordSystem/teacher/main/taskCalendar',
-					data: {
-						year: this.year,
-						month: this.month,
-					},
-					success: (data) => {
-						console.log(data)
-						this.taskCalendarList = data.data
-					}
+				this.$minApi.taskCalendar({
+					year: this.year,
+					month: this.month,
+				}).then(data => {
+					this.taskCalendarList = data.data
+					// console.log(res)
 				})
+
 			},
 			// 单日任务详情列表
 			getDayOfMissionList() {
-				uni.request({
-					url: 'http://192.168.2.107:8089/backwordSystem/teacher/main/dayOfMissionList',
-					data: {
-						month: this.month,
-						year: this.year,
-						day: this.day,
-					},
-					success: (data) => {
-						console.log(data)
-						this.dayOfMissionList = data.data
-					}
+				this.$minApi.dayOfMissionList({
+					month: this.month,
+					year: this.year,
+					day: this.day,
+				}, ).then(data => {
+					this.dayOfMissionList = data.data
+					// console.log(res)
+				}).catch(err => {
+					// console.log(err)
 				})
 			},
 			// 页面跳转
-			linkTo(taskId) {							
+			linkTo(taskId) {
 				uni.navigateTo({
 					url: '../details/operationalDetails?taskId=' + taskId
 				})
 			}
 		},
-		created() {}
+		created() {
+
+		}
 
 	};
 </script>

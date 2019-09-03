@@ -1,47 +1,64 @@
 <template>
-	<view class="byCourseBox">
+
+	<view class="byCourseBox" :class="show==true?'preventTouchMove':''">
 		<!-- 分类 -->
 		<view class="byList">
 			<!-- 分类标题 -->
 			<view class="courseNavBox">
-				<view class="courseType" @tap=actives(1)>
+				<view class="courseType" @tap=actives1()>
 					<label class="typeTitle" for="">大学四级大学四级</label>
 					<uni-icon class='typeIcon' :type="active1==1?'arrowdown ':'arrowup'" style='font-size: 20rpx;'></uni-icon>
 				</view>
-				<view class="courseType courseBorder" @tap=actives(2)>
+				<view class="courseType courseBorder" @tap=actives2()>
 					<label class="typeTitle" for="">第三章第三章第三章</label>
 					<uni-icon class='typeIcon' :type="active2==1?'arrowdown ':'arrowup'"></uni-icon>
 				</view>
-				<view class="courseType" @tap=actives(3)>
+				<view class="courseType" @tap=actives3()>
 					<label class="typeTitle" for="">第四节</label>
 					<uni-icon class='typeIcon' :type="active3==1?'arrowdown ':'arrowup'"></uni-icon>
 				</view>
 			</view>
-			<!-- 分类选项 -->
-			<view class="courseOptions" v-if='show'>
-				<view class="options" v-for="(item,index) in 3" :key='item' @tap="optionsActive(index)">{{item}}</view>
+			<!-- 分类选项--第一级 -->
+			<scroll-view scroll-y='true' class="courseOptions" v-if='show1'>
+				<view class="options" v-for="(item,index) in 31" :key='item' @tap="optionsActive1(index)">active1{{item}}</view>
 				<view class="options">四级核心词汇</view>
 				<view class="options">大学六级</view>
 				<view class="options">六级核心词汇</view>
 				<view class="options">专业四级</view>
-			</view>
+			</scroll-view>
+			<!-- 分类选项--第二级 -->
+			<scroll-view scroll-y='true' class="courseOptions" v-if='show2'>
+				<view class="options" v-for="(item,index) in 31" :key='item' @tap="optionsActive2(index)">active2{{item}}</view>
+				<view class="options">四级核心词汇</view>
+				<view class="options">大学六级</view>
+				<view class="options">六级核心词汇</view>
+				<view class="options">专业四级</view>
+			</scroll-view>
+			<!-- 分类选项--第三级 -->
+			<scroll-view scroll-y='true' class="courseOptions" v-if='show3'>
+				<view class="options" v-for="(item,index) in 31" :key='item' @tap="optionsActive3(index)">active3{{item}}</view>
+				<view class="options">四级核心词汇</view>
+				<view class="options">大学六级</view>
+				<view class="options">六级核心词汇</view>
+				<view class="options">专业四级</view>
+			</scroll-view>
 		</view>
 
 		<!-- 内容 -->
 		<view class="courseConBox">
 			<!-- <view class="courseList">
-				<view class="Title"><label for="" class="bigTitle">四级核心词汇</label><label class="smallTitle" for="">chapter 1-Lesson
-						2</label></view>
-				<view class="listCon" v-for="item in 5" :key='item'>
-					<view class="listConRadio">
-						<checkbox value="cb" color="#FFBB00" style="transform:scale(1)" />
+					<view class="Title"><label for="" class="bigTitle">四级核心词汇</label><label class="smallTitle" for="">chapter 1-Lesson
+							2</label></view>
+					<view class="listCon" v-for="item in 5" :key='item'>
+						<view class="listConRadio">
+							<checkbox value="cb" color="#FFBB00" style="transform:scale(1)" />
+						</view>
+						<view class="listConWord">
+							<view for="" class="word">abandon</view>
+							<view for="" class="Interpretation">n.同谋，从犯；附件</view>
+						</view>
 					</view>
-					<view class="listConWord">
-						<view for="" class="word">abandon</view>
-						<view for="" class="Interpretation">n.同谋，从犯；附件</view>
-					</view>
-				</view>
-			</view> -->
+				</view> -->
 
 			<view class="courseList" v-for="i in 4" :key=i>
 				<view class="Title"><label class="bigTitle">四级核心词汇</label><label class="smallTitle" for="">chapter 1-Lesson
@@ -70,6 +87,11 @@
 				查看已选（4）
 			</navigator>
 		</view>
+
+		<!-- 遮罩层 -->
+		<view :class="show==true?'backgrounds':''">
+		</view>
+
 	</view>
 </template>
 
@@ -85,6 +107,9 @@
 				active2: 1,
 				active3: 1,
 				show: false,
+				show1: false,
+				show2: false,
+				show3: false,
 				checkAll: false,
 				list: ['a', 'b', 'c'],
 				result: ['a', 'b'],
@@ -96,32 +121,78 @@
 		components: {
 			uniIcon
 		},
-		methods: {
-			actives(val) {
-				console.log(val)
-				this.val = !this.val
-				this.show = !this.show
-				console.log(this.val)
-			},
+		methods: {			
 			actives1() {
+				if(this.show==true&&(this.show2==true||this.show3==true)){
+					this.show = this.show
+					console.log(1)
+				}
+				else if(this.show==true&&this.show1==false){
+					this.show=false
+					console.log(2)
+				}
+				else{
+					this.show=!this.show
+					console.log(3)
+				}
+				console.log(this.show)
 				this.active1 = !this.active1
-				this.show = !this.show
-				console.log(this.active1)
+				this.show1 = !this.show1
+				this.show2 = false
+				this.show3 = false
+				this.active2 = false
+				this.active3 = false
+				console.log(this.active1,'active1')
 			},
 			actives2() {
+				if(this.show==true&&(this.show1==true||this.show3==true)){
+					this.show = this.show
+				}
+				else{
+					this.show=!this.show
+				}
+				
 				this.active2 = !this.active2
-				this.show = !this.show
-				console.log(this.active2)
+				this.show2 = !this.show2
+				this.show1 = false
+				this.show3 = false
+				this.active1 = false
+				this.active3 = false
+				console.log(this.active2,'active2')
 			},
 			actives3() {
+				if(this.show==true&&(this.show1==true||this.show2==true)){
+					this.show = this.show
+				}
+				else{
+					this.show=!this.show
+				}
+				
+				this.show1 = false
+				this.show2 = false
+				this.active2 = false
+				this.active1 = false
 				this.active3 = !this.active3
-				this.show = !this.show
+				this.show3 = !this.show3
 				console.log(this.active3)
 			},
-			optionsActive(val) {
+			optionsActive1(val) {
 				console.log(val)
-				this.show = false
+				this.show = !this.show
+				this.show1 = false
 				this.active1 = !this.active1
+			},
+			optionsActive2(val) {
+				console.log(val)
+				this.show = !this.show
+				this.show2 = false
+				this.active2 = !this.active2
+			},
+			optionsActive3(val) {
+				console.log(val)
+				this.show = !this.show
+				this.show3 = false
+				this.active3 = !this.active3
 			},
 			onChange(event) {
 				console.log(event.detail)
@@ -161,6 +232,27 @@
 </script>
 
 <style lang="scss">
+	.backgrounds {
+		background-color: rgba(0, 0, 0, 0.5);
+		top: 0px;
+		left: 0px;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+		position: fixed !important;
+		z-index: 100;
+	}
+
+	.preventTouchMove {
+		top: 0px;
+		left: 0px;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+		position: fixed !important;
+		z-index: 100;
+	}
+
 	.byCourseBox {
 		position: relative;
 
@@ -194,6 +286,8 @@
 			z-index: 100;
 			background-color: #FBFBFB;
 			margin-bottom: 32rpx;
+			z-index: 101;
+			width: 100%;
 
 			// 分类标题
 			.courseNavBox {
@@ -250,6 +344,7 @@
 				// left: 0;
 				z-index: 50;
 				width: 100%;
+				height: 600rpx;
 
 				.options {
 					width: 100%;
@@ -339,7 +434,7 @@
 			background: #FFFFFF;
 			box-shadow: 0px -6rpx 24rpx rgba(201, 201, 201, 1);
 			opacity: 1;
-			z-index: 99999999;
+			z-index: 100;
 
 			.radio {
 				line-height: 112rpx;

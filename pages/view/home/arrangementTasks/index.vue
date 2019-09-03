@@ -61,16 +61,16 @@
 			},
 		},
 	}
-
 </script>
 
 <style lang="scss">
 	.arrangementTasksBox {
 		.tasksHeadBox {
 			position: fixed;
-			top:0;
-			z-index: 100;
+			top: 0;
+			z-index: 101;
 			background-color: #FBFBFB;
+			width: 100%;
 		}
 
 		// 顶部

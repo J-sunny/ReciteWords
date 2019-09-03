@@ -6,7 +6,7 @@
 			<view class="navTitle">登录</view>
 			<view class="loginTitle">背单词·教师端</view>
 		</view>
-
+		<van-toast id="van-toast" />
 		<!-- 内容 -->
 		<view class="loginCon">
 			<view class="userNameBox">
@@ -15,15 +15,16 @@
 			</view>
 			<view class="userNameBox">
 				<image class="pwdPic" src="../../../static/images/pwd@2x.png" mode=""></image>
-				<input class="nameInput" v-model="password" type="text" placeholder="请输入密码">
+				<input class="nameInput" v-model="password" type="password" placeholder="请输入密码">
 			</view>
 			<view class="loginBtn" @tap="loginByAccount()">登录</view>
 		</view>
 	</view>
-
 </template>
 
 <script>
+	// import Toast from './wxcomponents/dist/toast/toast';
+	import Toast from '../../../wxcomponents/dist/toast/toast';
 	export default {
 		data() {
 			return {
@@ -34,15 +35,18 @@
 		methods: {
 			// 登录
 			loginByAccount() {
-				uni.request({
-					url: 'http://192.168.2.107:8089/backwordSystem/loginByAccount',
-					data: {
-						password: this.password,
-						username: this.username,
-					},
-					success: (data) => {
-						console.log(data)
-					}
+				this.$minApi.loginByAccount({
+					password: this.password,
+					username: this.username,
+					userSchoolId: '1',
+					userIdenty: '1'
+				}).then(data => {
+					Toast('登录成功');
+					console.log(data)
+					uni.setStorageSync('token', data.token);
+					uni.switchTab({
+						url: '../home/index/index'
+					});
 				})
 			}
 		}

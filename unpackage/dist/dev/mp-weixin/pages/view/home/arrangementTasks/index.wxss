@@ -24,6 +24,25 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
+.backgrounds {
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: fixed !important;
+  z-index: 100;
+}
+.preventTouchMove {
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: fixed !important;
+  z-index: 100;
+}
 .byCourseBox {
   position: relative;
 }
@@ -47,6 +66,8 @@
     z-index: 100;
     background-color: #FBFBFB;
     margin-bottom: 32rpx;
+    z-index: 101;
+    width: 100%;
 }
 .byCourseBox .byList .courseNavBox {
       border-bottom: 1rpx solid #F5F7F7;
@@ -92,6 +113,7 @@
       position: absolute;
       z-index: 50;
       width: 100%;
+      height: 600rpx;
 }
 .byCourseBox .byList .courseOptions .options {
         width: 100%;
@@ -164,7 +186,7 @@
     -webkit-box-shadow: 0px -6rpx 24rpx #c9c9c9;
             box-shadow: 0px -6rpx 24rpx #c9c9c9;
     opacity: 1;
-    z-index: 99999999;
+    z-index: 100;
 }
 .byCourseBox .allCheck .radio {
       line-height: 112rpx;
@@ -512,8 +534,9 @@
 .arrangementTasksBox .tasksHeadBox {
   position: fixed;
   top: 0;
-  z-index: 100;
+  z-index: 101;
   background-color: #FBFBFB;
+  width: 100%;
 }
 .arrangementTasksBox .tasksBoxHead {
   width: 100%;

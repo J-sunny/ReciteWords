@@ -8,10 +8,20 @@ import 'pages/style/init.css'
 // import 'vant/lib/index.css';
 // 
 // Vue.use(Vant);
+
+import MinRequest from './request/index'
+import minRequest from './request/api'
+Vue.use(MinRequest)
+
+import Toast from './wxcomponents/dist/toast/toast';
+
+
+
 Vue.config.productionTip = false
 App.mpType = 'app'
 
 const app = new Vue({
-	...App
+	...App,
+	minRequest
 })
 app.$mount()

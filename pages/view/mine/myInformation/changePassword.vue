@@ -13,18 +13,20 @@
 				<view class="oldBox borderBto">
 					<label class="pwdName ">旧密码</label>
 					<!-- <input class="pwdInput" type="{{pwdType1}}" placeholder="请填写旧密码" /> -->
-					<input  class="pwdInput" :password="isPassword1" type="text"  placeholder="请填写旧密码" v-model="oldPwd"></input>
-					
-					<view class="pwdEyeBox" @tap="lookPwd1()">
-						<image  class="open" :src="isPassword1==true?'../../../../static/images/eye@2x.png':'../../../../static/images/closeEye@2x.png'" mode=""></image>
+					<input class="pwdInput" :password="isPassword1" type="text" placeholder="请填写旧密码" v-model="oldPwd"></input>
+
+					<view class="pwdEyeBox" @click="lookPwd1()">
+						<image class="open" :src="isPassword1==true?'../../../../static/images/eye@2x.png':'../../../../static/images/closeEye@2x.png'"
+						 mode=""></image>
 					</view>
 				</view>
 				<view class="oldBox ">
 					<label class="pwdName">新密码</label>
 					<!-- <input class="pwdInput" type="{{pwdType2}}" placeholder="请填写新密码" /> -->
-					<input  class="pwdInput" :password='isPassword2' type="text" placeholder="请填写新密码" v-model="newPwd"></input>
+					<input class="pwdInput" :password='isPassword2' type="text" placeholder="请填写新密码" v-model="newPwd"></input>
 					<view class="pwdEyeBox" @tap="lookPwd2()">
-						<image class="open" :src="isPassword2==true?'../../../../static/images/eye@2x.png':'../../../../static/images/closeEye@2x.png'" mode=""></image>
+						<image class="open" :src="isPassword2==true?'../../../../static/images/eye@2x.png':'../../../../static/images/closeEye@2x.png'"
+						 mode=""></image>
 					</view>
 				</view>
 			</view>
@@ -44,17 +46,17 @@
 				pwdType2: 'password',
 				isPassword1: true,
 				isPassword2: true,
-				oldPwd:'',
-				newPwd:'',
-				showOld:false,
-				showNew:false
+				oldPwd: '',
+				newPwd: '',
+				showOld: false,
+				showNew: false
 			}
 		},
 		components: {
 
 		},
-		watch:{
-			
+		watch: {
+
 			// oldPwd(){
 			// 	if(this.oldPwd!=''){
 			// 		console.log(this.oldPwd)
@@ -81,6 +83,7 @@
 			},
 			// 切换input框类型
 			lookPwd1() {
+				console.log('1113')
 				// var isPassword=!this.isPassword
 				this.isPassword1 = !this.isPassword1
 				console.log(this.isPassword1, '111’')
@@ -92,6 +95,7 @@
 				}
 			},
 			lookPwd2() {
+				console.log('222’')
 				this.isPassword2 = !this.isPassword2
 				console.log(this.isPassword2, '111’')
 				if (this.pwdType2 == 'password') {
@@ -239,8 +243,9 @@
 				opacity: 1;
 				text-align: center;
 			}
-			.activeSaveBtn{
-				background:linear-gradient(180deg,rgba(254,201,27,1) 0%,rgba(255,187,0,1) 100%);
+
+			.activeSaveBtn {
+				background: linear-gradient(180deg, rgba(254, 201, 27, 1) 0%, rgba(255, 187, 0, 1) 100%);
 			}
 		}
 	}

@@ -44,12 +44,30 @@
 		components: {
 			neilModal
 		},
+		created() {
+			console.log(uni.getStorageSync('token'))
+			// 没有登录则跳转到登录页面
+			if (!uni.getStorageSync('token')) {
+				uni.redirectTo({
+					url: '../../../view/login/index'
+				});
+			}
+		},
 		methods: {
 			// 返回
 			goBack() {
 				uni.navigateBack({
 					delta: 1
 				});
+			},
+			// 退出登录
+			loginOut() {
+				this.$minApi.loginOut({
+
+				}).then(data => {
+					console.log(data)
+					uni.removeStorageSync('token');
+				})
 			},
 			bindClick(type) {
 				console.log(this[`show${type}`])
@@ -62,6 +80,7 @@
 			},
 			confirm() {
 				console.log(`监听到点击确认`)
+				this.loginOut()
 			},
 			cancel() {
 				console.log(`监听到点击取消`)
