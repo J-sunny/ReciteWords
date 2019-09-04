@@ -24,8 +24,17 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
+.qiun-charts {
+  width: 100%;
+  height: 500rpx;
+  background-color: #FFFFFF;
+}
+.charts {
+  width: 100%;
+  height: 500rpx;
+  background-color: #FFFFFF;
+}
 .stuDetailsBox {
-  position: relative;
   overflow: hidden;
 }
 .stuDetailsBox .site-img {
@@ -86,49 +95,51 @@
 }
 .stuDetailsBox .conBox {
     margin-top: 416rpx;
-    padding: 0 32rpx;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    z-index: 50;
+    padding-bottom: 64rpx;
 }
-.stuDetailsBox .conBox .stuList {
-      width: 686rpx;
-      height: 352rpx;
-      background: white;
-      -webkit-box-shadow: 0px 8rpx 36rpx rgba(201, 201, 201, 0.15);
-              box-shadow: 0px 8rpx 36rpx rgba(201, 201, 201, 0.15);
-      opacity: 1;
-      border-radius: 16rpx;
-      padding: 40rpx 0 0 48rpx;
+.stuDetailsBox .conBox .stuListBox {
+      padding: 0 32rpx;
       -webkit-box-sizing: border-box;
       box-sizing: border-box;
 }
-.stuDetailsBox .conBox .stuList .toDay {
-        width: 50%;
-        height: 50%;
-        float: left;
+.stuDetailsBox .conBox .stuListBox .stuList {
+        width: 686rpx;
+        height: 352rpx;
+        background: white;
+        -webkit-box-shadow: 0px 8rpx 36rpx rgba(201, 201, 201, 0.15);
+                box-shadow: 0px 8rpx 36rpx rgba(201, 201, 201, 0.15);
+        opacity: 1;
+        border-radius: 16rpx;
+        padding: 40rpx 0 0 48rpx;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
 }
-.stuDetailsBox .conBox .stuList .toDay .dayTitle {
-          font-size: 24rpx;
-          font-weight: bold;
-          color: #5c6371;
+.stuDetailsBox .conBox .stuListBox .stuList .toDay {
+          width: 50%;
+          height: 50%;
+          float: left;
 }
-.stuDetailsBox .conBox .stuList .toDay .dayTitle .titleIcon {
-            width: 28rpx;
-            height: 28rpx;
-            margin-right: 16rpx;
+.stuDetailsBox .conBox .stuListBox .stuList .toDay .dayTitle {
+            font-size: 24rpx;
+            font-weight: bold;
+            color: #5c6371;
 }
-.stuDetailsBox .conBox .stuList .toDay .dayNum {
-          font-size: 16rpx;
-          font-weight: 400;
-          color: #999999;
+.stuDetailsBox .conBox .stuListBox .stuList .toDay .dayTitle .titleIcon {
+              width: 28rpx;
+              height: 28rpx;
+              margin-right: 16rpx;
 }
-.stuDetailsBox .conBox .stuList .toDay .dayNum .bigFont {
-            font-size: 48rpx;
-            font-weight: normal;
-            color: #2e3548;
-            margin-left: 44rpx;
-            margin-right: 8rpx;
+.stuDetailsBox .conBox .stuListBox .stuList .toDay .dayNum {
+            font-size: 16rpx;
+            font-weight: 400;
+            color: #999999;
+}
+.stuDetailsBox .conBox .stuListBox .stuList .toDay .dayNum .bigFont {
+              font-size: 48rpx;
+              font-weight: normal;
+              color: #2e3548;
+              margin-left: 44rpx;
+              margin-right: 8rpx;
 }
 .stuDetailsBox .conBox .histogram {
       width: 100%;
@@ -138,18 +149,51 @@
               box-shadow: 0px 8rpx 36rpx rgba(201, 201, 201, 0.15);
       border-radius: 16rpx;
       margin-top: 36rpx;
-      padding: 32rpx 32rpx 40rpx;
-      -webkit-box-sizing: border-box;
-      box-sizing: border-box;
 }
 .stuDetailsBox .conBox .histogram .hisTitle {
         font-size: 28rpx;
         font-weight: 800;
         color: #2e3548;
+        padding: 32rpx 32rpx 40rpx;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
 }
 .stuDetailsBox .conBox .histogram .hisTitle .titleIcon {
           width: 28rpx;
           height: 28rpx;
           margin-right: 16rpx;
+}
+.stuDetailsBox .conBox .histogram .lookChange {
+        font-size: 30rpx;
+        font-family: PingFang SC;
+        font-weight: 400;
+        color: #979dab;
+        margin-bottom: 40rpx;
+}
+.stuDetailsBox .conBox .histogram .lookChange .week {
+          margin-left: 228rpx;
+}
+.stuDetailsBox .conBox .histogram .lookChange .mouth {
+          margin-left: 56rpx;
+}
+.stuDetailsBox .conBox .todayStudyBox {
+      margin-top: 32rpx;
+      color: #979DAB;
+      font-family: PingFang SC;
+      color: #2e3548;
+      opacity: 1;
+      font-size: 24rpx;
+}
+.stuDetailsBox .conBox .todayStudyBox .study {
+        margin-left: 64rpx;
+        font-weight: bold;
+}
+.stuDetailsBox .conBox .todayStudyBox .review {
+        margin-left: 180rpx;
+        font-weight: bold;
+}
+.stuDetailsBox .conBox .todayStudyBox .grayColor {
+        color: #979DAB;
+        font-weight: 500;
 }
 

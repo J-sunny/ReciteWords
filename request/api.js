@@ -28,7 +28,7 @@ minRequest.interceptors.response((response) => {
 
 // 设置默认配置
 minRequest.setConfig((config) => {
-	config.baseURL = 'http://192.168.2.107:8089/backwordSystem'
+	config.baseURL = 'http://192.168.2.167:8089/backwordSystem'
 	return config
 })
 

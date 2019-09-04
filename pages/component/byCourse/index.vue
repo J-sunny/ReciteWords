@@ -5,43 +5,53 @@
 		<view class="byList">
 			<!-- 分类标题 -->
 			<view class="courseNavBox">
-				<view class="courseType" @tap=actives1()>
-					<label class="typeTitle" for="">大学四级大学四级</label>
-					<uni-icon class='typeIcon' :type="active1==1?'arrowdown ':'arrowup'" style='font-size: 20rpx;'></uni-icon>
+				<view>
+					<view class="courseType" @tap="actives1()">
+						<text class="typeTitle">{{title1}}</text>
+						<uni-icon class='typeIcon' :type="active1==1?'arrowdown ':'arrowup'" style='font-size: 20rpx;'></uni-icon>
+					</view>
+					<!-- 分类选项--第一级 -->
+					<scroll-view scroll-y='true' class="courseOptions" v-if='show1'>
+						<view class="options" v-for="(item,index) in 31" :key='item' @tap="optionsActive1(index)">{{item}}</view>
+						<view class="options">四级核心词汇</view>
+						<view class="options">大学六级</view>
+						<view class="options">六级核心词汇</view>
+						<view class="options">专业四级</view>
+					</scroll-view>
 				</view>
-				<view class="courseType courseBorder" @tap=actives2()>
-					<label class="typeTitle" for="">第三章第三章第三章</label>
-					<uni-icon class='typeIcon' :type="active2==1?'arrowdown ':'arrowup'"></uni-icon>
+
+				<view>
+					<view class="courseType courseBorder" @tap="actives2()">
+						<label class="typeTitle" >{{title2}}</label>
+						<uni-icon class='typeIcon' :type="active2==1?'arrowdown ':'arrowup'"></uni-icon>
+					</view>
+					<!-- 分类选项--第二级 -->
+					<scroll-view scroll-y='true' class="courseOptions" v-if='show2'>
+						<view class="options" v-for="(item,index) in 31" :key='item' @tap="optionsActive2(index)">{{item}}</view>
+						<view class="options">四级核心词汇</view>
+						<view class="options">大学六级</view>
+						<view class="options">六级核心词汇</view>
+						<view class="options">专业四级</view>
+					</scroll-view>
 				</view>
-				<view class="courseType" @tap=actives3()>
-					<label class="typeTitle" for="">第四节</label>
-					<uni-icon class='typeIcon' :type="active3==1?'arrowdown ':'arrowup'"></uni-icon>
+
+				<view>
+					<view class="courseType" @tap="actives3()">
+						<label class="typeTitle" for="">{{title3}}</label>
+						<uni-icon class='typeIcon' :type="active3==1?'arrowdown ':'arrowup'"></uni-icon>
+					</view>
+					<!-- 分类选项--第三级 -->
+					<scroll-view scroll-y='true' class="courseOptions" v-if='show3'>
+						<view class="options" v-for="(item,index) in 31" :key='item' @tap="optionsActive3(index)">{{item}}</view>
+						<view class="options">四级核心词汇</view>
+						<view class="options">大学六级</view>
+						<view class="options">六级核心词汇</view>
+						<view class="options">专业四级</view>
+					</scroll-view>
 				</view>
+				
+				
 			</view>
-			<!-- 分类选项--第一级 -->
-			<scroll-view scroll-y='true' class="courseOptions" v-if='show1'>
-				<view class="options" v-for="(item,index) in 31" :key='item' @tap="optionsActive1(index)">active1{{item}}</view>
-				<view class="options">四级核心词汇</view>
-				<view class="options">大学六级</view>
-				<view class="options">六级核心词汇</view>
-				<view class="options">专业四级</view>
-			</scroll-view>
-			<!-- 分类选项--第二级 -->
-			<scroll-view scroll-y='true' class="courseOptions" v-if='show2'>
-				<view class="options" v-for="(item,index) in 31" :key='item' @tap="optionsActive2(index)">active2{{item}}</view>
-				<view class="options">四级核心词汇</view>
-				<view class="options">大学六级</view>
-				<view class="options">六级核心词汇</view>
-				<view class="options">专业四级</view>
-			</scroll-view>
-			<!-- 分类选项--第三级 -->
-			<scroll-view scroll-y='true' class="courseOptions" v-if='show3'>
-				<view class="options" v-for="(item,index) in 31" :key='item' @tap="optionsActive3(index)">active3{{item}}</view>
-				<view class="options">四级核心词汇</view>
-				<view class="options">大学六级</view>
-				<view class="options">六级核心词汇</view>
-				<view class="options">专业四级</view>
-			</scroll-view>
 		</view>
 
 		<!-- 内容 -->
@@ -66,6 +76,7 @@
 				<van-checkbox-group :value="result" @change="onChanges()">
 					<view class="checkedBox" v-for="(item , index2) in list" :key="index2">
 						<view class="box" :style="{height:'160rpx',padding:'40rpx 24rpx' ,'border-radius':'16rpx','margin-top':'32rpx',background:'#fff','box-sizing': 'border-box'}">
+						<!-- 复选框组 -->
 							<van-checkbox class="vanCheckBox" :name="item" checked-color="#FFBB00">
 								<view class="words">
 									<view for="" class="word">{{item}}</view>
@@ -103,6 +114,9 @@
 	export default {
 		data() {
 			return {
+				title1:'w',
+				title2:'e',
+				title3:'t',
 				active1: 1,
 				active2: 1,
 				active3: 1,
@@ -110,6 +124,7 @@
 				show1: false,
 				show2: false,
 				show3: false,
+
 				checkAll: false,
 				list: ['a', 'b', 'c'],
 				result: ['a', 'b'],
@@ -121,18 +136,16 @@
 		components: {
 			uniIcon
 		},
-		methods: {			
+		methods: {
 			actives1() {
-				if(this.show==true&&(this.show2==true||this.show3==true)){
+				if (this.show == true && (this.show2 == true || this.show3 == true)) {
 					this.show = this.show
 					console.log(1)
-				}
-				else if(this.show==true&&this.show1==false){
-					this.show=false
+				} else if (this.show == true && this.show1 == false) {
+					this.show = false
 					console.log(2)
-				}
-				else{
-					this.show=!this.show
+				} else {
+					this.show = !this.show
 					console.log(3)
 				}
 				console.log(this.show)
@@ -142,32 +155,30 @@
 				this.show3 = false
 				this.active2 = false
 				this.active3 = false
-				console.log(this.active1,'active1')
+				console.log(this.active1, 'active1')
 			},
 			actives2() {
-				if(this.show==true&&(this.show1==true||this.show3==true)){
+				if (this.show == true && (this.show1 == true || this.show3 == true)) {
 					this.show = this.show
+				} else {
+					this.show = !this.show
 				}
-				else{
-					this.show=!this.show
-				}
-				
+
 				this.active2 = !this.active2
 				this.show2 = !this.show2
 				this.show1 = false
 				this.show3 = false
 				this.active1 = false
 				this.active3 = false
-				console.log(this.active2,'active2')
+				console.log(this.active2, 'active2')
 			},
 			actives3() {
-				if(this.show==true&&(this.show1==true||this.show2==true)){
+				if (this.show == true && (this.show1 == true || this.show2 == true)) {
 					this.show = this.show
+				} else {
+					this.show = !this.show
 				}
-				else{
-					this.show=!this.show
-				}
-				
+
 				this.show1 = false
 				this.show2 = false
 				this.active2 = false
@@ -178,17 +189,21 @@
 			},
 			optionsActive1(val) {
 				console.log(val)
+				this.title1=val
+				console.log(this.title1)
 				this.show = !this.show
 				this.show1 = false
 				this.active1 = !this.active1
 			},
 			optionsActive2(val) {
+				this.title2=val
 				console.log(val)
 				this.show = !this.show
 				this.show2 = false
 				this.active2 = !this.active2
 			},
 			optionsActive3(val) {
+				this.title3=val
 				console.log(val)
 				this.show = !this.show
 				this.show3 = false
@@ -318,7 +333,7 @@
 
 					.typeTitle {
 						margin-right: -12rpx;
-						width: 200rpx;
+						width: 198rpx;
 						overflow: hidden;
 						text-overflow: ellipsis;
 						white-space: nowrap;
@@ -340,8 +355,8 @@
 				box-shadow: 0px 30rpx 40rpx rgba(201, 201, 201, 0.3);
 				position: absolute;
 				// position: fixed;
-				// top:90rpx;
-				// left: 0;
+				top: 90rpx;
+				left: 0;
 				z-index: 50;
 				width: 100%;
 				height: 600rpx;

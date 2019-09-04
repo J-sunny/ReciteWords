@@ -10,7 +10,7 @@
 			<!-- 头像 -->
 			<view class="touBox">
 				<view class="touXiang" @tap="show('headPic')">
-					<image src="../../../../static/images/touXiang%20(1).png"></image>
+					<image src="../../../../static/images/touXiang@2x.png"></image>
 				</view>
 			</view>
 		</view>

@@ -27,7 +27,7 @@
 			<view class="minePh">
 				<view class="mineleft f_float">
 					<label for="" class="myRanking">200</label>
-					<image class="myPic" src="../../../../static/images/people.png" mode=""></image>
+					<image class="myPic" src="../../../../static/images/people@2.png" mode=""></image>
 					<label for="" class="myName">Fanny萱</label>
 				</view>
 				<view class="mineRight r_float">
@@ -44,10 +44,10 @@
 					<view class="mineleft f_float">
 						<label for="" class="myRanking" v-if="false">200</label>
 						<!-- 排行勋章 -->
-						<image v-if='' class="xz" src="../../../../static/images/xz1.png" mode=""></image>
-						<image v-if='false' class="xz" src="../../../../static/images/xz2.png" mode=""></image>
-						<image v-if='false' class="xz" src="../../../../static/images/xz3.png" mode=""></image>
-						<image class="myPic" src="../../../../static/images/people.png" mode=""></image>
+						<image v-if='true' class="xz" src="../../../../static/images/xz1@2.png" mode=""></image>
+						<image v-if='false' class="xz" src="../../../../static/images/xz2@2.png" mode=""></image>
+						<image v-if='false' class="xz" src="../../../../static/images/xz3@2.png" mode=""></image>
+						<image class="myPic" src="../../../../static/images/people@2.png" mode=""></image>
 						<label for="" class="myName">Fanny萱</label>
 					</view>
 					<view class="mineRight r_float">
@@ -59,9 +59,9 @@
 				<view class="minePh">
 					<view class="mineleft f_float">
 						<!-- 排行勋章 -->
-						<image v-if='' class="xz" src="../../../../static/images/xz2.png" mode=""></image>
-						<image class="myPic" src="../../../../static/images/people.png" mode=""></image>
-						<label for="" class="myName">Fanny萱</label>
+						<image v-if='true' class="xz" src="../../../../static/images/xz2@2.png" mode=""></image>
+						<image class="myPic" src="../../../../static/images/people@2.png" mode=""></image>
+						<label  class="myName">Fanny萱</label>
 					</view>
 					<view class="mineRight r_float">
 						<label for="" class="completionTime">完成时间</label>
@@ -73,21 +73,20 @@
 				<view class="minePh">
 					<view class="mineleft f_float">
 						<!-- 排行勋章 -->
-						<image v-if='' class="xz" src="../../../../static/images/xz3.png" mode=""></image>
-						<image class="myPic" src="../../../../static/images/people.png" mode=""></image>
-						<label for="" class="myName">Fanny萱</label>
+						<image v-if="true" class="xz" src="../../../../static/images/xz3@2.png" mode=""></image>
+						<image class="myPic" src="../../../../static/images/people@2.png" mode=""></image>
+						<label  class="myName">Fanny萱</label>
 					</view>
 					<view class="mineRight r_float">
 						<label for="" class="completionTime">完成时间</label>
 						<label for="times">00:20:36</label>
 					</view>
 				</view>
-
 
 				<view class="minePh" v-for="iten in 30" :key='iten'>
 					<view class="mineleft f_float">
 						<label for="" class="myRanking">200</label>
-						<image class="myPic" src="../../../../static/images/people.png" mode=""></image>
+						<image class="myPic" src="../../../../static/images/people@2.png" mode=""></image>
 						<label for="" class="myName">Fanny萱</label>
 					</view>
 					<view class="mineRight r_float">

@@ -5,7 +5,7 @@
 		<view class="navTitle">我的</view>
 		<!--用户信息  -->
 		<navigator hover-class='none' url="../myInformation/index" class="userInfoBox">
-			<image class="userPic" src="../../../../static/images/touXiang%20(1).png" mode=""></image>
+			<image class="userPic" src="../../../../static/images/touXiang@2x.png" mode=""></image>
 			<view class="userText">
 				<text class="userName">吴琳</text><br>
 				<label class="userUni">华中师范大学 XF20120125</label>
@@ -63,10 +63,12 @@
 			// 退出登录
 			loginOut() {
 				this.$minApi.loginOut({
-
 				}).then(data => {
 					console.log(data)
 					uni.removeStorageSync('token');
+					uni.redirectTo({
+						url: '../../../view/login/index'
+					});
 				})
 			},
 			bindClick(type) {

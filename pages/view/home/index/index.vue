@@ -8,7 +8,7 @@
 			<!-- 日历 -->
 			<view class="calendarBox">
 				<view class="calendar">
-					<uni-calendar :insert="true" :lunar="false" :disable-before="false" @change="change" />
+					<uni-calendar :selected="selected" :insert="true" :lunar="false" :disable-before="false" @change="change" />
 				</view>
 			</view>
 		</view>
@@ -54,12 +54,26 @@
 				year: '',
 				month: '',
 				day: '',
+				selected: [{
+					date: '2019-9-21',
+					info:'',
+					data:{
+						custom:'自定义信息',
+						name:'消息头'
+					}
+				}, {
+					date: '2019-9-22'
+				}, {
+					date: '2019-9-24'
+				}, {
+					date: '2019-9-25'
+				}]
 			}
 		},
 		methods: {
 			// 日历
 			change(e) {
-				// console.log(e)
+				console.log(e)
 				this.year = e.year,
 					this.month = e.month,
 					this.day = e.date,
@@ -73,7 +87,7 @@
 					month: this.month,
 				}).then(data => {
 					this.taskCalendarList = data.data
-					// console.log(res)
+					// console.log(data)
 				})
 
 			},
@@ -85,7 +99,7 @@
 					day: this.day,
 				}, ).then(data => {
 					this.dayOfMissionList = data.data
-					// console.log(res)
+					// console.log(data)
 				}).catch(err => {
 					// console.log(err)
 				})

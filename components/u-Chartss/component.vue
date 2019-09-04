@@ -1,5 +1,5 @@
 <template>
-	<canvas v-if="canvasId" :id="canvasId" :canvasId="canvasId" :style="{'width':'500px','height':'500px', 'transform': 'scale('+(1/pixelRatio)+')','margin-left':-cWidth*(pixelRatio-1)/2+'px','margin-top':-cHeight*(pixelRatio-1)/2+'px'}"
+	<canvas v-if="canvasId" :id="canvasId" :canvasId="canvasId" :style="{'width':cWidth*pixelRatio+'px','height':cHeight*pixelRatio+'px', 'transform': 'scale('+(1/pixelRatio)+')','margin-left':-cWidth*(pixelRatio-1)/2+'px','margin-top':-cHeight*(pixelRatio-1)/2+'px'}"
 	 @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd" @error="error">
 	</canvas>
 </template>
@@ -7,6 +7,7 @@
 <script>
 	import uCharts from './u-charts.js';
 	var canvases = {};
+	
 	export default {
 		props: {
 			chartType: {
@@ -53,7 +54,6 @@
 				}
 			},
 			initColumnChart() {
-				console.log(this.opts)
 				canvases[this.canvasId] = new uCharts({
 					$this: this,
 					canvasId: this.canvasId,
@@ -75,8 +75,8 @@
 						//disabled:true
 					},
 					dataLabel: true,
-					width: this.opts.width,
-					height: 500,
+					width: this.cWidth * this.pixelRatio,
+					height: this.cHeight * this.pixelRatio,
 					extra: {
 						column: {
 							type: 'group',
@@ -118,8 +118,8 @@
 							return val.toFixed(0) + '元'
 						}
 					},
-					width: this.opts.width,
-					height: this.opts.height,
+					width: this.cWidth * this.pixelRatio,
+					height: this.cHeight * this.pixelRatio,
 					extra: {
 						line: {
 							type: 'straight'
