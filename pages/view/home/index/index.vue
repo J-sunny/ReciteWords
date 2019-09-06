@@ -8,25 +8,26 @@
 			<!-- 日历 -->
 			<view class="calendarBox">
 				<view class="calendar">
-					<uni-calendar :selected="selected" :insert="true" :lunar="false" :disable-before="false" @change="change" />
+					<uni-calendar :insert="true" :lunar="true" :selected="selected" :disable-before="false" @change="change" />
+					<!-- <uni-calendar :selected="selected" :insert="true" :lunar="false" :disable-before="false" @change="change" /> -->
 				</view>
 			</view>
 		</view>
 		<!-- 词汇量 -->
-		<view class="vocabularyBox" v-if="true">
-			<view class="vocabulary" v-for="(item,index) in 6" :key=item>
+		<view class="vocabularyBox" v-if="token">
+			<view class="vocabulary" v-for="(item,index) in dayOfMissionList" :key="item.taskId">
 				<!-- 左边 -->
 				<view style="float: left;">
-					<view class='vocTitle'>任务词汇量：<span class='yellowColor'>10个</span></view>
-					<view class='vocClass'>XX专业XX系301班</view>
-					<view class='vocData'>7-10 15:00:00</view>
+					<view class='vocTitle'>任务词汇量：<span class='yellowColor'>{{item.allWordCount}}个</span></view>
+					<view class='vocClass'>{{item.className}}</view>
+					<view class='vocData'>{{item.taskTime}}</view>
 				</view>
 				<!-- 右边   查看详情 -->
-				<label hover-class='none' class='seeDetails' @click="linkTo(index)">查看详情</label>
+				<label hover-class='none' class='seeDetails' @click="linkTo(item.allWordCount,item.taskTime,item.taskId)">查看详情</label>
 			</view>
 		</view>
 		<!-- 暂无任务 -->
-		<view class="noTask" v-if=false>
+		<view class="noTask" v-if="!token||dayOfMissionList.length==0">
 			<image class="noTaskPic" src="../../../../static/images/noTaskTB.png" mode=""></image>
 			<view class='noTaskTitle'>暂无任务</view>
 			<view class='arrangement'>快去布置任务吧！</view>
@@ -54,30 +55,25 @@
 				year: '',
 				month: '',
 				day: '',
+				token: '',
 				selected: [{
-					date: '2019-9-21',
-					info:'',
-					data:{
-						custom:'自定义信息',
-						name:'消息头'
-					}
-				}, {
-					date: '2019-9-22'
-				}, {
-					date: '2019-9-24'
-				}, {
-					date: '2019-9-25'
+					date: '2019-09-05'
 				}]
 			}
 		},
+		onShow() {
+			this.token = uni.getStorageSync('token')
+		},
+
 		methods: {
 			// 日历
 			change(e) {
 				console.log(e)
-				this.year = e.year,
-					this.month = e.month,
-					this.day = e.date,
-					this.taskCalendar()
+				this.year = e.year
+				this.month = e.month
+				this.day = e.date
+				this.taskCalendar()
+				console.log(2222)
 				this.getDayOfMissionList()
 			},
 			// 获取任务日历数据
@@ -87,7 +83,70 @@
 					month: this.month,
 				}).then(data => {
 					this.taskCalendarList = data.data
-					// console.log(data)
+					console.log(data)
+					let list = []
+					if (data.data[0]) {
+						data.data.forEach(item => {
+							list.push({
+								date: item.taskTime
+							})
+						})
+						console.log(list)
+						// this.selected = list
+						this.selected = [{
+							date: '2019-09-05'
+						},
+						{
+							date: '2019-09-06'
+						},
+						{
+							date: '2019-09-07'
+						},
+						{
+							date: '2019-09-08'
+						},
+						{
+							date: '2019-09-09'
+						},
+						{
+							date: '2019-09-10'
+						},
+						{
+							date: '2019-09-15'
+						},
+						{
+							date: '2019-09-17'
+						},
+						{
+							date: '2019-09-19'
+						},
+						{
+							date: '2019-09-20'
+						},
+						{
+							date: '2019-09-26'
+						},
+						{
+							date: '2019-09-28'
+						},
+						{
+							date: '2019-09-29'
+						},
+						{
+							date: '2019-08-29'
+						},
+						{
+							date: '2019-08-22'
+						},
+						{
+							date: '2019-08-20'
+						},
+						{
+							date: '2019-08-23'
+						},
+						]
+						console.log(this.selected)						
+					}
 				})
 
 			},
@@ -99,26 +158,26 @@
 					day: this.day,
 				}, ).then(data => {
 					this.dayOfMissionList = data.data
-					// console.log(data)
+					console.log(data)
 				}).catch(err => {
 					// console.log(err)
 				})
 			},
 			// 页面跳转
-			linkTo(taskId) {
+			linkTo(allWordCount, taskTime, taskId) {
 				uni.navigateTo({
-					url: '../details/operationalDetails?taskId=' + taskId
+					url: '../details/operationalDetails?taskId=' + taskId + '&allWordCount=' + allWordCount + '&taskTime=' +
+						taskTime
 				})
 			}
 		},
-		created() {
 
-		}
 
 	};
 </script>
 
 <style lang="scss">
+
 	// 大盒子
 	.bigBox {
 		position: relative;

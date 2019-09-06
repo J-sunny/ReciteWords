@@ -11,13 +11,13 @@
 			<view class="taskVocabulary">
 				<!-- 左边--任务词汇量 -->
 				<view class="taskLeft">
-					<view class='taskTitle'>任务词汇量：<label class='yellowColor'>10个</label></view>
-					<view class='taskTime'>7-10 15:00:00</view>
+					<view class='taskTitle'>任务词汇量：<label class='yellowColor'>{{allWordCount}}个</label></view>
+					<view class='taskTime'>{{taskTime}}</view>
 				</view>
 				<!-- 右边查看排名 -->
-				<navigator hover-class='none' class="viewBtn" url='ranking'>
+				<label class="viewBtn" @tap="linkToRanking()">
 					查看排名
-				</navigator>
+				</label>
 			</view>
 		</view>
 
@@ -35,7 +35,7 @@
 					<view class="stuName">学号：<label class="stuNames">20181227</label></view>
 				</view>
 				<!-- 右边查看详情按钮 -->
-				<label  class="frameRightBtn" @click="linkTo(index)">查看详情</label>
+				<label class="frameRightBtn" @click="linkTo(index)">查看详情</label>
 			</view>
 		</view>
 
@@ -46,7 +46,9 @@
 	export default {
 		data() {
 			return {
-				taskId: ''
+				taskId: '',
+				allWordCount: '',
+				taskTime: ''
 			}
 		},
 		methods: {
@@ -61,6 +63,12 @@
 				uni.navigateTo({
 					url: 'studentDetails?studentId=' + studentId
 				})
+			},
+			// 查看排名跳转
+			linkToRanking() {
+				uni.navigateTo({
+					url: 'ranking?taskId=' + this.taskId
+				})
 			}
 
 		},
@@ -72,6 +80,8 @@
 			// var data = JSON.parse(options.index); // 字符串转对象
 			console.log(options)
 			this.taskId = options.taskId
+			this.taskTime = options.taskTime
+			this.allWordCount = options.allWordCount
 		}
 	}
 </script>

@@ -127,6 +127,9 @@
         font-weight: 400;
         color: #5C6371;
 }
+.byCourseBox .byList .courseOptions .activeColor {
+        color: #FFBB00;
+}
 .byCourseBox .courseConBox {
     padding: 0 32rpx 120rpx 32rpx;
     -webkit-box-sizing: border-box;

@@ -35,6 +35,10 @@ minRequest.setConfig((config) => {
 export default {
 	// 这里统一管理api请求
 	apis: {
+		// 获取用户信息
+		getUserInfo(data) {
+			return minRequest.get('/getUserInfo', data)
+		},
 		// 单日任务详情列表
 		dayOfMissionList(data) {
 			return minRequest.get('/teacher/main/dayOfMissionList', data)
@@ -54,6 +58,30 @@ export default {
 		// 获取用户信息
 		getUserInfo(data) {
 			return minRequest.get('/getUserInfo', data)
+		},
+		// 获取课程下拉列表
+		thesaurusList(data) {
+			return minRequest.get('/teacher/task/thesaurusList', data)
+		},
+		// 获取章节下拉列表
+		chapterList(data) {
+			return minRequest.get('/teacher/task/chapterList', data)
+		},
+		// 获取学校下拉列表
+		schoolList(data) {
+			return minRequest.get('/schoolList', data)
+		},
+		// 获取班级下拉列表
+		classList(data) {
+			return minRequest.get('/classList', data)
+		},
+		// 获取所有单词列表
+		allWordList(data) {
+			return minRequest.get('/teacher/word/allWordList', data)
+		},
+		// 查看任务排名
+		taskRank(data) {
+			return minRequest.get('/student/task/taskRank', data)
 		},
 	}
 }

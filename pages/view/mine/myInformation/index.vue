@@ -17,19 +17,21 @@
 		<!-- 内容 -->
 		<view class="infoCon">
 			<view class="conBox">
-				<label class="name">昵称/姓名</label><label class="con">20142547</label>
+				<label class="name">昵称/姓名</label><label class="con">{{getUserInfoList.teacherAccount}}</label>
 			</view>
 			<view class="conBox">
-				<label class="name">工号</label><label class="con">XF20120125</label>
+				<label class="name">工号</label><label class="con">{{getUserInfoList.teacherNum}}</label>
 			</view>
 			<view class="conBox" @tap="show1('gender')">
-				<label class="name">性别</label><label class="con cons">{{sex}}</label><label class="arrowRight" @tap="show1('gender')"></label>
+				<label class="name">性别</label><label class="con cons">{{teacherGender==0?'女':'男'}}</label><label
+				 class="arrowRight" @tap="show1('gender')"></label>
 			</view>
 			<view class="conBox" @tap="show2('')">
-				<label class="name">生日</label><label class="con cons">{{birthday}}</label><label class="arrowRight" @tap="show2('')"></label>
+				<label class="name">生日</label><label class="con cons">{{teacherBirth}}</label><label class="arrowRight"
+				 @tap="show2('')"></label>
 			</view>
 			<view class="conBox">
-				<label class="name">学校</label><label class="con">XX学校</label>
+				<label class="name">学校</label><label class="con">{{getUserInfoList.teacherRealname}}</label>
 			</view>
 			<navigator url="changePassword" class="conBox">
 				<label class="name">修改密码</label>
@@ -54,11 +56,8 @@
 		<view class="genderPopup">
 			<popup-layer ref="gender" :direction="'top'">
 				<view class="popupBox">
-					<!-- <view class="opcition"><label class="cancel" @tap="close1">取消</label><label class="genders">性别</label><label class="confirm">确定</label></view>
-					<view class="male">男</view>
-					<view class="female">女</view> -->
-					<!-- <view class="cancel" >取消</view> -->
-					<van-picker show-toolbar title="性别" :columns='columns' default-index=0 @cancel="onCancel()" @confirm="onConfirm()" />
+					<van-picker show-toolbar title="性别" :columns='columns' :default-index='getUserInfoList.teacherGender' @cancel="onCancel()"
+					 @confirm="onConfirm()" />
 				</view>
 			</popup-layer>
 		</view>
@@ -83,21 +82,21 @@
 	export default {
 		data() {
 			return {
-				columns: ['男', '女'],
-				maxDate:new Date().getTime(),			
-				birthday:new Date().getTime(),
+				columns: ['女', '男'],
+				maxDate: new Date().getTime(),
+				teacherBirth: '',
+				teacherGender:'',
 				formatter(type, value) {
 					if (type === 'year') {
 						return `${value}年`;
 					} else if (type === 'month') {
 						return `${value}月`;
-					}
-					else if (type === 'day') {
+					} else if (type === 'day') {
 						return `${value}日`;
 					}
 					return value;
 				},
-				sex:'男'
+				getUserInfoList: []
 			}
 		},
 		components: {
@@ -134,7 +133,7 @@
 					index
 				} = event.detail;
 				console.log(`当前值：${value}, 当前索引：${index}`);
-				this.sex=value
+				this.teacherGender = value
 			},
 
 			onCancel() {
@@ -157,17 +156,27 @@
 				// this.setData({
 				// 	currentDate: val.detail
 				// });
-				this.birthday=time.formatTime(new Date(val.detail),'Y-M-D') 
-				console.log(this.birthday)
+				this.teacherBirth = time.formatTime(new Date(val.detail), 'Y-M-D')
+				console.log(this.teacherBirth)
 				// var a=time.formatTimeTwo(this.birthday)				
 				this.close2()
 			},
-			birCancel(){
+			birCancel() {
 				this.close2()
-			}
+			},
+			// 获取用户信息
+			getUserInfo() {
+				this.$minApi.getUserInfo({}).then(data => {
+					console.log(data)
+					this.getUserInfoList = data.data
+					this.teacherBirth=data.data.teacherBirth
+					this.teacherGender=data.data.teacherGender
+				})
+			},
 		},
 		created() {
-			this.birthday=time.formatTime(new Date(this.birthday),'Y-M-D') 
+			this.birthday = time.formatTime(new Date(this.birthday), 'Y-M-D')
+			this.getUserInfo()
 		}
 	}
 </script>

@@ -61,7 +61,7 @@
 						<!-- 排行勋章 -->
 						<image v-if='true' class="xz" src="../../../../static/images/xz2@2.png" mode=""></image>
 						<image class="myPic" src="../../../../static/images/people@2.png" mode=""></image>
-						<label  class="myName">Fanny萱</label>
+						<label class="myName">Fanny萱</label>
 					</view>
 					<view class="mineRight r_float">
 						<label for="" class="completionTime">完成时间</label>
@@ -75,7 +75,7 @@
 						<!-- 排行勋章 -->
 						<image v-if="true" class="xz" src="../../../../static/images/xz3@2.png" mode=""></image>
 						<image class="myPic" src="../../../../static/images/people@2.png" mode=""></image>
-						<label  class="myName">Fanny萱</label>
+						<label class="myName">Fanny萱</label>
 					</view>
 					<view class="mineRight r_float">
 						<label for="" class="completionTime">完成时间</label>
@@ -118,21 +118,22 @@
 				});
 			},
 			// 查看任务排名
-			getDayOfMissionList() {
-				uni.request({
-					url: 'http://192.168.2.107:8089/backwordSystem/student/task/taskRank',
-					data: {
-						taskId: this.taskId,
-					},
-					success: (data) => {
-						console.log(data)
-						this.taskRankList = data.data
-					}
+			taskRank() {
+				this.$minApi.taskRank({
+					taskId: this.taskId
+				}).then(data => {
+					console.log(data)
+					this.taskRankList=data.data
 				})
 			}
 		},
 		created() {
-
+			
+		},
+		onLoad(options) {
+			console.log(options)
+			this.taskId = options.taskId
+			this.taskRank()
 		}
 
 	}

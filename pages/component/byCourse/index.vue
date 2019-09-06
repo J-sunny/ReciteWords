@@ -12,26 +12,18 @@
 					</view>
 					<!-- 分类选项--第一级 -->
 					<scroll-view scroll-y='true' class="courseOptions" v-if='show1'>
-						<view class="options" v-for="(item,index) in 31" :key='item' @tap="optionsActive1(index)">{{item}}</view>
-						<view class="options">四级核心词汇</view>
-						<view class="options">大学六级</view>
-						<view class="options">六级核心词汇</view>
-						<view class="options">专业四级</view>
+						<view class="options" :class="item.thesaurusName==title1?'activeColor':''" v-for="item in thesaurusLists" :key='item' @tap="optionsActive1(item.thesaurusName,item.thesaurusId)">{{item.thesaurusName}}</view>
 					</scroll-view>
 				</view>
 
 				<view>
 					<view class="courseType courseBorder" @tap="actives2()">
-						<label class="typeTitle" >{{title2}}</label>
+						<label class="typeTitle">{{title2}}</label>
 						<uni-icon class='typeIcon' :type="active2==1?'arrowdown ':'arrowup'"></uni-icon>
 					</view>
 					<!-- 分类选项--第二级 -->
 					<scroll-view scroll-y='true' class="courseOptions" v-if='show2'>
-						<view class="options" v-for="(item,index) in 31" :key='item' @tap="optionsActive2(index)">{{item}}</view>
-						<view class="options">四级核心词汇</view>
-						<view class="options">大学六级</view>
-						<view class="options">六级核心词汇</view>
-						<view class="options">专业四级</view>
+						<view class="options" :class="item.belong_chapter==title2?'activeColor':''" v-for="(item,index) in chapterLists" :key='index' @tap="optionsActive2(item.belong_chapter)">{{item.belong_chapter}}</view>
 					</scroll-view>
 				</view>
 
@@ -42,41 +34,23 @@
 					</view>
 					<!-- 分类选项--第三级 -->
 					<scroll-view scroll-y='true' class="courseOptions" v-if='show3'>
-						<view class="options" v-for="(item,index) in 31" :key='item' @tap="optionsActive3(index)">{{item}}</view>
-						<view class="options">四级核心词汇</view>
-						<view class="options">大学六级</view>
-						<view class="options">六级核心词汇</view>
-						<view class="options">专业四级</view>
+						<view class="options" :class="item.belong_lesson==title3?'activeColor':''" v-for="(item,index) in chapterLists" :key='index' @tap="optionsActive3(item.belong_lesson)">{{item.belong_lesson}}</view>
 					</scroll-view>
 				</view>
-				
-				
+
+
 			</view>
 		</view>
 
 		<!-- 内容 -->
-		<view class="courseConBox">
-			<!-- <view class="courseList">
-					<view class="Title"><label for="" class="bigTitle">四级核心词汇</label><label class="smallTitle" for="">chapter 1-Lesson
-							2</label></view>
-					<view class="listCon" v-for="item in 5" :key='item'>
-						<view class="listConRadio">
-							<checkbox value="cb" color="#FFBB00" style="transform:scale(1)" />
-						</view>
-						<view class="listConWord">
-							<view for="" class="word">abandon</view>
-							<view for="" class="Interpretation">n.同谋，从犯；附件</view>
-						</view>
-					</view>
-				</view> -->
-
+		<view class="courseConBox">		
 			<view class="courseList" v-for="i in 4" :key=i>
 				<view class="Title"><label class="bigTitle">四级核心词汇</label><label class="smallTitle" for="">chapter 1-Lesson
 						2</label></view>
 				<van-checkbox-group :value="result" @change="onChanges()">
 					<view class="checkedBox" v-for="(item , index2) in list" :key="index2">
 						<view class="box" :style="{height:'160rpx',padding:'40rpx 24rpx' ,'border-radius':'16rpx','margin-top':'32rpx',background:'#fff','box-sizing': 'border-box'}">
-						<!-- 复选框组 -->
+							<!-- 复选框组 -->
 							<van-checkbox class="vanCheckBox" :name="item" checked-color="#FFBB00">
 								<view class="words">
 									<view for="" class="word">{{item}}</view>
@@ -114,9 +88,9 @@
 	export default {
 		data() {
 			return {
-				title1:'w',
-				title2:'e',
-				title3:'t',
+				title1: '全部',
+				title2: '全部',
+				title3: '全部',
 				active1: 1,
 				active2: 1,
 				active3: 1,
@@ -124,7 +98,6 @@
 				show1: false,
 				show2: false,
 				show3: false,
-
 				checkAll: false,
 				list: ['a', 'b', 'c'],
 				result: ['a', 'b'],
@@ -135,6 +108,17 @@
 		},
 		components: {
 			uniIcon
+		},
+		watch: {
+			title1() {
+				console.log(this.title1)
+				this.chapterList(this.title1)
+				this.title2 = "全部"
+				this.title3 = "全部"
+			},
+			title2() {
+				
+			}
 		},
 		methods: {
 			actives1() {
@@ -188,22 +172,21 @@
 				console.log(this.active3)
 			},
 			optionsActive1(val) {
-				console.log(val)
-				this.title1=val
-				console.log(this.title1)
+				this.title1 = val
+				console.log(this.title1, this.thesaurusId1)
 				this.show = !this.show
 				this.show1 = false
 				this.active1 = !this.active1
 			},
 			optionsActive2(val) {
-				this.title2=val
+				this.title2 = val
 				console.log(val)
 				this.show = !this.show
 				this.show2 = false
 				this.active2 = !this.active2
 			},
 			optionsActive3(val) {
-				this.title3=val
+				this.title3 = val
 				console.log(val)
 				this.show = !this.show
 				this.show3 = false
@@ -219,24 +202,18 @@
 			},
 			// 获取课程下拉列表
 			thesaurusList() {
-				uni.request({
-					url: 'http://192.168.2.107:8089/backwordSystem/teacher/task/thesaurusList',
-					data: {},
-					success: (data) => {
-						console.log(data)
-						this.thesaurusLists = data.data
-					}
+				this.$minApi.thesaurusList({}).then(data => {
+					console.log(data)
+					this.thesaurusLists = data.data
 				})
 			},
 			// 获取章节下拉列表
-			chapterList() {
-				uni.request({
-					url: 'http://192.168.2.107:8089/backwordSystem/teacher/task/chapterList',
-					data: {},
-					success: (data) => {
-						console.log(data)
-						this.chapterLists = data.data
-					}
+			chapterList(thesauruName) {
+				this.$minApi.chapterList({
+					thesauruName: thesauruName
+				}).then(data => {
+					console.log(data)
+					this.chapterLists = data.data
 				})
 			},
 		},
@@ -370,8 +347,9 @@
 					font-size: 30rpx;
 					font-weight: 400;
 					color: #5C6371;
-
-
+				}
+				.activeColor{
+					color: #FFBB00;
 				}
 			}
 		}

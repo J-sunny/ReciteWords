@@ -1,9 +1,9 @@
 (global["webpackJsonp"] = global["webpackJsonp"] || []).push([["common/vendor"],{
 
 /***/ 0:
-/*!**********************************************************!*\
-  !*** C:/Users/Administrator/Desktop/ReciteWords/main.js ***!
-  \**********************************************************/
+/*!*****************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/main.js ***!
+  \*****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -771,7 +771,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -1624,9 +1624,9 @@ function normalizeComponent (
 /***/ }),
 
 /***/ 103:
-/*!****************************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/ReciteWords/main.js?{"page":"pages%2Fview%2Fhome%2FarrangementTasks%2FcheckSelected"} ***!
-  \****************************************************************************************************************************/
+/*!***********************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/main.js?{"page":"pages%2Fview%2Fhome%2FarrangementTasks%2FcheckSelected"} ***!
+  \***********************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1641,9 +1641,9 @@ createPage(_checkSelected.default);
 /***/ }),
 
 /***/ 11:
-/*!***********************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/ReciteWords/pages/style/init.css ***!
-  \***********************************************************************/
+/*!******************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/pages/style/init.css ***!
+  \******************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1652,9 +1652,9 @@ createPage(_checkSelected.default);
 /***/ }),
 
 /***/ 111:
-/*!**********************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/ReciteWords/main.js?{"page":"pages%2Fcomponent%2FbyLetter%2Findex"} ***!
-  \**********************************************************************************************************/
+/*!*****************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/main.js?{"page":"pages%2Fcomponent%2FbyLetter%2Findex"} ***!
+  \*****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1669,9 +1669,9 @@ createPage(_index.default);
 /***/ }),
 
 /***/ 112:
-/*!**********************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/ReciteWords/main.js?{"page":"pages%2Fcomponent%2FbyCourse%2Findex"} ***!
-  \**********************************************************************************************************/
+/*!*****************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/main.js?{"page":"pages%2Fcomponent%2FbyCourse%2Findex"} ***!
+  \*****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1686,9 +1686,9 @@ createPage(_index.default);
 /***/ }),
 
 /***/ 113:
-/*!***********************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/ReciteWords/main.js?{"page":"components%2Flee-select%2Flee-select%2Flee-select"} ***!
-  \***********************************************************************************************************************/
+/*!******************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/main.js?{"page":"components%2Flee-select%2Flee-select%2Flee-select"} ***!
+  \******************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1703,9 +1703,9 @@ createPage(_leeSelect.default);
 /***/ }),
 
 /***/ 114:
-/*!*************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/ReciteWords/main.js?{"page":"pages%2Fview%2Fhome%2Fdetails%2Franking"} ***!
-  \*************************************************************************************************************/
+/*!********************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/main.js?{"page":"pages%2Fview%2Fhome%2Fdetails%2Franking"} ***!
+  \********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1720,9 +1720,9 @@ createPage(_ranking.default);
 /***/ }),
 
 /***/ 12:
-/*!*******************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/ReciteWords/request/index.js ***!
-  \*******************************************************************/
+/*!**************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/request/index.js ***!
+  \**************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1839,9 +1839,9 @@ MinRequest;exports.default = _default;
 /***/ }),
 
 /***/ 122:
-/*!********************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/ReciteWords/main.js?{"page":"pages%2Fview%2Fhome%2Fdetails%2FstudentDetails"} ***!
-  \********************************************************************************************************************/
+/*!***************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/main.js?{"page":"pages%2Fview%2Fhome%2Fdetails%2FstudentDetails"} ***!
+  \***************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1856,9 +1856,9 @@ createPage(_studentDetails.default);
 /***/ }),
 
 /***/ 128:
-/*!**********************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/ReciteWords/components/u-charts/u-charts.js ***!
-  \**********************************************************************************/
+/*!*****************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/components/u-charts/u-charts.js ***!
+  \*****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7233,14 +7233,14 @@ if ( true && typeof module.exports === "object") {
 /***/ }),
 
 /***/ 13:
-/*!*****************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/ReciteWords/request/api.js ***!
-  \*****************************************************************/
+/*!************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/request/api.js ***!
+  \************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _index = _interopRequireDefault(__webpack_require__(/*! ./index.js */ 12));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _index = _interopRequireDefault(__webpack_require__(/*! ./index.js */ 12));var _apis;function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
 
 var minRequest = new _index.default();
 
@@ -7276,7 +7276,11 @@ minRequest.setConfig(function (config) {
 
 {
   // 这里统一管理api请求
-  apis: {
+  apis: (_apis = {
+    // 获取用户信息
+    getUserInfo: function getUserInfo(data) {
+      return minRequest.get('/getUserInfo', data);
+    },
     // 单日任务详情列表
     dayOfMissionList: function dayOfMissionList(data) {
       return minRequest.get('/teacher/main/dayOfMissionList', data);
@@ -7292,19 +7296,43 @@ minRequest.setConfig(function (config) {
     // 退出登录
     loginOut: function loginOut(data) {
       return minRequest.get('/loginOut', data);
-    },
-    // 获取用户信息
-    getUserInfo: function getUserInfo(data) {
-      return minRequest.get('/getUserInfo', data);
-    } } };exports.default = _default;
+    } }, _defineProperty(_apis, "getUserInfo", function getUserInfo(
+
+  data) {
+    return minRequest.get('/getUserInfo', data);
+  }), _defineProperty(_apis, "thesaurusList", function thesaurusList(
+
+  data) {
+    return minRequest.get('/teacher/task/thesaurusList', data);
+  }), _defineProperty(_apis, "chapterList", function chapterList(
+
+  data) {
+    return minRequest.get('/teacher/task/chapterList', data);
+  }), _defineProperty(_apis, "schoolList", function schoolList(
+
+  data) {
+    return minRequest.get('/schoolList', data);
+  }), _defineProperty(_apis, "classList", function classList(
+
+  data) {
+    return minRequest.get('/classList', data);
+  }), _defineProperty(_apis, "allWordList", function allWordList(
+
+  data) {
+    return minRequest.get('/teacher/word/allWordList', data);
+  }), _defineProperty(_apis, "taskRank", function taskRank(
+
+  data) {
+    return minRequest.get('/student/task/taskRank', data);
+  }), _apis) };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 
 /***/ 131:
-/*!************************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/ReciteWords/main.js?{"page":"pages%2Fview%2Fhome%2Fdetails%2FoperationalDetails"} ***!
-  \************************************************************************************************************************/
+/*!*******************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/main.js?{"page":"pages%2Fview%2Fhome%2Fdetails%2FoperationalDetails"} ***!
+  \*******************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7319,9 +7347,9 @@ createPage(_operationalDetails.default);
 /***/ }),
 
 /***/ 139:
-/*!*********************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/ReciteWords/main.js?{"page":"pages%2Fview%2Fmine%2Findex%2Findex"} ***!
-  \*********************************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/main.js?{"page":"pages%2Fview%2Fmine%2Findex%2Findex"} ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7336,9 +7364,9 @@ createPage(_index.default);
 /***/ }),
 
 /***/ 14:
-/*!***********************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/ReciteWords/wxcomponents/dist/toast/toast.js ***!
-  \***********************************************************************************/
+/*!******************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/wxcomponents/dist/toast/toast.js ***!
+  \******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7413,9 +7441,9 @@ Toast;exports.default = _default;
 /***/ }),
 
 /***/ 15:
-/*!************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/ReciteWords/wxcomponents/dist/common/utils.js ***!
-  \************************************************************************************/
+/*!*******************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/wxcomponents/dist/common/utils.js ***!
+  \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7442,9 +7470,9 @@ function nextTick(fn) {
 /***/ }),
 
 /***/ 152:
-/*!**************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/ReciteWords/components/uni-calendar/calendar.js ***!
-  \**************************************************************************************/
+/*!*********************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/components/uni-calendar/calendar.js ***!
+  \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7999,9 +8027,9 @@ calendar;exports.default = _default;
 /***/ }),
 
 /***/ 16:
-/*!*********************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/ReciteWords/main.js?{"page":"pages%2Fview%2Fhome%2Findex%2Findex"} ***!
-  \*********************************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/main.js?{"page":"pages%2Fview%2Fhome%2Findex%2Findex"} ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13483,7 +13511,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -13504,14 +13532,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -13587,7 +13615,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -13965,9 +13993,9 @@ internalMixin(Vue);
 /***/ }),
 
 /***/ 24:
-/*!********************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/ReciteWords/main.js?{"page":"pages%2Fview%2Fhome%2FarrangementTasks%2Findex"} ***!
-  \********************************************************************************************************************/
+/*!***************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/main.js?{"page":"pages%2Fview%2Fhome%2FarrangementTasks%2Findex"} ***!
+  \***************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14013,9 +14041,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 4:
-/*!*************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/ReciteWords/pages.json ***!
-  \*************************************************************/
+/*!********************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/pages.json ***!
+  \********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14025,9 +14053,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 42:
-/*!************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/ReciteWords/pages/commont/city.js ***!
-  \************************************************************************/
+/*!*******************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/pages/commont/city.js ***!
+  \*******************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19845,9 +19873,9 @@ cityData;exports.default = _default;
 /***/ }),
 
 /***/ 54:
-/*!*****************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/ReciteWords/main.js?{"page":"pages%2Fview%2Fmine%2FmyInformation%2Findex"} ***!
-  \*****************************************************************************************************************/
+/*!************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/main.js?{"page":"pages%2Fview%2Fmine%2FmyInformation%2Findex"} ***!
+  \************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19862,9 +19890,9 @@ createPage(_index.default);
 /***/ }),
 
 /***/ 60:
-/*!*************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/ReciteWords/pages/utils/getDate.js ***!
-  \*************************************************************************/
+/*!********************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/pages/utils/getDate.js ***!
+  \********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19919,9 +19947,9 @@ module.exports = {
 /***/ }),
 
 /***/ 63:
-/*!**************************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/ReciteWords/main.js?{"page":"pages%2Fview%2Fmine%2FmyInformation%2FchangePassword"} ***!
-  \**************************************************************************************************************************/
+/*!*********************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/main.js?{"page":"pages%2Fview%2Fmine%2FmyInformation%2FchangePassword"} ***!
+  \*********************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19936,9 +19964,9 @@ createPage(_changePassword.default);
 /***/ }),
 
 /***/ 71:
-/*!**************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/ReciteWords/main.js?{"page":"pages%2Fview%2Flogin%2Findex"} ***!
-  \**************************************************************************************************/
+/*!*********************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/main.js?{"page":"pages%2Fview%2Flogin%2Findex"} ***!
+  \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19953,9 +19981,9 @@ createPage(_index.default);
 /***/ }),
 
 /***/ 79:
-/*!********************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/ReciteWords/main.js?{"page":"pages%2Fview%2Fmine%2FapprovalStudents%2Findex"} ***!
-  \********************************************************************************************************************/
+/*!***************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/main.js?{"page":"pages%2Fview%2Fmine%2FapprovalStudents%2Findex"} ***!
+  \***************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19970,9 +19998,9 @@ createPage(_index.default);
 /***/ }),
 
 /***/ 87:
-/*!************************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/ReciteWords/main.js?{"page":"pages%2Fview%2Fmine%2FclassManagement%2FseeDetails"} ***!
-  \************************************************************************************************************************/
+/*!*******************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/main.js?{"page":"pages%2Fview%2Fmine%2FclassManagement%2FseeDetails"} ***!
+  \*******************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19987,9 +20015,9 @@ createPage(_seeDetails.default);
 /***/ }),
 
 /***/ 95:
-/*!*******************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/ReciteWords/main.js?{"page":"pages%2Fview%2Fmine%2FclassManagement%2Findex"} ***!
-  \*******************************************************************************************************************/
+/*!**************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/main.js?{"page":"pages%2Fview%2Fmine%2FclassManagement%2Findex"} ***!
+  \**************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

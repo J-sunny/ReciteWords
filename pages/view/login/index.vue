@@ -42,8 +42,8 @@
 					userIdenty: '1'
 				}).then(data => {
 					Toast('登录成功');
-					console.log(data)
-					uni.setStorageSync('token', data.token);
+					// console.log(data)
+					uni.setStorageSync('token', data.data.token);
 					uni.switchTab({
 						url: '../home/index/index'
 					});

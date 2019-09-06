@@ -7,8 +7,8 @@
 		<navigator hover-class='none' url="../myInformation/index" class="userInfoBox">
 			<image class="userPic" src="../../../../static/images/touXiang@2x.png" mode=""></image>
 			<view class="userText">
-				<text class="userName">吴琳</text><br>
-				<label class="userUni">华中师范大学 XF20120125</label>
+				<text class="userName">{{getUserInfoList.teacherName}}</text><br>
+				<label class="userUni">{{getUserInfoList.teacherRealname}}</label>
 			</view>
 		</navigator>
 		<!-- 内容 -->
@@ -39,19 +39,21 @@
 		data() {
 			return {
 				show1: false,
+				getUserInfoList: []
 			}
 		},
 		components: {
 			neilModal
 		},
 		created() {
-			console.log(uni.getStorageSync('token'))
+			// console.log(uni.getStorageSync('token'))
 			// 没有登录则跳转到登录页面
 			if (!uni.getStorageSync('token')) {
 				uni.redirectTo({
 					url: '../../../view/login/index'
 				});
 			}
+			this.getUserInfo()
 		},
 		methods: {
 			// 返回
@@ -60,11 +62,17 @@
 					delta: 1
 				});
 			},
+			// 获取用户信息
+			getUserInfo() {
+				this.$minApi.getUserInfo({}).then(data => {
+					console.log(data)
+					this.getUserInfoList = data.data
+				})
+			},
 			// 退出登录
 			loginOut() {
-				this.$minApi.loginOut({
-				}).then(data => {
-					console.log(data)
+				this.$minApi.loginOut({}).then(data => {
+					// console.log(data)
 					uni.removeStorageSync('token');
 					uni.redirectTo({
 						url: '../../../view/login/index'
