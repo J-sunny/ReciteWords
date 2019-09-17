@@ -41,7 +41,7 @@
 	export default {
 		data() {
 			return {
-				show: 'course'
+				show: 'word'
 			}
 		},
 		components: {

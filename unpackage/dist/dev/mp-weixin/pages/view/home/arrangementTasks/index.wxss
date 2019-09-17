@@ -93,7 +93,6 @@
 }
 .byCourseBox .byList .courseNavBox .courseType .typeTitle {
           margin-right: -12rpx;
-          width: 198rpx;
           overflow: hidden;
           -o-text-overflow: ellipsis;
              text-overflow: ellipsis;
@@ -422,6 +421,16 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
+page {
+  height: 100%;
+}
+page,
+page {
+  height: 100%;
+}
+.byLetterBox {
+  overflow: hidden;
+}
 .box {
   padding: 40rpx 24rpx;
   -webkit-box-sizing: border-box;
@@ -465,7 +474,7 @@
 .byLetterBox .indexList {
   margin-top: 400rpx;
   padding-bottom: 120rpx;
-  height: 814rpx;
+  height: 1500rpx;
 }
 .byLetterBox .allCheck {
   padding: 0 32rpx;

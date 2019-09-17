@@ -310,7 +310,7 @@
 
 					.typeTitle {
 						margin-right: -12rpx;
-						width: 198rpx;
+						// width: 198rpx;
 						overflow: hidden;
 						text-overflow: ellipsis;
 						white-space: nowrap;

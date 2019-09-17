@@ -13,15 +13,16 @@
 		<view class="indexList">
 			<!-- <uni-indexed-list :options="list" :showSelect="true"></uni-indexed-list> -->
 			<!-- <uni-select :listData="listData" :quickPanelData="quickPanelData" @chooseItem="chooseItem"></uni-select> -->
-			<lee-select listBackgroundColor='#fff' :listData="listData" :quickPanelData="quickPanelData" @chooseItem="chooseItem" itemHeight=160></lee-select>
+			<lee-select listBackgroundColor='#fff' :listData="listData" :quickPanelData="quickPanelData" @chooseItem="chooseItem"
+			 itemHeight=160></lee-select>
 		</view>
 		<!-- 底部全选 -->
 		<view class="allCheck">
 			<!-- <label class="radio"> -->
-				<!-- <checkbox color="#FFBB00" style="transform:scale(1)" @tap="checkAll=!checkAll" :checked="checkAll" /> -->
-				
-				<van-checkbox class="radio" :value="checkAll" @change="onChange()" checked-color="#FFBB00">全选</van-checkbox>
-				
+			<!-- <checkbox color="#FFBB00" style="transform:scale(1)" @tap="checkAll=!checkAll" :checked="checkAll" /> -->
+
+			<van-checkbox class="radio" :value="checkAll" @change="onChange()" checked-color="#FFBB00">全选</van-checkbox>
+
 			<!-- </label> -->
 			<navigator url="/pages/view/home/arrangementTasks/checkSelected" class="lookCheck" :class="checkAll==true?'lookActive':''">
 				查看已选（4）
@@ -64,22 +65,45 @@
 			leeSelect,
 			uniSelect
 		},
-		methods: {			
+		methods: {
 			onChange(event) {
 				console.log(event.detail)
-			      this.checkAll= event.detail
-			  },					
+				this.checkAll = event.detail
+			},
 			chooseItem(item) {
 				console.log(item)
 			},
 			onSearch(event) {
 				console.log(event.detail)
+			},
+			getHeight() {
+				// var query = wx.createSelectorQuery();
+				// query.select('page').boundingClientRect()
+				// query.exec(function(res) {
+				// 	//res就是 所有标签为mjltest的元素的信息 的数组
+				// 	console.log(res);
+				// 	//取高度
+				// 	console.log(res[0].height);
+				// })
 			}
 		},
+		created() {
+			this.getHeight()
+		}
+
 	}
 </script>
 
 <style lang="scss">
+	page {
+		height: 100%;
+	}
+
+	html,
+	body {
+		height: 100%;
+	}
+
 	// .checkedBox .van-checkbox{
 	// 	padding: 40rpx 0;
 	// }
@@ -87,11 +111,16 @@
 	// 	padding: 40rpx 0;
 	// 	margin-top: 32rpx;
 	// }
-	.box{
+	.byLetterBox {
+		overflow: hidden;
+	}
+
+	.box {
 		padding: 40rpx 24rpx;
-		
+
 		box-sizing: border-box;
 	}
+
 	// .van-checkbox__icon-wrap{
 	// 	margin-top: 16rpx;
 	// }
@@ -141,7 +170,8 @@
 		.indexList {
 			margin-top: 400rpx;
 			padding-bottom: 120rpx;
-			height: 814rpx;
+			height: 1500rpx;
+			// height: 100%;
 			// padding-top: 400rpx;
 		}
 

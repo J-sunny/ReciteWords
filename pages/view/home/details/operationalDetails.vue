@@ -4,7 +4,7 @@
 			<!-- 顶部背景图 -->
 			<image class='site-img' src="../../../../static/images/BJ2.png" catchtap='navmap'></image>
 			<!-- 返回按钮 -->
-			<view class="arrow" @tap="goBack"></view>
+			<view class="arrow" @tap="goBack()"></view>
 			<!-- 标题 -->
 			<view class="title">任务详情</view>
 			<!-- 任务词汇量 -->

@@ -18,7 +18,7 @@ minRequest.interceptors.request((request) => {
 // 响应拦截器
 minRequest.interceptors.response((response) => {
 	// console.log(response.status)
-	if (response.status == 100) {
+	if (response.status == 508) {
 		uni.redirectTo({
 			url: '/pages/view/login/index'
 		});

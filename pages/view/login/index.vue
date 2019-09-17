@@ -23,7 +23,6 @@
 </template>
 
 <script>
-	// import Toast from './wxcomponents/dist/toast/toast';
 	import Toast from '../../../wxcomponents/dist/toast/toast';
 	export default {
 		data() {
@@ -41,8 +40,8 @@
 					userSchoolId: '1',
 					userIdenty: '1'
 				}).then(data => {
-					Toast('登录成功');
-					// console.log(data)
+					Toast(data.msg);
+					console.log(data)
 					uni.setStorageSync('token', data.data.token);
 					uni.switchTab({
 						url: '../home/index/index'

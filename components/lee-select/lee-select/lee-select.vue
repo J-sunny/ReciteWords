@@ -113,7 +113,7 @@
 				return uni.upx2px(this.listAttr.titleFontSize || 24) + 'px'
 			},
 			getListAttrTitleHeight() {
-				return uni.upx2px(this.listAttr.titleHeight || 60) + 'px'
+				return uni.upx2px(this.listAttr.titleHeight || 72) + 'px'
 			},
 			getListAttrTitleBackground() {
 				return this.listAttr.titleBackground || '#FBFBFB'
@@ -311,8 +311,6 @@
 					.listConWord {
 						float: left;
 						margin-left: 24rpx;
-
-
 					}
 				}
 

@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/view/home/index/index",
+    "pages/view/home/details/studentDetails",
     "pages/view/home/arrangementTasks/index",
     "pages/view/mine/myInformation/index",
     "pages/view/mine/myInformation/changePassword",
@@ -13,7 +14,6 @@
     "pages/component/byCourse/index",
     "components/lee-select/lee-select/lee-select",
     "pages/view/home/details/ranking",
-    "pages/view/home/details/studentDetails",
     "pages/view/home/details/operationalDetails",
     "pages/view/mine/index/index"
   ],
@@ -44,5 +44,6 @@
       }
     ]
   },
-  "usingComponents": {}
+  "usingComponents": {},
+  "sitemapLocation": "sitemap24.json"
 }

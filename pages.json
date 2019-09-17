@@ -1,14 +1,18 @@
-
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-
-
 		{
 			"path": "pages/view/home/index/index",
 			"style": {
 				"navigationBarTitleText": "学英语"
 			}
 		},
+		{
+			"path": "pages/view/home/details/studentDetails",
+			"style": {
+				"navigationBarTitleText": "学生学习详情"
+			}
+		},
+
 		{
 			"path": "pages/view/home/arrangementTasks/index",
 			"style": {
@@ -113,12 +117,7 @@
 				"navigationBarTitleText": "任务排名"
 			}
 		},
-		{
-			"path": "pages/view/home/details/studentDetails",
-			"style": {
-				"navigationBarTitleText": "学生学习详情"
-			}
-		},
+
 
 
 		{
@@ -168,5 +167,5 @@
 			"query": "" //启动参数，在页面的onLoad函数里面得到
 		}]
 	}
-	
+
 }
