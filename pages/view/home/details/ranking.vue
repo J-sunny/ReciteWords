@@ -10,11 +10,11 @@
 			<!-- 排行 -->
 			<view class="wordNum">
 				<view class="danCi lines">
-					<view class="danNum">30</view>
+					<view class="danNum">{{allWordCount}}</view>
 					<view class="danText">单词数</view>
 				</view>
 				<view class="danCi">
-					<view class="danNum">200</view>
+					<view class="danNum">{{taskRankList.participantNum}}</view>
 					<view class="danText">参与人数</view>
 				</view>
 			</view>
@@ -105,6 +105,7 @@
 		data() {
 			return {
 				taskId: '',
+				allWordCount:'',
 				taskRankList: []
 			}
 		},
@@ -133,6 +134,8 @@
 		onLoad(options) {
 			console.log(options)
 			this.taskId = options.taskId
+			this.allWordCount=options.allWordCount
+			
 			this.taskRank()
 		}
 

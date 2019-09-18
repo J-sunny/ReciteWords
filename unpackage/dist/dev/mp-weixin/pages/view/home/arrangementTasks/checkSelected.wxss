@@ -24,6 +24,10 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
+.status_bar {
+  height: 25px;
+  width: 100%;
+}
 .tripList_root {
   top: 0px;
   left: 0px;

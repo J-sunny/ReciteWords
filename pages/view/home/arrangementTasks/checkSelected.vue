@@ -1,5 +1,6 @@
 <template>
 	<view class="checkSelectBox" :class="shows==true?'tripList_root':''">
+		 <view class="status_bar"></view>
 		<!-- 顶部 -->
 		<view class="tasksHeadBox">
 			<view class="tasksBoxHead">
@@ -12,22 +13,20 @@
 		<!-- 内容 -->
 		<view class="selectCon">
 			<!-- 选择班级 -->
-			<view class="selectClass">
-				<label class="classText">选择单词</label>
-				<label class="selected">（已选<label class="yellowColor">4</label>个）</label>
+			<view class="selectClass"  @tap="showBox()">
+				<label class="classText">选择班级</label>
+				<label class="selected">（已选<label class="yellowColor">{{selectedClassNum==''?'0':selectedClassNum}}</label>个）</label>
 				<label class="lookClass"></label>
 				<!-- <uni-icon class='typeIcon' type="arrowright"></uni-icon> -->
 			</view>
 			<!-- 已选班级列表 -->
 			<scroll-view class="selectedList">
-				<label class="className">视觉传达301班</label>
-				<label class="className">动画设计102班</label>
-				<label class="className">艺术设计系动画设计艺术设计104班</label>
-				<label class="className">视觉传达301班</label>
+				<label v-if="selectedClassList.length!=0" v-for="(item,index) in selectedClassList" :key='index' class="className">{{item}}</label>
+				<label v-if="selectedClassList.length==0" class="className">未选择班级</label>
 			</scroll-view>
 			<!-- 已选单词 -->
 			<view class="selectClass">
-				<label class="classText">选择班级</label>
+				<label class="classText">选择单词</label>
 				<label class="selected">（已选<label class="yellowColor">4</label>个）</label>
 			</view>
 			<!-- 已选单词列表 -->
@@ -50,12 +49,9 @@
 		</view>
 		<!-- 底部 发布-->
 		<view class="allCheck">
-			<label class="goBack" @tap="goBack()">
-				返回
-			</label>
-			<label class="lookCheck" @tap="showBox()">
-				{{fabu}}（共4个）
-			</label>
+			<label class="goBack" @tap="goBack()">返回</label>
+			<label v-if="fabu==true" class="lookCheck">发布（共4个）</label>
+			<label v-if="fabu==false" class="lookCheck" @click="confirmClass()">确认（共4个）</label>
 		</view>
 
 		<!-- 弹框 -->
@@ -63,8 +59,8 @@
 			<van-popup :show='shows' position="bottom" @close="onClose()">
 				<scroll-view scroll-y='true' class="botBox">
 					<van-checkbox-group :value=" results " @change="onChangess()">
-						<van-checkbox v-for="item in 15" :key='item' checked-color="#FFBB00" :name="item">
-							{{item}}艺术设计系动画设计艺术设计101班艺术设计系动画设计艺术设计101班
+						<van-checkbox v-for="item in classArr" :key='item.classId' checked-color="#FFBB00" :name="item.classId">
+							{{item.className}}
 						</van-checkbox>
 					</van-checkbox-group>
 				</scroll-view>
@@ -80,9 +76,12 @@
 			return {
 				// 控制底部弹出框
 				shows: false,
-				fabu: '发布',
+				fabu: true,
 				result: [],
-				results: []
+				results: [],
+				classArr: [],
+				selectedClassList: [],
+				selectedClassNum: ''
 			}
 		},
 		components: {
@@ -106,21 +105,52 @@
 				this.results = event.detail
 				console.log(this.results)
 			},
+			// 确认选择班级
+			confirmClass() {
+				this.selectedClassList=[]
+				this.results.forEach(data => {
+					this.classArr.forEach(val => {
+						if (data == val.classId) {
+							this.selectedClassList.push(val.className)
+						}
+					})
+				})
+
+				console.log(this.selectedClassList)
+				// this.selectedClassList = this.results
+				this.selectedClassNum = this.results.length
+				this.onClose()
+			},
 			// 控制---底部弹出框
 			onClose() {
 				this.shows = false
-				this.fabu = '发布'
+				this.fabu = true
 			},
 			showBox() {
 				this.shows = true
-				this.fabu = '确认'
+				this.fabu = false
+			},
+			// 获取班级下拉列表
+			classList() {
+				this.$minApi.classList({
+					schoolId: 1
+				}).then(data => {
+					this.classArr = data.data
+					console.log(data)
+				})
 			}
+		},
+		created() {
+			this.classList()
 		}
 	}
 </script>
 
 <style lang="scss">
-	
+	 .status_bar {
+	      height: var(--status-bar-height);
+	      width: 100%;
+	  }
 	.tripList_root {
 		top: 0px;
 		left: 0px;
@@ -133,9 +163,9 @@
 
 	.checkSelectBox {
 		position: relative;
-		
 
-.van-checkbox {
+
+		.van-checkbox {
 			height: 160rpx;
 		}
 
@@ -359,10 +389,10 @@
 		}
 
 		// 底部弹框
-		
-		.headPicPopup{
-			.van-popup {							
-			background-color:rgba(0,0,0,0.1) ;				
+
+		.headPicPopup {
+			.van-popup {
+				background-color: rgba(0, 0, 0, 0.1);
 			}
 		}
 
@@ -380,16 +410,16 @@
 			line-height: 106rpx;
 			overflow: hidden;
 			height: 1000rpx;
-			border-radius:20rpx 20rpx 0px 0px;
-			
-			
-		
-			font-size:30rpx;
-			font-family:PingFang SC;
-			font-weight:400;
-			line-height:106rpx;
-			color:rgba(46,53,72,1);
-			opacity:1;
+			border-radius: 20rpx 20rpx 0px 0px;
+
+
+
+			font-size: 30rpx;
+			font-family: PingFang SC;
+			font-weight: 400;
+			line-height: 106rpx;
+			color: rgba(46, 53, 72, 1);
+			opacity: 1;
 
 			.selectedName {
 				background: rgba(255, 255, 255, 1);

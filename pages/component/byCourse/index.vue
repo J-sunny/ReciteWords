@@ -1,5 +1,4 @@
 <template>
-
 	<view class="byCourseBox" :class="show==true?'preventTouchMove':''">
 		<!-- 分类 -->
 		<view class="byList">
@@ -74,7 +73,7 @@
 		</view>
 
 		<!-- 遮罩层 -->
-		<view :class="show==true?'backgrounds':''">
+		<view  :class="show==true?'backgrounds':''">
 		</view>
 
 	</view>

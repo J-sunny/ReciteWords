@@ -233,14 +233,10 @@
 				cHeight: '',
 				pixelRatio: 1,
 				serverData: '',
+				studentId: '',
 			}
 		},
-		onLoad() {
-			_self = this;
-			this.cWidth = uni.upx2px(750);
-			this.cHeight = uni.upx2px(500);
-			this.getServerData();
-		},
+		
 		methods: {
 			// 返回
 			goBack() {
@@ -368,8 +364,29 @@
 				// 		return category + ' ' + item.name + ':' + item.data
 				// 	}
 				// });
+			},						
+			// 获取用户学习情况(今日时长,今日单词,总时长,总单词)
+			getStudentRecord(studentId) {
+				this.$minApi.getStudentRecord({studentId:this.studentId}).then(data => {
+					console.log(data)
+				})
 			}
+		},
+		onLoad(options) {
+			_self = this;
+			this.cWidth = uni.upx2px(750);
+			this.cHeight = uni.upx2px(500);
+			this.getServerData();
+			
+			// var data = JSON.parse(options.index); // 字符串转对象
+			console.log(options)
+			this.studentId = options.studentId
+
+			this.getStudentRecord()
 		}
+
+
+
 	}
 </script>
 

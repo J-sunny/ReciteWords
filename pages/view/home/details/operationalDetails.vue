@@ -28,14 +28,18 @@
 				班级：<label class='major'> XX专业XX系301班（ <label class='yellowColor'>0</label> /21人）</label>
 			</view>
 			<!-- 框框 -->
-			<view class="frame" v-for="(item,index) in 10" :key='item'>
+			<view class="frame" v-for="item in taskDetailsLists" :key='item.studentId'>
 				<!-- 左边 -->
 				<view class="frameLeft">
-					<view class="stuName">姓名：<label class="stuNames">刘泽琪</label><label class="completionStatus do">已完成</label></view>
-					<view class="stuName">学号：<label class="stuNames">20181227</label></view>
+					<view class="stuName">
+						姓名：<label class="stuNames">{{item.studentRealname}}</label>
+						<label v-if="item.completeStatus==1" class="completionStatus do">已完成</label>
+						<label v-if="item.completeStatus==0" class="completionStatus notDo">未完成</label>
+					</view>
+					<view class="stuName">学号：<label class="stuNames">{{item.studentNum}}</label></view>
 				</view>
 				<!-- 右边查看详情按钮 -->
-				<label class="frameRightBtn" @click="linkTo(index)">查看详情</label>
+				<label class="frameRightBtn" @click="linkTo(item.studentId,)">查看详情</label>
 			</view>
 		</view>
 
@@ -48,7 +52,8 @@
 			return {
 				taskId: '',
 				allWordCount: '',
-				taskTime: ''
+				taskTime: '',
+				taskDetailsLists: []
 			}
 		},
 		methods: {
@@ -58,7 +63,7 @@
 					delta: 1
 				});
 			},
-			// 班级成员跳转
+			// 查看详情跳转
 			linkTo(studentId) {
 				uni.navigateTo({
 					url: 'studentDetails?studentId=' + studentId
@@ -67,14 +72,26 @@
 			// 查看排名跳转
 			linkToRanking() {
 				uni.navigateTo({
-					url: 'ranking?taskId=' + this.taskId
+					url: 'ranking?taskId=' + this.taskId+'&allWordCount='+this.allWordCount
+				})
+			},
+			// 任务详情列表
+			taskDetailsList(taskId) {
+				console.log(taskId)
+				this.$minApi.taskDetailsList({
+					taskId: taskId
+				}, ).then(data => {
+					console.log(data)
+					this.taskDetailsLists = data.data
+
+					console.log(this.taskDetailsLists)
+				}).catch(err => {
+					// console.log(err)
 				})
 			}
 
 		},
-		created() {
-
-		},
+		created() {},
 
 		onLoad(options) {
 			// var data = JSON.parse(options.index); // 字符串转对象
@@ -82,6 +99,8 @@
 			this.taskId = options.taskId
 			this.taskTime = options.taskTime
 			this.allWordCount = options.allWordCount
+
+			this.taskDetailsList(options.taskId)
 		}
 	}
 </script>

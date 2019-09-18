@@ -83,5 +83,13 @@ export default {
 		taskRank(data) {
 			return minRequest.get('/student/task/taskRank', data)
 		},
+		// 任务详情列表
+		taskDetailsList(data) {
+			return minRequest.get('/teacher/main/taskDetailsList', data)
+		},
+		// 获取用户学习情况(今日时长,今日单词,总时长,总单词)
+		getStudentRecord(data) {
+			return minRequest.get('/student/behaviorRecord/getStudentRecord', data)
+		},
 	}
 }

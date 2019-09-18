@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import App from './App'
+import 'pages/style/init.css'
 
 
 import MinRequest from './request/index'
