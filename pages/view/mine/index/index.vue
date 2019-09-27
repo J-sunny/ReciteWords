@@ -7,8 +7,9 @@
 		<navigator hover-class='none' url="../myInformation/index" class="userInfoBox">
 			<image class="userPic" src="../../../../static/images/touXiang@2x.png" mode=""></image>
 			<view class="userText">
-				<text class="userName">{{getUserInfoList.teacherName}}</text><br>
-				<label class="userUni">{{getUserInfoList.teacherRealname}}</label>
+				<text class="userName">{{getUserInfoList.teacherRealname}}</text><br>
+				<label class="userUni">{{getUserInfoList.belongSchoolId}}&emsp;&emsp;&emsp;</label>
+				<label class="userUni" style="margin-left: 20rpx;">{{getUserInfoList.teacherNum}}</label>
 			</view>
 		</navigator>
 		<!-- 内容 -->

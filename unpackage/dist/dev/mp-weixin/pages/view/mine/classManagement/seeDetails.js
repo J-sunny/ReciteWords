@@ -61,13 +61,44 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 var _default =
 {
+  data: function data() {
+    return {
+      show: false,
+      columns: ['一班', '二班', '三班'],
+      className: "一班" };
+
+  },
   methods: {
     goBack: function goBack() {
       uni.navigateBack({
         delta: 1 });
 
+    },
+    // picker选择器
+    onConfirm: function onConfirm(event) {var _event$detail =
+
+
+
+
+      event.detail,picker = _event$detail.picker,value = _event$detail.value,index = _event$detail.index;
+      console.log("\u5F53\u524D\u503C\uFF1A".concat(value, ", \u5F53\u524D\u7D22\u5F15\uFF1A").concat(index));
+      this.show = false;
+      this.className = value;
+    },
+    onCancel: function onCancel() {
+      this.show = false;
+    },
+    // 改变班级
+    changeRanking: function changeRanking() {
+      console.log(222);
+      this.show = true;
     } },
 
   created: function created() {

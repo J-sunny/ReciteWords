@@ -11,7 +11,8 @@
 					</view>
 					<!-- 分类选项--第一级 -->
 					<scroll-view scroll-y='true' class="courseOptions" v-if='show1'>
-						<view class="options" :class="item.thesaurusName==title1?'activeColor':''" v-for="item in thesaurusLists" :key='item' @tap="optionsActive1(item.thesaurusName,item.thesaurusId)">{{item.thesaurusName}}</view>
+						<view class="options" :class="item.thesaurusName==title1?'activeColor':''" v-for="item in thesaurusLists" :key='item'
+						 @tap="optionsActive1(item.thesaurusName,item.thesaurusId)">{{item.thesaurusName}}</view>
 					</scroll-view>
 				</view>
 
@@ -22,7 +23,8 @@
 					</view>
 					<!-- 分类选项--第二级 -->
 					<scroll-view scroll-y='true' class="courseOptions" v-if='show2'>
-						<view class="options" :class="item.belong_chapter==title2?'activeColor':''" v-for="(item,index) in chapterLists" :key='index' @tap="optionsActive2(item.belong_chapter)">{{item.belong_chapter}}</view>
+						<view class="options" :class="item.belong_chapter==title2?'activeColor':''" v-for="(item,index) in chapterLists"
+						 :key='index' @tap="optionsActive2(item.belong_chapter)">{{item.belong_chapter}}</view>
 					</scroll-view>
 				</view>
 
@@ -33,7 +35,8 @@
 					</view>
 					<!-- 分类选项--第三级 -->
 					<scroll-view scroll-y='true' class="courseOptions" v-if='show3'>
-						<view class="options" :class="item.belong_lesson==title3?'activeColor':''" v-for="(item,index) in chapterLists" :key='index' @tap="optionsActive3(item.belong_lesson)">{{item.belong_lesson}}</view>
+						<view class="options" :class="item.belong_lesson==title3?'activeColor':''" v-for="(item,index) in lessonLists"
+						 :key='index' @tap="optionsActive3(item.belong_lesson)">{{item.belong_lesson}}</view>
 					</scroll-view>
 				</view>
 
@@ -42,7 +45,7 @@
 		</view>
 
 		<!-- 内容 -->
-		<view class="courseConBox">		
+		<view class="courseConBox">
 			<view class="courseList" v-for="i in 4" :key=i>
 				<view class="Title"><label class="bigTitle">四级核心词汇</label><label class="smallTitle" for="">chapter 1-Lesson
 						2</label></view>
@@ -73,7 +76,7 @@
 		</view>
 
 		<!-- 遮罩层 -->
-		<view  :class="show==true?'backgrounds':''">
+		<view :class="show==true?'backgrounds':''">
 		</view>
 
 	</view>
@@ -101,7 +104,8 @@
 				list: ['a', 'b', 'c'],
 				result: ['a', 'b'],
 				thesaurusLists: [],
-				chapterLists: []
+				chapterLists: [],
+				lessonLists: []
 
 			};
 		},
@@ -116,7 +120,7 @@
 				this.title3 = "全部"
 			},
 			title2() {
-				
+				this.lessonList(this.title1, this.title2)
 			}
 		},
 		methods: {
@@ -206,7 +210,7 @@
 					this.thesaurusLists = data.data
 				})
 			},
-			// 获取章节下拉列表
+			// 获取章下拉列表
 			chapterList(thesauruName) {
 				this.$minApi.chapterList({
 					thesauruName: thesauruName
@@ -215,6 +219,17 @@
 					this.chapterLists = data.data
 				})
 			},
+			// 获取节下拉列表
+			lessonList(thesauruName,chapter) {
+				console.log(chapter,thesauruName)
+				this.$minApi.lessonList({
+					chapter: chapter,
+					thesauruName: thesauruName
+				}).then(data => {
+					console.log(data)
+					this.lessonLists = data.data
+				})
+			}
 		},
 		created() {
 			this.thesaurusList()
@@ -347,7 +362,8 @@
 					font-weight: 400;
 					color: #5C6371;
 				}
-				.activeColor{
+
+				.activeColor {
 					color: #FFBB00;
 				}
 			}

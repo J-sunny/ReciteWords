@@ -105,112 +105,122 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default =
-{
-  data: function data() {
-    return {
-      pwdType1: 'password',
-      pwdType2: 'password',
-      isPassword1: true,
-      isPassword2: true,
-      oldPwd: '',
-      newPwd: '',
-      showOld: false,
-      showNew: false };
-
-  },
-  components: {},
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
-  watch: {
 
-    // oldPwd(){
-    // 	if(this.oldPwd!=''){
-    // 		console.log(this.oldPwd)
-    // 		this.showOld==true
-    // 	}
-    // 	
-    // 	console.log(this.showOld)
-    // 	console.log(this.oldPwd)
-    // },
-    // newPwd(){
-    // 	if(this.newPwd!=''){
-    // 		this.showNew==true
-    // 	}
-    // 	
-    // 	console.log(this.showNew)
-    // }
-  },
-  methods: {
-    // 返回
-    goBack: function goBack() {
-      uni.navigateBack({
-        delta: 1 });
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _toast = _interopRequireDefault(__webpack_require__(/*! ../../../../wxcomponents/dist/toast/toast */ 14));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = { data: function data() {return { pwdType1: 'password', pwdType2: 'password', isPassword1: true, isPassword2: true, oldPwd: '', newPwd: '', teacherPwd: '' };}, components: {}, methods: { // 返回
+    goBack: function goBack() {uni.navigateBack({ delta: 1 });}, // 切换input框类型
+    lookPwd: function lookPwd(val) {// console.log(val)
+      if (val == 1) {this.isPassword1 = !this.isPassword1;if (this.pwdType1 == 'password') {this.pwdType1 = 'text';} else if (this.pwdType1 == 'text') {this.pwdType1 = 'password';}}if (val == 2) {this.isPassword2 = !this.isPassword2; // console.log(this.isPassword2, '111’')
+        if (this.pwdType2 == 'password') {this.pwdType2 = 'text';} else if (this.pwdType2 == 'text') {this.pwdType2 = 'password';}}}, // 获取用户信息
+    getUserInfo: function getUserInfo() {var _this = this;this.$minApi.getUserInfo({}).then(function (data) {_this.teacherPwd = data.data.teacherPwd;
+        console.log(data.data.teacherPwd);
+      });
     },
-    // 切换input框类型
-    lookPwd1: function lookPwd1() {
-      console.log('1113');
-      // var isPassword=!this.isPassword
-      this.isPassword1 = !this.isPassword1;
-      console.log(this.isPassword1, '111’');
+    // 修改密码
+    changePwd: function changePwd() {
+      // console.log(this.teacherPwd)
+      // console.log(this.oldPwd)
+      if (this.teacherPwd != this.oldPwd) {
+        (0, _toast.default)('旧密码不正确');
+        return;
+      }
+      var reg = /(?!^\d+$)(?!^[A-Za-z]+$)(?!^[^A-Za-z0-9]+$)(?!^.*[\u4E00-\u9FA5].*$)^\S{8,12}$/;
+      if (!reg.test(this.newPwd)) {
+        (0, _toast.default)('新密码格式不正确！');
+        return;
+      } else {
+        (0, _toast.default)('密码正确！');
+      }
+    } },
 
-      if (this.pwdType1 == 'password') {
-        this.pwdType1 = 'text';
-      } else if (this.pwdType1 == 'text') {
-        this.pwdType1 = 'password';
-      }
-    },
-    lookPwd2: function lookPwd2() {
-      console.log('222’');
-      this.isPassword2 = !this.isPassword2;
-      console.log(this.isPassword2, '111’');
-      if (this.pwdType2 == 'password') {
-        this.pwdType2 = 'text';
-      } else if (this.pwdType2 == 'text') {
-        this.pwdType2 = 'password';
-      }
-    } } };exports.default = _default;
+  created: function created() {
+    this.getUserInfo();
+  } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

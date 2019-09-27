@@ -13,7 +13,7 @@
 		<view class="classConBox">
 			<view class="classCon" v-for="item in 10" :key='item'>
 				<view class="classConLeft">
-					<view class="className">英语系大三1班</view>
+					<view class="className" >英语系大三1班</view>
 					<view class="grade">年级：2016级</view>
 					<view class="grade">学生数量：26个</view>
 				</view>
@@ -22,6 +22,9 @@
 				</navigator>
 			</view>
 		</view>
+
+
+		
 	</view>
 </template>
 
@@ -29,7 +32,8 @@
 	export default {
 		data() {
 			return {
-
+				show: true,
+				columns: ['一班', '二班', '三班'],
 			}
 		},
 		components: {
@@ -42,6 +46,8 @@
 					delta: 1
 				});
 			},
+
+		
 		},
 	}
 </script>

@@ -1,6 +1,4 @@
 {
   "navigationBarTitleText": "学生学习详情",
-  "usingComponents": {
-    "my-charts": "/components/u-charts/component"
-  }
+  "usingComponents": {}
 }

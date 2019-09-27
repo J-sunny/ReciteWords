@@ -24,7 +24,7 @@
 		<!-- 内容 -->
 		<view class="conBox">
 			<!-- 我的排名 -->
-			<view class="minePh">
+			<view class="minePh" v-if="false">
 				<view class="mineleft f_float">
 					<label for="" class="myRanking">200</label>
 					<image class="myPic" src="../../../../static/images/people@2.png" mode=""></image>
@@ -40,7 +40,7 @@
 
 			<!-- 其他排名 -->
 			<view style="margin-top: 24rpx;">
-				<view class="minePh">
+				<view class="minePh" v-if="false">
 					<view class="mineleft f_float">
 						<label for="" class="myRanking" v-if="false">200</label>
 						<!-- 排行勋章 -->
@@ -56,7 +56,7 @@
 					</view>
 				</view>
 
-				<view class="minePh">
+				<view class="minePh" v-if="false">
 					<view class="mineleft f_float">
 						<!-- 排行勋章 -->
 						<image v-if='true' class="xz" src="../../../../static/images/xz2@2.png" mode=""></image>
@@ -70,7 +70,7 @@
 				</view>
 
 
-				<view class="minePh">
+				<view class="minePh" v-if="false">
 					<view class="mineleft f_float">
 						<!-- 排行勋章 -->
 						<image v-if="true" class="xz" src="../../../../static/images/xz3@2.png" mode=""></image>
@@ -83,18 +83,20 @@
 					</view>
 				</view>
 
-				<view class="minePh" v-for="iten in 30" :key='iten'>
+				<view class="minePh" v-for="item in taskRankList.rankList" :key='item.studentId'>
 					<view class="mineleft f_float">
-						<label for="" class="myRanking">200</label>
+						<label v-if="item.rankNum!=1&&item.rankNum!=2&&item.rankNum!=3" class="myRanking">{{item.rankNum}}</label>
+						<image v-if='item.rankNum==1' class="xz" src="../../../../static/images/xz1@2.png" mode=""></image>
+						<image v-if='item.rankNum==2' class="xz" src="../../../../static/images/xz2@2.png" mode=""></image>
+						<image v-if='item.rankNum==3' class="xz" src="../../../../static/images/xz3@2.png" mode=""></image>
 						<image class="myPic" src="../../../../static/images/people@2.png" mode=""></image>
-						<label for="" class="myName">Fanny萱</label>
+						<label for="" class="myName">{{item.studentRealname}}</label>
 					</view>
 					<view class="mineRight r_float">
 						<label for="" class="completionTime">完成时间</label>
-						<label for="times">00:20:36</label>
+						<label for="times">{{item.completeTime==''?'暂无数据':item.completeTime}}</label>
 					</view>
 				</view>
-
 			</view>
 		</view>
 	</view>
@@ -105,7 +107,7 @@
 		data() {
 			return {
 				taskId: '',
-				allWordCount:'',
+				allWordCount: '',
 				taskRankList: []
 			}
 		},
@@ -124,18 +126,18 @@
 					taskId: this.taskId
 				}).then(data => {
 					console.log(data)
-					this.taskRankList=data.data
+					this.taskRankList = data.data
 				})
 			}
 		},
 		created() {
-			
+
 		},
 		onLoad(options) {
 			console.log(options)
 			this.taskId = options.taskId
-			this.allWordCount=options.allWordCount
-			
+			this.allWordCount = options.allWordCount
+
 			this.taskRank()
 		}
 

@@ -1877,7 +1877,8 @@ minRequest.interceptors.request(function (request) {
 // 响应拦截器
 minRequest.interceptors.response(function (response) {
   // console.log(response.status)
-  if (response.status == 508) {
+  if (response.data.code == 508) {
+    console.log("loginout");
     uni.redirectTo({
       url: '/pages/view/login/index' });
 
@@ -1887,7 +1888,8 @@ minRequest.interceptors.response(function (response) {
 
 // 设置默认配置
 minRequest.setConfig(function (config) {
-  config.baseURL = 'http://192.168.2.167:8089/backwordSystem';
+  // config.baseURL = 'http://192.168.2.102:8089/backwordSystem'
+  config.baseURL = 'http://148.70.55.201:8089/backwordSystem';
   return config;
 });var _default =
 
@@ -1925,6 +1927,10 @@ minRequest.setConfig(function (config) {
 
   data) {
     return minRequest.get('/teacher/task/chapterList', data);
+  }), _defineProperty(_apis, "lessonList", function lessonList(
+
+  data) {
+    return minRequest.get('/teacher/task/lessonList', data);
   }), _defineProperty(_apis, "schoolList", function schoolList(
 
   data) {
@@ -14079,7 +14085,8 @@ createPage(_index.default);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var cityData = [{
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var cityData = [
+{
   "initial": "A",
   "list": [{
     "code": "0997",

@@ -212,122 +212,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 var _uCharts = _interopRequireDefault(__webpack_require__(/*! @/components/u-charts/u-charts.js */ 30));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
 //
 //
@@ -434,142 +318,146 @@ var _uCharts = _interopRequireDefault(__webpack_require__(/*! @/components/u-cha
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _self;var canvaArea = null;var canvaColumn = null;var _default = { data: function data() {return { cWidth: '', cHeight: '', pixelRatio: 1, serverData: '', studentId: '' };}, methods: { // 返回
+var _self;var canvaArea = null;var canvaColumn = null;var _default = { data: function data() {return { cWidth: '', cHeight: '', pixelRatio: 1, serverData: '', studentId: '', toDayactive: 'toDayWeek', timesActive: 'timesWeek', Area: { // x轴
+        categories: ['2012', '2013', '2014', '2015', '2016', '2017'], // y轴
+        series: [{ data: [100, 80, 95, 150, 112, 132], name: "" }] }, Area1: { // x轴
+        categories: ['7-8', '7-9', '7-10', '7-11', '7-12', '7-13', '7-14'], // y轴
+        series: [{ data: [100, 80, 95, 180, 112, 132, 34, 111], name: "" }] }, ColumnStack: { // x轴
+        categories: ['2012', '2013', '2014', '2015', '2016'], // y轴
+        series: [{ data: [35, 55, 12, 14, 10], name: "学习" }, { data: [56, 66, 34, 23, 41], name: "复习" }] }, ColumnStack1: { // x轴
+        categories: ['2019-01', '2019-02', '2019-03', '2019-04', '2019-05'], // y轴
+        series: [{ data: [100, 55, 129, 134, 190], name: "学习" }, { data: [56, 66, 34, 23, 41], name: "复习" }] } };}, methods: { // 返回
     goBack: function goBack() {uni.navigateBack({ delta: 1 });}, // 获取图标数据
-    getServerData: function getServerData() {uni.request({ url: 'https://www.ucharts.cn/data.json', data: {}, success: function success(res) {console.log(res.data.data);_self.serverData = res.data.data;var Area = { categories: [], series: [] };Area.categories = res.data.data.Area.categories;Area.series = res.data.data.Area.series;_self.showArea("canvasArea", Area);var ColumnStack = { categories: [], series: [] }; //这里我后台返回的是数组，所以用等于，如果您后台返回的是单条数据，需要push进去
-          ColumnStack.categories = res.data.data.ColumnStack.categories;ColumnStack.series = res.data.data.ColumnStack.series;_self.showColumnStack("canvasColumnStack", ColumnStack);}, fail: function fail() {_self.tips = "网络错误，小程序端请检查合法域名";} });}, // 配置折线图   详情见u-charts
-    showArea: function showArea(canvasId, chartData) {canvaArea = new _uCharts.default({ $this: _self, canvasId: canvasId, type: 'area', fontSize: 11, legend: true, dataLabel: true, dataPointShape: true, background: '#FFFFFF', pixelRatio: _self.pixelRatio, categories: chartData.categories, series: chartData.series, animation: false, colors: ['#FF5C5C', '#FFBB00', '#979DAB'], xAxis: { disableGrid: true }, yAxis: { gridColor: '#F5F7F7', data: {} }, width: _self.cWidth * _self.pixelRatio, height: _self.cHeight * _self.pixelRatio, extra: { area: { type: 'straight', opacity: 0.4, addLine: true, width: 2, gradient: true } } });}, // 点击某一列显示某列的具体数据
-    touchArea: function touchArea(e) {// canvaArea.showToolTip(e, {
+    getServerData: function getServerData(today, times) {console.log(today, times);var _this = this;uni.request({ url: 'https://www.ucharts.cn/data.json', data: {}, success: function success(res) {console.log(res);_self.serverData = res.data.data; // 折线图
+          var Area = { categories: [], series: [] };if (times == 'timesWeek') {Area.categories = _this.Area.categories;Area.series = _this.Area.series;}if (times == 'timesMouth') {Area.categories = _this.Area1.categories;Area.series = _this.Area1.series;}_self.showArea("canvasArea", Area); // 柱状图
+          var ColumnStack = { categories: [], series: [] }; //这里我后台返回的是数组，所以用等于，如果您后台返回的是单条数据，需要push进去
+          if (today == 'toDayWeek') {ColumnStack.categories = _this.ColumnStack.categories;ColumnStack.series = _this.ColumnStack.series;}if (today == 'toDayMouth') {ColumnStack.categories = _this.ColumnStack1.categories;ColumnStack.series = _this.ColumnStack1.series;}_self.showColumnStack("canvasColumnStack", ColumnStack);}, fail: function fail() {
+          _self.tips = "网络错误，小程序端请检查合法域名";
+        } });
+
+    },
+    // 配置折线图   详情见u-charts
+    showArea: function showArea(canvasId, chartData) {
+      canvaArea = new _uCharts.default({
+        $this: _self,
+        canvasId: canvasId,
+        type: 'area',
+        fontSize: 11,
+        legend: true,
+        dataLabel: true,
+        dataPointShape: true,
+        background: '#FFFFFF',
+        pixelRatio: _self.pixelRatio,
+        categories: chartData.categories,
+        series: chartData.series,
+        animation: false,
+        colors: ['#FF5C5C', '#FFBB00', '#979DAB'],
+        xAxis: {
+          disableGrid: true },
+
+        yAxis: {
+          gridColor: '#F5F7F7',
+          data: {} },
+
+
+
+        width: _self.cWidth * _self.pixelRatio,
+        height: _self.cHeight * _self.pixelRatio,
+        extra: {
+          area: {
+            type: 'straight',
+            opacity: 0.4,
+            addLine: true,
+            width: 2,
+            gradient: true } } });
+
+
+
+    },
+    // 点击某一列显示某列的具体数据
+    touchArea: function touchArea(e) {
+      // canvaArea.showToolTip(e, {
       // 	format: function(item, category) {
       // 		return category + ' ' + item.name + ':' + item.data
       // 	}
       // });
-    }, // 配置图   详情见u-charts
-    showColumnStack: function showColumnStack(canvasId, chartData) {canvaColumn = new _uCharts.default({ $this: _self, canvasId: canvasId, type: 'column', legend: { show: true }, colors: ['#FF5C5C', '#FFBB00', '#979DAB'], fontSize: 11, background: '#FFFFFF', pixelRatio: _self.pixelRatio, animation: false, categories: chartData.categories, series: chartData.series, xAxis: { disableGrid: true }, yAxis: { disabled: true, gridColor: '#F5F7F7' }, dataLabel: true, width: _self.cWidth * _self.pixelRatio, height: _self.cHeight * _self.pixelRatio, extra: { column: { type: 'stack', width: _self.cWidth * _self.pixelRatio * 0.1 / chartData.categories.length } }, padding: [15, 10, 15, 10] });}, // 点击某一列显示某列的具体数据
-    touchColumn: function touchColumn(e) {// canvaColumn.showToolTip(e, {
+    },
+
+
+    // 配置柱状图   详情见u-charts
+    showColumnStack: function showColumnStack(canvasId, chartData) {
+      canvaColumn = new _uCharts.default({
+        $this: _self,
+        canvasId: canvasId,
+        type: 'column',
+        legend: {
+          show: true },
+
+        colors: ['#FF5C5C', '#FFBB00', '#979DAB'],
+        fontSize: 11,
+        background: '#FFFFFF',
+        pixelRatio: _self.pixelRatio,
+        animation: false,
+        categories: chartData.categories,
+        series: chartData.series,
+        xAxis: {
+          disableGrid: true },
+
+        yAxis: {
+          disabled: true,
+          gridColor: '#F5F7F7' },
+
+        dataLabel: true,
+        width: _self.cWidth * _self.pixelRatio,
+        height: _self.cHeight * _self.pixelRatio,
+        extra: {
+          column: {
+            type: 'stack',
+            width: _self.cWidth * _self.pixelRatio * 0.1 / chartData.categories.length } },
+
+
+        padding: [15, 10, 15, 10] });
+
+    },
+    // 点击某一列显示某列的具体数据
+    touchColumn: function touchColumn(e) {
+      // canvaColumn.showToolTip(e, {
       // 	format: function(item, category) {
       // 		return category + ' ' + item.name + ':' + item.data
       // 	}
       // });
-    }, // 获取用户学习情况(今日时长,今日单词,总时长,总单词)
-    getStudentRecord: function getStudentRecord(studentId) {this.$minApi.getStudentRecord({ studentId: this.studentId }).then(function (data) {console.log(data);});} }, onLoad: function onLoad(options) {_self = this;this.cWidth = uni.upx2px(750);this.cHeight = uni.upx2px(500);this.getServerData(); // var data = JSON.parse(options.index); // 字符串转对象
-    console.log(options);this.studentId = options.studentId;this.getStudentRecord();} };exports.default = _default;
+    },
+    // 获取用户学习情况(今日时长,今日单词,总时长,总单词)
+    getStudentRecord: function getStudentRecord(studentId) {
+      this.$minApi.getStudentRecord({ studentId: this.studentId }).then(function (data) {
+        console.log(data);
+      });
+    },
+
+
+
+    toDayChange: function toDayChange(val) {
+      this.toDayactive = val;
+      this.getServerData(val, this.timesActive);
+    },
+    timesChange: function timesChange(val) {
+      this.timesActive = val;
+      this.getServerData(this.toDayactive, val);
+    } },
+
+  onLoad: function onLoad(options) {
+    _self = this;
+    this.cWidth = uni.upx2px(750);
+    this.cHeight = uni.upx2px(500);
+    this.getServerData(this.toDayactive, this.timesActive);
+
+
+    // var data = JSON.parse(options.index); // 字符串转对象
+    console.log(options);
+    this.studentId = options.studentId;
+
+    this.getStudentRecord();
+  } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

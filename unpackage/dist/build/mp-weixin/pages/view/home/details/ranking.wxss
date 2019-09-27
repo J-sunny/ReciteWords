@@ -28,68 +28,75 @@
   position: relative;
   overflow: hidden;
 }
-.rankingBox .site-img {
-    width: 100%;
-    position: absolute;
-    left: 0;
+.rankingBox .headBox {
+    position: fixed;
     top: 0;
-    height: 326rpx;
-    z-index: 10;
-}
-.rankingBox .arrow {
-    position: fixed;
-    left: 40rpx;
-    top: 73rpx;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    width: 20rpx;
-    height: 20rpx;
-    border-left: 4rpx solid #fff;
-    border-top: 4rpx solid #fff;
-    -webkit-transform: rotate(-45deg);
-        -ms-transform: rotate(-45deg);
-            transform: rotate(-45deg);
-    z-index: 20;
-}
-.rankingBox .title {
-    width: 100%;
-    text-align: center;
-    position: absolute;
     left: 0;
-    top: 60rpx;
-    font-size: 36rpx;
-    font-weight: 800;
-    color: white;
-    opacity: 1;
-    z-index: 15;
-}
-.rankingBox .wordNum {
-    position: fixed;
-    top: 160rpx;
-    z-index: 30;
-    padding: 0 50rpx;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
     width: 100%;
-    color: #fff;
-    text-align: center;
+    height: 326rpx;
 }
-.rankingBox .wordNum .lines {
-      border-right: 2rpx solid #FFFFFF;
+.rankingBox .headBox .site-img {
+      width: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 326rpx;
+      z-index: 10;
 }
-.rankingBox .wordNum .danCi {
-      float: left;
-      width: 49%;
+.rankingBox .headBox .arrow {
+      position: fixed;
+      left: 40rpx;
+      top: 73rpx;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      width: 20rpx;
+      height: 20rpx;
+      border-left: 4rpx solid #fff;
+      border-top: 4rpx solid #fff;
+      -webkit-transform: rotate(-45deg);
+          -ms-transform: rotate(-45deg);
+              transform: rotate(-45deg);
+      z-index: 20;
 }
-.rankingBox .wordNum .danCi .danNum {
-        font-size: 48rpx;
-        font-weight: 500;
+.rankingBox .headBox .title {
+      width: 100%;
+      text-align: center;
+      position: absolute;
+      left: 0;
+      top: 60rpx;
+      font-size: 36rpx;
+      font-weight: 800;
+      color: white;
+      opacity: 1;
+      z-index: 15;
 }
-.rankingBox .wordNum .danCi .danText {
-        font-size: 28rpx;
-        font-weight: 500;
+.rankingBox .headBox .wordNum {
+      position: fixed;
+      top: 160rpx;
+      z-index: 30;
+      padding: 0 50rpx;
+      -webkit-box-sizing: border-box;
+              box-sizing: border-box;
+      width: 100%;
+      color: #fff;
+      text-align: center;
+}
+.rankingBox .headBox .wordNum .lines {
+        border-right: 2rpx solid #FFFFFF;
+}
+.rankingBox .headBox .wordNum .danCi {
+        float: left;
+        width: 49%;
+}
+.rankingBox .headBox .wordNum .danCi .danNum {
+          font-size: 48rpx;
+          font-weight: 500;
+}
+.rankingBox .headBox .wordNum .danCi .danText {
+          font-size: 28rpx;
+          font-weight: 500;
 }
 .rankingBox .conBox {
     margin-top: 326rpx;
@@ -102,6 +109,7 @@
       -webkit-box-sizing: border-box;
               box-sizing: border-box;
       line-height: 112rpx;
+      overflow: hidden;
 }
 .rankingBox .conBox .minePh .mineleft {
         float: left;

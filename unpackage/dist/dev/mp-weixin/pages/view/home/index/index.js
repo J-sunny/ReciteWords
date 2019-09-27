@@ -169,30 +169,44 @@ __webpack_require__.r(__webpack_exports__);
 
   data: function data() {
     return {
-      taskCalendarList: [],
       dayOfMissionList: [],
       year: '',
       month: '',
       day: '',
       token: '',
-      selected: [{
-        date: '2019-09-05' }] };
-
+      selected: [],
+      falg: null,
+      myDate: null };
 
   },
   onShow: function onShow() {
     this.token = uni.getStorageSync('token');
   },
+  watch: {
+    falg: function falg(val, now) {
+      this.myDate = this.falg;
+      this.taskCalendar();
+      var nowArr = [];
+      var valArr = val.split("-");
+      if (now == null) {
+        nowArr = valArr;
+      } else {
+        nowArr = now.split("-");
+      }
+      if (valArr[0] != nowArr[0] && valArr[1] != nowArr[1] || (now = null)) {
+
+      }
+    } },
 
   methods: {
     // 日历
     change: function change(e) {
-      console.log(e);
+      // console.log(e)
       this.year = e.year;
       this.month = e.month;
       this.day = e.date;
-      this.taskCalendar();
-      console.log(2222);
+      // this.taskCalendar()
+      this.falg = e.fulldate;
       this.getDayOfMissionList();
     },
     // 获取任务日历数据
@@ -201,70 +215,67 @@ __webpack_require__.r(__webpack_exports__);
         year: this.year,
         month: this.month }).
       then(function (data) {
-        _this.taskCalendarList = data.data;
         console.log(data);
-        var list = [];
         if (data.data[0]) {
           data.data.forEach(function (item) {
-            list.push({
-              date: item.taskTime });
-
+            var data = {};
+            data.date = item.taskTime;
+            _this.selected.push(data);
           });
-          console.log(list);
-          // this.selected = list
-          _this.selected = [{
-            date: '2019-09-05' },
-
-          {
-            date: '2019-09-06' },
-
-          {
-            date: '2019-09-07' },
-
-          {
-            date: '2019-09-08' },
-
-          {
-            date: '2019-09-09' },
-
-          {
-            date: '2019-09-10' },
-
-          {
-            date: '2019-09-15' },
-
-          {
-            date: '2019-09-17' },
-
-          {
-            date: '2019-09-19' },
-
-          {
-            date: '2019-09-20' },
-
-          {
-            date: '2019-09-26' },
-
-          {
-            date: '2019-09-28' },
-
-          {
-            date: '2019-09-29' },
-
-          {
-            date: '2019-08-29' },
-
-          {
-            date: '2019-08-22' },
-
-          {
-            date: '2019-08-20' },
-
-          {
-            date: '2019-08-23' }];
-
-
-          console.log(_this.selected);
+          // 	this.selecteds = [{
+          // 			date: '2019-09-05'
+          // 		},
+          // 		{
+          // 			date: '2019-09-06'
+          // 		},
+          // 		{
+          // 			date: '2019-09-07'
+          // 		},
+          // 		{
+          // 			date: '2019-09-08'
+          // 		},
+          // 		{
+          // 			date: '2019-09-09'
+          // 		},
+          // 		{
+          // 			date: '2019-09-10'
+          // 		},
+          // 		{
+          // 			date: '2019-09-15'
+          // 		},
+          // 		{
+          // 			date: '2019-09-17'
+          // 		},
+          // 		{
+          // 			date: '2019-09-19'
+          // 		},
+          // 		{
+          // 			date: '2019-09-20'
+          // 		},
+          // 		{
+          // 			date: '2019-09-26'
+          // 		},
+          // 		{
+          // 			date: '2019-09-28'
+          // 		},
+          // 		{
+          // 			date: '2019-09-29'
+          // 		},
+          // 		{
+          // 			date: '2019-08-29'
+          // 		},
+          // 		{
+          // 			date: '2019-08-22'
+          // 		},
+          // 		{
+          // 			date: '2019-08-20'
+          // 		},
+          // 		{
+          // 			date: '2019-08-23'
+          // 		},
+          // 	]
+          // 
+          // 
         }
       });
 
@@ -277,7 +288,7 @@ __webpack_require__.r(__webpack_exports__);
         day: this.day }).
       then(function (data) {
         _this2.dayOfMissionList = data.data;
-        console.log(data);
+        // console.log(data)
       }).catch(function (err) {
         // console.log(err)
       });

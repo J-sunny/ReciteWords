@@ -11,7 +11,7 @@
 			<view class="taskVocabulary">
 				<!-- 左边--任务词汇量 -->
 				<view class="taskLeft">
-					<view class='taskTitle'>英语系大三1班</view>
+					<view class='taskTitle' @click="changeRanking()">{{className}}</view>
 					<view class='taskTime'><label>年级：</label>2016级</view>
 					<view class='taskTime'><label>学生数量：</label>26个</view>
 				</view>
@@ -30,22 +30,53 @@
 				<!-- 右边查看详情按钮 -->
 				<navigator class="frameRightBtn" url='../../home/details/studentDetails'>查看详情</navigator>
 			</view>
-		
+
 		</view>
+
+		<!-- 选择班级  弹出框 -->
+		<van-popup :show="show" position="bottom" style="height: 356rpx">
+			<van-picker show-toolbar title="选择班级" :columns="columns" @cancel="onCancel()" @confirm="onConfirm()" />
+		</van-popup>
 	</view>
 </template>
 
 <script>
 	export default {
+		data() {
+			return {
+				show: false,
+				columns: ['一班', '二班', '三班'],
+				className:"一班"
+			}
+		},
 		methods: {
 			goBack() {
 				uni.navigateBack({
 					delta: 1
 				});
-			}
+			},
+			// picker选择器
+			onConfirm(event) {
+					const {
+						picker,
+						value,
+						index
+					} = event.detail;
+					console.log((`当前值：${value}, 当前索引：${index}`));
+					this.show = false;
+					this.className=value
+				},
+				onCancel() {
+					this.show = false;
+				},
+				// 改变班级
+				changeRanking() {
+					console.log(222)
+					this.show = true;
+				},
 		},
 		created() {
-
+			
 		}
 
 	}
@@ -143,7 +174,8 @@
 					color: rgba(151, 157, 171, 1);
 					opacity: 1;
 					margin-top: 16rpx;
-					label{
+
+					label {
 						color: #2E3548;
 					}
 				}
@@ -192,10 +224,10 @@
 				.frameLeft {
 					float: left;
 
-					.studentName {						
-						font-size:30rpx;
-						font-weight:bold;
-						color:rgba(46,53,72,1);
+					.studentName {
+						font-size: 30rpx;
+						font-weight: bold;
+						color: rgba(46, 53, 72, 1);
 						margin-top: 32rpx;
 					}
 
@@ -214,7 +246,7 @@
 							opacity: 1;
 						}
 
-					
+
 
 					}
 

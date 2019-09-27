@@ -18,7 +18,8 @@ minRequest.interceptors.request((request) => {
 // 响应拦截器
 minRequest.interceptors.response((response) => {
 	// console.log(response.status)
-	if (response.status == 508) {
+	if (response.data.code == 508) {
+		console.log("loginout")
 		uni.redirectTo({
 			url: '/pages/view/login/index'
 		});
@@ -28,7 +29,8 @@ minRequest.interceptors.response((response) => {
 
 // 设置默认配置
 minRequest.setConfig((config) => {
-	config.baseURL = 'http://192.168.2.167:8089/backwordSystem'
+	// config.baseURL = 'http://192.168.2.102:8089/backwordSystem'
+	config.baseURL = 'http://148.70.55.201:8089/backwordSystem'
 	return config
 })
 
@@ -63,9 +65,13 @@ export default {
 		thesaurusList(data) {
 			return minRequest.get('/teacher/task/thesaurusList', data)
 		},
-		// 获取章节下拉列表
+		// 获取章下拉列表
 		chapterList(data) {
 			return minRequest.get('/teacher/task/chapterList', data)
+		},
+		// 获取节下拉列表
+		lessonList(data) {
+			return minRequest.get('/teacher/task/lessonList', data)
 		},
 		// 获取学校下拉列表
 		schoolList(data) {
@@ -91,5 +97,6 @@ export default {
 		getStudentRecord(data) {
 			return minRequest.get('/student/behaviorRecord/getStudentRecord', data)
 		},
+		
 	}
 }

@@ -17,7 +17,7 @@
 		<!-- 内容 -->
 		<view class="infoCon">
 			<view class="conBox">
-				<label class="name">昵称/姓名</label><label class="con">{{getUserInfoList.teacherAccount}}</label>
+				<label class="name">昵称/姓名</label><label class="con">{{getUserInfoList.teacherName}}</label>
 			</view>
 			<view class="conBox">
 				<label class="name">工号</label><label class="con">{{getUserInfoList.teacherNum}}</label>
@@ -31,7 +31,7 @@
 				 @tap="show2('')"></label>
 			</view>
 			<view class="conBox">
-				<label class="name">学校</label><label class="con">{{getUserInfoList.teacherRealname}}</label>
+				<label class="name">学校</label><label class="con">{{getUserInfoList.belongSchoolId}}</label>
 			</view>
 			<navigator url="changePassword" class="conBox">
 				<label class="name">修改密码</label>

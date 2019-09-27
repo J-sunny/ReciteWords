@@ -1,4 +1,5 @@
-let cityData = [{
+let cityData = [
+	{
 		"initial": "A",
 		"list": [{
 				"code": "0997",

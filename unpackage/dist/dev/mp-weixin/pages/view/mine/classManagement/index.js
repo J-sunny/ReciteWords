@@ -132,11 +132,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 var _default =
 {
   data: function data() {
-    return {};
-
+    return {
+      show: true,
+      columns: ['一班', '二班', '三班'] };
 
   },
   components: {},

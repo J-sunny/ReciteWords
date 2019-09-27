@@ -1,4 +1,7 @@
 {
   "navigationBarTitleText": "班级管理",
-  "usingComponents": {}
+  "usingComponents": {
+    "van-picker": "../../../wxcomponents/dist/picker/index",
+    "van-popup": "../../../wxcomponents/dist/popup/index"
+  }
 }

@@ -376,6 +376,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
+
+
+
 {
   data: function data() {
     return {
@@ -393,7 +396,8 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       list: ['a', 'b', 'c'],
       result: ['a', 'b'],
       thesaurusLists: [],
-      chapterLists: [] };
+      chapterLists: [],
+      lessonLists: [] };
 
 
   },
@@ -408,7 +412,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       this.title3 = "全部";
     },
     title2: function title2() {
-
+      this.lessonList(this.title1, this.title2);
     } },
 
   methods: {
@@ -498,13 +502,24 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
         _this.thesaurusLists = data.data;
       });
     },
-    // 获取章节下拉列表
+    // 获取章下拉列表
     chapterList: function chapterList(thesauruName) {var _this2 = this;
       this.$minApi.chapterList({
         thesauruName: thesauruName }).
       then(function (data) {
         console.log(data);
         _this2.chapterLists = data.data;
+      });
+    },
+    // 获取节下拉列表
+    lessonList: function lessonList(thesauruName, chapter) {var _this3 = this;
+      console.log(chapter, thesauruName);
+      this.$minApi.lessonList({
+        chapter: chapter,
+        thesauruName: thesauruName }).
+      then(function (data) {
+        console.log(data);
+        _this3.lessonLists = data.data;
       });
     } },
 
