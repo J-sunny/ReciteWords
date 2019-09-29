@@ -11,12 +11,15 @@
 			<view class="taskVocabulary">
 				<!-- 左边--任务词汇量 -->
 				<view class="taskLeft">
-					<view class='taskTitle'>任务词汇量：<label class='yellowColor'>{{allWordCount}}个</label></view>
+					<view class='taskTitle'>任务词汇量：<label class='yellowColor'>{{allWordCount}}个</label><label class="status">未开始</label></view>
 					<view class='taskTime'>{{taskTime}}</view>
 				</view>
 				<!-- 右边查看排名 -->
-				<label class="viewBtn" @tap="linkToRanking()">
+				<label class="viewBtn" @tap="linkToRanking()" v-if="false">
 					查看排名
+				</label>
+				<label class="delectBtn" @tap="delectTask()">
+					删除任务
 				</label>
 			</view>
 		</view>
@@ -42,18 +45,23 @@
 				<label class="frameRightBtn" @click="linkTo(item.studentId,)">查看详情</label>
 			</view>
 		</view>
-
+		<van-dialog id="van-dialog" />
+		<van-toast id="van-toast" />
 	</view>
 </template>
 
 <script>
+	import Dialog from '@/wxcomponents/dist/dialog/dialog';
+	import Toast from '@/wxcomponents/dist/toast/toast';
 	export default {
 		data() {
 			return {
 				taskId: '',
 				allWordCount: '',
 				taskTime: '',
-				taskDetailsLists: []
+				taskDetailsLists: [],
+				show1: false,
+				show: true
 			}
 		},
 		methods: {
@@ -72,7 +80,7 @@
 			// 查看排名跳转
 			linkToRanking() {
 				uni.navigateTo({
-					url: 'ranking?taskId=' + this.taskId+'&allWordCount='+this.allWordCount
+					url: 'ranking?taskId=' + this.taskId + '&allWordCount=' + this.allWordCount
 				})
 			},
 			// 任务详情列表
@@ -88,11 +96,23 @@
 				}).catch(err => {
 					// console.log(err)
 				})
-			}
+			},
+			// 删除任务事件
+			delectTask() {
+				Dialog.confirm({
+					title: '  ',
+					message: '是否确定删除任务？'
+				}).then(() => {
+					console.log("确认")
+					Toast("删除成功");
+					// on confirm
+				}).catch(() => {
+					// on cancel
+					console.log("取消")
+				});
+			},
 
 		},
-		created() {},
-
 		onLoad(options) {
 			// var data = JSON.parse(options.index); // 字符串转对象
 			console.log(options)
@@ -101,6 +121,7 @@
 			this.allWordCount = options.allWordCount
 
 			this.taskDetailsList(options.taskId)
+
 		}
 	}
 </script>
@@ -109,6 +130,16 @@
 	.missionDetailsBox {
 		position: relative;
 		overflow: hidden;
+
+		.makeSureTxt {
+			text-align: center;
+			font-size: 323rpx;
+			font-family: PingFang SC;
+			font-weight: 400;
+			line-height: 48rpx;
+			color: rgba(46, 53, 72, 1);
+			opacity: 1;
+		}
 
 		.headBox {
 			position: fixed;
@@ -188,6 +219,24 @@
 					opacity: 1;
 					margin-top: 16rpx;
 				}
+
+				.status {
+					display: inline-block;
+					font-size: 22rpx;
+					font-family: PingFang SC;
+					font-weight: 400;
+					line-height: 44rpx;
+					color: rgba(151, 157, 171, 1);
+					opacity: 1;
+					width: 90rpx;
+					height: 44rpx;
+					background: rgba(239, 239, 241, 0.5);
+					border: 2rpx solid rgba(201, 201, 201, 1);
+					opacity: 1;
+					border-radius: 4rpx;
+					text-align: center;
+					margin-left: 16rpx;
+				}
 			}
 
 			// 右边查看排名按钮
@@ -197,6 +246,21 @@
 				float: right;
 				line-height: 56rpx;
 				background: linear-gradient(90deg, rgba(254, 201, 27, 1) 0%, rgba(255, 187, 0, 1) 100%);
+				opacity: 1;
+				border-radius: 40rpx;
+				text-align: center;
+				font-size: 24rpx;
+				font-weight: 400;
+				margin-top: 22rpx;
+				color: rgba(255, 255, 255, 1);
+			}
+
+			.delectBtn {
+				width: 140rpx;
+				height: 56rpx;
+				float: right;
+				line-height: 56rpx;
+				background: #FE661C;
 				opacity: 1;
 				border-radius: 40rpx;
 				text-align: center;

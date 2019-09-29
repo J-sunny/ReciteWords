@@ -118,10 +118,10 @@
 				pixelRatio: 1,
 				serverData: '',
 				studentId: '',
-			
+
 				toDayactive: 'toDayWeek',
 				timesActive: 'timesWeek',
-				
+
 				Area: {
 					// x轴
 					categories: ['2012', '2013', '2014', '2015', '2016', '2017'],
@@ -133,24 +133,24 @@
 				},
 				Area1: {
 					// x轴
-					categories: ['7-8', '7-9', '7-10', '7-11', '7-12', '7-13', '7-14'],
+					categories: ['7-8', '7-9', '7-10', '7-11', '7-12', '7-13', '7-14', '7-15'],
 					// y轴
 					series: [{
 						data: [100, 80, 95, 180, 112, 132, 34, 111],
 						name: ""
 					}]
 				},
-				
+
 				ColumnStack: {
 					// x轴
-					categories: ['2012', '2013', '2014', '2015', '2016'],
+					categories: ['2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022'],
 					// y轴
 					series: [{
-							data: [35, 55, 12, 14, 10],
+							data: [35, 55, 12, 14, 10, 44, 33, 22, 77, 66, 11],
 							name: "学习"
 						},
 						{
-							data: [56, 66, 34, 23, 41],
+							data: [56, 66, 34, 23, 41, 31, 53, 37, 29, 48, 57],
 							name: "复习"
 						},
 					]
@@ -169,11 +169,9 @@
 						},
 					]
 				}
-							
-				
 			}
 		},
-		
+
 		methods: {
 			// 返回
 			goBack() {
@@ -181,9 +179,9 @@
 					delta: 1
 				});
 			},
-		// 获取图标数据
-			getServerData(today,times) {
-				console.log(today,times)
+			// 获取图标数据
+			getServerData(today, times) {
+				console.log(today, times)
 				let _this = this
 				uni.request({
 					url: 'https://www.ucharts.cn/data.json',
@@ -204,7 +202,7 @@
 							Area.categories = _this.Area1.categories;
 							Area.series = _this.Area1.series;
 						}
-						
+
 
 						_self.showArea("canvasArea", Area);
 						// 柱状图
@@ -221,7 +219,7 @@
 							ColumnStack.categories = _this.ColumnStack1.categories;
 							ColumnStack.series = _this.ColumnStack1.series;
 						}
-						
+
 						_self.showColumnStack("canvasColumnStack", ColumnStack);
 					},
 					fail: () => {
@@ -319,36 +317,35 @@
 				// 		return category + ' ' + item.name + ':' + item.data
 				// 	}
 				// });
-			},						
+			},
 			// 获取用户学习情况(今日时长,今日单词,总时长,总单词)
 			getStudentRecord(studentId) {
-				this.$minApi.getStudentRecord({studentId:this.studentId}).then(data => {
+				this.$minApi.getStudentRecord({
+					studentId: this.studentId
+				}).then(data => {
 					console.log(data)
 				})
 			},
-			
-			
-			
+
+
+
 			toDayChange(val) {
 				this.toDayactive = val
-				this.getServerData(val,this.timesActive)
+				this.getServerData(val, this.timesActive)
 			},
 			timesChange(val) {
 				this.timesActive = val
-				this.getServerData(this.toDayactive,val)
+				this.getServerData(this.toDayactive, val)
 			}
 		},
 		onLoad(options) {
 			_self = this;
 			this.cWidth = uni.upx2px(750);
 			this.cHeight = uni.upx2px(500);
-			this.getServerData(this.toDayactive,this.timesActive);
-			
-			
+			this.getServerData(this.toDayactive, this.timesActive);
 			// var data = JSON.parse(options.index); // 字符串转对象
-			console.log(options)
+			// console.log(options)
 			this.studentId = options.studentId
-
 			this.getStudentRecord()
 		}
 
@@ -540,8 +537,9 @@
 					.mouth {
 						margin-left: 56rpx;
 					}
+
 					.active {
-						font-size: 15px;
+						font-size: 30rpx;
 						font-family: PingFang SC;
 						font-weight: 800;
 						color: rgba(46, 53, 72, 1);

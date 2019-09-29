@@ -8,9 +8,8 @@ minRequest.interceptors.request((request) => {
 	const token = uni.getStorageSync('token');
 	if (token) {
 		request.header["X-Token"] = token;
-	}
-	else{
-		
+	} else {
+
 	}
 	return request
 })
@@ -30,6 +29,7 @@ minRequest.interceptors.response((response) => {
 // 设置默认配置
 minRequest.setConfig((config) => {
 	// config.baseURL = 'http://192.168.2.102:8089/backwordSystem'
+	// config.baseURL = 'http://localhost:8089/backwordSystem'
 	config.baseURL = 'http://148.70.55.201:8089/backwordSystem'
 	return config
 })
@@ -97,6 +97,14 @@ export default {
 		getStudentRecord(data) {
 			return minRequest.get('/student/behaviorRecord/getStudentRecord', data)
 		},
-		
+		// 根据当前用户获取班级列表
+		classList(data) {
+			return minRequest.get('/teacher/manager/classList', data)
+		},
+		// 获取待分配学生列表
+		pendingList(data) {
+			return minRequest.get('/teacher/manager/pendingList', data)
+		},
+
 	}
 }

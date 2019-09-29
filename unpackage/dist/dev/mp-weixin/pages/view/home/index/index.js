@@ -117,7 +117,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var uniCalendar = function uniCalendar() {return Promise.all(/*! import() | components/uni-calendar/uni-calendar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-calendar/uni-calendar")]).then(__webpack_require__.bind(null, /*! ../../../../components/uni-calendar/uni-calendar */ 147));};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var uniCalendar = function uniCalendar() {return Promise.all(/*! import() | components/uni-calendar/uni-calendar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-calendar/uni-calendar")]).then(__webpack_require__.bind(null, /*! ../../../../components/uni-calendar/uni-calendar */ 156));};var _default =
 
 
 
@@ -215,7 +215,7 @@ __webpack_require__.r(__webpack_exports__);
         year: this.year,
         month: this.month }).
       then(function (data) {
-        console.log(data);
+        // console.log(data)
         if (data.data[0]) {
           data.data.forEach(function (item) {
             var data = {};

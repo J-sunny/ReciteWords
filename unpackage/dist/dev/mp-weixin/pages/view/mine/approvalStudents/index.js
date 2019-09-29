@@ -105,80 +105,186 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default =
-{
-  data: function data() {
-    return {
-      showPass: 'unapproval' };
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
-  },
-  methods: {
-    // 切换审批状态
-    change: function change(val) {
-      this.showPass = val;
-    },
 
-    // 返回
-    goBack: function goBack() {
-      uni.navigateBack({
-        delta: 1 });
 
-    } },
 
-  created: function created() {
 
-  } };exports.default = _default;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _toast = _interopRequireDefault(__webpack_require__(/*! @/wxcomponents/dist/toast/toast */ 14));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = { data: function data() {return { showPass: 'unapproval', pendingLists: [], active: 0, show: false, columns: ['一班', '二班', '三班'] };}, methods: { goBack: function goBack() {uni.navigateBack({ delta: 1 });}, // 切换审批状态
+    change: function change(val) {this.showPass = val;}, // 获取待分配的学生列表
+    pendingList: function pendingList() {var _this = this;this.$minApi.pendingList({}).then(function (data) {_this.pendingLists = data.data;console.log(_this.pendingLists[0].studentAccount);});}, // 选中mtab
+    onChange: function onChange(event) {console.log(event);}, // 通过
+    adopt: function adopt() {(0, _toast.default)("通过");}, // 不通过
+    notPass: function notPass() {(0, _toast.default)("不通过");}, // 未分配
+    // picker选择器
+    onConfirm: function onConfirm(event) {var _event$detail = event.detail,picker = _event$detail.picker,value = _event$detail.value,index = _event$detail.index;console.log("\u5F53\u524D\u503C\uFF1A".concat(value, ", \u5F53\u524D\u7D22\u5F15\uFF1A").concat(index));this.show = false;(0, _toast.default)("加入班级成功！");}, onCancel: function onCancel() {this.show = false;}, // 显示选择班级弹框
+    changeRanking: function changeRanking() {this.show = true;} }, created: function created() {this.pendingList();} };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

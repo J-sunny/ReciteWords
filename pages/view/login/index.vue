@@ -23,7 +23,7 @@
 </template>
 
 <script>
-	import Toast from '../../../wxcomponents/dist/toast/toast';
+	import Toast from '@/wxcomponents/dist/toast/toast';
 	export default {
 		data() {
 			return {

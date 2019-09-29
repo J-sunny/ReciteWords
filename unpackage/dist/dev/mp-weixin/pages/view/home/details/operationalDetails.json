@@ -1,4 +1,7 @@
 {
   "navigationBarTitleText": "任务详情",
-  "usingComponents": {}
+  "usingComponents": {
+    "van-dialog": "../../../wxcomponents/dist/dialog/index",
+    "van-toast": "../../../wxcomponents/dist/toast/index"
+  }
 }

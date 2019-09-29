@@ -13,22 +13,23 @@
 		<view class="classConBox">
 			<view class="classCon" v-for="item in 10" :key='item'>
 				<view class="classConLeft">
-					<view class="className" >英语系大三1班</view>
+					<view class="className">英语系大三1班</view>
 					<view class="grade">年级：2016级</view>
 					<view class="grade">学生数量：26个</view>
 				</view>
-				<navigator url="" class="classConright">
+				<label @click="linkTo()" class="classConright">
 					查看详情
-				</navigator>
+				</label>
 			</view>
 		</view>
 
-
 		
+
 	</view>
 </template>
 
 <script>
+	
 	export default {
 		data() {
 			return {
@@ -46,9 +47,15 @@
 					delta: 1
 				});
 			},
+			// 查看详情页面跳转
+			linkTo() {
+				uni.navigateTo({
+					url: 'seeDetails'
+				})
+			}
 
-		
 		},
+		created() {}
 	}
 </script>
 

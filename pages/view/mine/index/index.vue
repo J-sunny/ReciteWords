@@ -14,7 +14,7 @@
 		</navigator>
 		<!-- 内容 -->
 		<view class="conBox">
-			<navigator hover-class='none' url="../classManagement/seeDetails" class="classManagement">
+			<navigator hover-class='none' url="../classManagement/index" class="classManagement">
 				<view class="conTitle">班级管理</view>
 				<view class="conIdes">管理班级，学生</view>
 			</navigator>
@@ -35,7 +35,7 @@
 </template>
 
 <script>
-	import neilModal from '../../../../components/neilModal/neil-modal.vue';
+	import neilModal from '@/components/neilModal/neil-modal.vue';
 	export default {
 		data() {
 			return {
@@ -66,7 +66,7 @@
 			// 获取用户信息
 			getUserInfo() {
 				this.$minApi.getUserInfo({}).then(data => {
-					console.log(data)
+					// console.log(data)
 					this.getUserInfoList = data.data
 				})
 			},

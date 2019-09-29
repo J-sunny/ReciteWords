@@ -15,7 +15,7 @@
 							<view>{{ canlender.month }}月</view>
 						</view>
 						<view class="uni-calendar__date-after uni-calendar__rollback" @tap="dataBefor(1, 'month')"><text class="iconfont icon-jiantou " /></view>
-						<view class="uni-calendar__backtoday" @tap="backtoday">回到今天</view>
+						<!-- <view class="uni-calendar__backtoday" @tap="backtoday">回到今天</view> -->
 					</view>
 					<view v-if="isLunar" class="uni-calendar__day-detail">
 						<view>{{ canlender.year + '年' + canlender.month + '月' + canlender.date + '日 （' + canlender.lunar.astro + ')' }}</view>

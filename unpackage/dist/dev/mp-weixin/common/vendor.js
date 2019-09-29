@@ -765,7 +765,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -1617,7 +1617,79 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ 104:
+/***/ 102:
+/*!********************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/wxcomponents/dist/dialog/dialog.js ***!
+  \********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var queue = [];
+function getContext() {
+  var pages = getCurrentPages();
+  return pages[pages.length - 1];
+}
+var Dialog = function Dialog(options) {
+  options = Object.assign({}, Dialog.currentOptions, options);
+  return new Promise(function (resolve, reject) {
+    var context = options.context || getContext();
+    var dialog = context.selectComponent(options.selector);
+    delete options.context;
+    delete options.selector;
+    if (dialog) {
+      dialog.set(Object.assign({ onCancel: reject, onConfirm: resolve }, options));
+      queue.push(dialog);
+    } else
+    {
+      console.warn('未找到 van-dialog 节点，请确认 selector 及 context 是否正确');
+    }
+  });
+};
+Dialog.defaultOptions = {
+  show: true,
+  title: '',
+  message: '',
+  zIndex: 100,
+  overlay: true,
+  className: '',
+  customStyle: '',
+  asyncClose: false,
+  messageAlign: '',
+  transition: 'scale',
+  selector: '#van-dialog',
+  confirmButtonText: '确认',
+  cancelButtonText: '取消',
+  showConfirmButton: true,
+  showCancelButton: false,
+  closeOnClickOverlay: false,
+  confirmButtonOpenType: '' };
+
+Dialog.alert = Dialog;
+Dialog.confirm = function (options) {return Dialog(Object.assign({ showCancelButton: true }, options));};
+Dialog.close = function () {
+  queue.forEach(function (dialog) {
+    dialog.close();
+  });
+  queue = [];
+};
+Dialog.stopLoading = function () {
+  queue.forEach(function (dialog) {
+    dialog.stopLoading();
+  });
+};
+Dialog.setDefaultOptions = function (options) {
+  Object.assign(Dialog.currentOptions, options);
+};
+Dialog.resetDefaultOptions = function () {
+  Dialog.currentOptions = Object.assign({}, Dialog.defaultOptions);
+};
+Dialog.resetDefaultOptions();var _default =
+Dialog;exports.default = _default;
+
+/***/ }),
+
+/***/ 105:
 /*!**************************************************************************************************************************!*\
   !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/main.js?{"page":"pages%2Fview%2Fmine%2FclassManagement%2Findex"} ***!
   \**************************************************************************************************************************/
@@ -1628,7 +1700,7 @@ function normalizeComponent (
 /* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
 
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
-var _index = _interopRequireDefault(__webpack_require__(/*! ./pages/view/mine/classManagement/index.vue */ 105));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _index = _interopRequireDefault(__webpack_require__(/*! ./pages/view/mine/classManagement/index.vue */ 106));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 createPage(_index.default);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
 
@@ -1645,10 +1717,10 @@ createPage(_index.default);
 
 /***/ }),
 
-/***/ 112:
-/*!***********************************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/main.js?{"page":"pages%2Fview%2Fhome%2FarrangementTasks%2FcheckSelected"} ***!
-  \***********************************************************************************************************************************/
+/***/ 113:
+/*!**********************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/main.js?{"page":"pages%2Fview%2Fmine%2FclassManagement%2FrevisionClass"} ***!
+  \**********************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1656,8 +1728,8 @@ createPage(_index.default);
 /* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
 
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
-var _checkSelected = _interopRequireDefault(__webpack_require__(/*! ./pages/view/home/arrangementTasks/checkSelected.vue */ 113));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-createPage(_checkSelected.default);
+var _revisionClass = _interopRequireDefault(__webpack_require__(/*! ./pages/view/mine/classManagement/revisionClass.vue */ 114));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_revisionClass.default);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
 
 /***/ }),
@@ -1781,7 +1853,24 @@ MinRequest;exports.default = _default;
 
 /***/ }),
 
-/***/ 120:
+/***/ 121:
+/*!***********************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/main.js?{"page":"pages%2Fview%2Fhome%2FarrangementTasks%2FcheckSelected"} ***!
+  \***********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
+var _checkSelected = _interopRequireDefault(__webpack_require__(/*! ./pages/view/home/arrangementTasks/checkSelected.vue */ 122));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_checkSelected.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
+
+/***/ }),
+
+/***/ 129:
 /*!*****************************************************************************************************************!*\
   !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/main.js?{"page":"pages%2Fcomponent%2FbyLetter%2Findex"} ***!
   \*****************************************************************************************************************/
@@ -1794,57 +1883,6 @@ MinRequest;exports.default = _default;
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
 var _index = _interopRequireDefault(__webpack_require__(/*! ./pages/component/byLetter/index.vue */ 46));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 createPage(_index.default);
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
-
-/***/ }),
-
-/***/ 121:
-/*!*****************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/main.js?{"page":"pages%2Fcomponent%2FbyCourse%2Findex"} ***!
-  \*****************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
-
-var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
-var _index = _interopRequireDefault(__webpack_require__(/*! ./pages/component/byCourse/index.vue */ 39));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-createPage(_index.default);
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
-
-/***/ }),
-
-/***/ 122:
-/*!******************************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/main.js?{"page":"components%2Flee-select%2Flee-select%2Flee-select"} ***!
-  \******************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
-
-var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
-var _leeSelect = _interopRequireDefault(__webpack_require__(/*! ./components/lee-select/lee-select/lee-select.vue */ 52));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-createPage(_leeSelect.default);
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
-
-/***/ }),
-
-/***/ 123:
-/*!********************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/main.js?{"page":"pages%2Fview%2Fhome%2Fdetails%2Franking"} ***!
-  \********************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
-
-var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
-var _ranking = _interopRequireDefault(__webpack_require__(/*! ./pages/view/home/details/ranking.vue */ 124));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-createPage(_ranking.default);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
 
 /***/ }),
@@ -1867,8 +1905,7 @@ minRequest.interceptors.request(function (request) {
   var token = uni.getStorageSync('token');
   if (token) {
     request.header["X-Token"] = token;
-  } else
-  {
+  } else {
 
   }
   return request;
@@ -1889,6 +1926,7 @@ minRequest.interceptors.response(function (response) {
 // 设置默认配置
 minRequest.setConfig(function (config) {
   // config.baseURL = 'http://192.168.2.102:8089/backwordSystem'
+  // config.baseURL = 'http://localhost:8089/backwordSystem'
   config.baseURL = 'http://148.70.55.201:8089/backwordSystem';
   return config;
 });var _default =
@@ -1955,15 +1993,23 @@ minRequest.setConfig(function (config) {
 
   data) {
     return minRequest.get('/student/behaviorRecord/getStudentRecord', data);
+  }), _defineProperty(_apis, "classList", function classList(
+
+  data) {
+    return minRequest.get('/teacher/manager/classList', data);
+  }), _defineProperty(_apis, "pendingList", function pendingList(
+
+  data) {
+    return minRequest.get('/teacher/manager/pendingList', data);
   }), _apis) };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 
-/***/ 131:
-/*!*******************************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/main.js?{"page":"pages%2Fview%2Fhome%2Fdetails%2FoperationalDetails"} ***!
-  \*******************************************************************************************************************************/
+/***/ 130:
+/*!*****************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/main.js?{"page":"pages%2Fcomponent%2FbyCourse%2Findex"} ***!
+  \*****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1971,16 +2017,16 @@ minRequest.setConfig(function (config) {
 /* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
 
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
-var _operationalDetails = _interopRequireDefault(__webpack_require__(/*! ./pages/view/home/details/operationalDetails.vue */ 132));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-createPage(_operationalDetails.default);
+var _index = _interopRequireDefault(__webpack_require__(/*! ./pages/component/byCourse/index.vue */ 39));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_index.default);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
 
 /***/ }),
 
-/***/ 139:
-/*!****************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/main.js?{"page":"pages%2Fview%2Fmine%2Findex%2Findex"} ***!
-  \****************************************************************************************************************/
+/***/ 131:
+/*!******************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/main.js?{"page":"components%2Flee-select%2Flee-select%2Flee-select"} ***!
+  \******************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1988,8 +2034,25 @@ createPage(_operationalDetails.default);
 /* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
 
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
-var _index = _interopRequireDefault(__webpack_require__(/*! ./pages/view/mine/index/index.vue */ 140));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-createPage(_index.default);
+var _leeSelect = _interopRequireDefault(__webpack_require__(/*! ./components/lee-select/lee-select/lee-select.vue */ 52));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_leeSelect.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
+
+/***/ }),
+
+/***/ 132:
+/*!********************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/main.js?{"page":"pages%2Fview%2Fhome%2Fdetails%2Franking"} ***!
+  \********************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
+var _ranking = _interopRequireDefault(__webpack_require__(/*! ./pages/view/home/details/ranking.vue */ 133));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_ranking.default);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
 
 /***/ }),
@@ -2071,6 +2134,40 @@ Toast;exports.default = _default;
 
 /***/ }),
 
+/***/ 140:
+/*!*******************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/main.js?{"page":"pages%2Fview%2Fhome%2Fdetails%2FoperationalDetails"} ***!
+  \*******************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
+var _operationalDetails = _interopRequireDefault(__webpack_require__(/*! ./pages/view/home/details/operationalDetails.vue */ 141));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_operationalDetails.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
+
+/***/ }),
+
+/***/ 148:
+/*!****************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/main.js?{"page":"pages%2Fview%2Fmine%2Findex%2Findex"} ***!
+  \****************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
+var _index = _interopRequireDefault(__webpack_require__(/*! ./pages/view/mine/index/index.vue */ 149));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_index.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
+
+/***/ }),
+
 /***/ 15:
 /*!*******************************************************************************************!*\
   !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/wxcomponents/dist/common/utils.js ***!
@@ -2100,7 +2197,24 @@ function nextTick(fn) {
 
 /***/ }),
 
-/***/ 152:
+/***/ 16:
+/*!****************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/main.js?{"page":"pages%2Fview%2Fhome%2Findex%2Findex"} ***!
+  \****************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
+var _index = _interopRequireDefault(__webpack_require__(/*! ./pages/view/home/index/index.vue */ 17));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_index.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
+
+/***/ }),
+
+/***/ 161:
 /*!*********************************************************************************************!*\
   !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/components/uni-calendar/calendar.js ***!
   \*********************************************************************************************/
@@ -2654,23 +2768,6 @@ var calendar = {
 
 
 calendar;exports.default = _default;
-
-/***/ }),
-
-/***/ 16:
-/*!****************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/main.js?{"page":"pages%2Fview%2Fhome%2Findex%2Findex"} ***!
-  \****************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
-
-var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
-var _index = _interopRequireDefault(__webpack_require__(/*! ./pages/view/home/index/index.vue */ 17));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-createPage(_index.default);
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
 
 /***/ }),
 
@@ -8142,7 +8239,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -8163,14 +8260,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -8246,7 +8343,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));

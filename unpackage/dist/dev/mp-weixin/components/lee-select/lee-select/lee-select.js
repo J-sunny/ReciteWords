@@ -105,7 +105,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var baseClasses = function baseClasses() {return __webpack_require__.e(/*! import() | components/lee-select/base-classes/base-classes */ "components/lee-select/base-classes/base-classes").then(__webpack_require__.bind(null, /*! ../base-classes/base-classes.vue */ 176));};var _default2 =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var baseClasses = function baseClasses() {return __webpack_require__.e(/*! import() | components/lee-select/base-classes/base-classes */ "components/lee-select/base-classes/base-classes").then(__webpack_require__.bind(null, /*! ../base-classes/base-classes.vue */ 185));};var _default2 =
 
 
 
@@ -373,5 +373,5 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ })
 
-},[[122,"common/runtime","common/vendor"]]]);
+},[[131,"common/runtime","common/vendor"]]]);
 //# sourceMappingURL=../../../../.sourcemap/mp-weixin/components/lee-select/lee-select/lee-select.js.map

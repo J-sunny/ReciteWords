@@ -180,9 +180,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
-var time = __webpack_require__(/*! ../../../utils/getDate.js */ 69);var popupLayer = function popupLayer() {return __webpack_require__.e(/*! import() | components/popup-layer */ "components/popup-layer").then(__webpack_require__.bind(null, /*! ../../../../components/popup-layer.vue */ 183));};
+var time = __webpack_require__(/*! ../../../utils/getDate.js */ 69);var popupLayer = function popupLayer() {return __webpack_require__.e(/*! import() | components/popup-layer */ "components/popup-layer").then(__webpack_require__.bind(null, /*! ../../../../components/popup-layer.vue */ 192));};
 
 // import Toast from '../../../../wxcomponents/dist/toast/toast';
 var _default =
@@ -203,7 +202,8 @@ var _default =
         }
         return value;
       },
-      getUserInfoList: [] };
+      getUserInfoList: [],
+      picSrc: '' };
 
   },
   components: {
@@ -279,6 +279,20 @@ var _default =
         _this.teacherBirth = data.data.teacherBirth;
         _this.teacherGender = data.data.teacherGender;
       });
+    },
+    // 从本地相册选择图片或使用相机拍照。
+    selectPic: function selectPic(type) {
+      var this_ = this;
+      uni.chooseImage({
+        count: 1,
+        sourceType: [type],
+        success: function success(res) {
+          console.log(res);
+          console.log(JSON.stringify(res.tempFilePaths));
+          this_.close('headPic');
+          this_.picSrc = res.tempFilePaths[0];
+        } });
+
     } },
 
   created: function created() {

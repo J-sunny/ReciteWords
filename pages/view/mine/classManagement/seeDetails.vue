@@ -12,23 +12,28 @@
 				<!-- 左边--任务词汇量 -->
 				<view class="taskLeft">
 					<view class='taskTitle' @click="changeRanking()">{{className}}</view>
-					<view class='taskTime'><label>年级：</label>2016级</view>
-					<view class='taskTime'><label>学生数量：</label>26个</view>
+					<view class='taskTime'><label>年级：</label>{{classLists.classYear}}级</view>
+					<view class='taskTime'><label>学生数量：</label>{{classLists.studentInfo.length}}个</view>
+				</view>
+				<!-- 右边 -->
+				<view class="taskRight">
+					<label class="editClass" @click="linkTo()">编辑</label>
+					<label class="delectClass" @click="delectClass()">删除</label>
 				</view>
 			</view>
 		</view>
 		<!-- 内容 -->
 		<view class="contentBox">
 			<!-- 框框 -->
-			<view class="frame" v-for="item in 10" :key='item'>
+			<view class="frame" v-for="item in classLists.studentInfo" :key='item.studentId'>
 				<!-- 左边 -->
 				<view class="frameLeft">
-					<view class="studentName">张建科</view>
-					<view class="stuName">年级：<label class="stuNames">2018级</label></view>
-					<view class="stuName">学号：<label class="stuNames">20181227</label></view>
+					<view class="studentName">{{item.studentName}}</view>
+					<view class="stuName">年级：<label class="stuNames">{{item.studentGrade}}级</label></view>
+					<view class="stuName">学号：<label class="stuNames">{{item.studentNum}}</label></view>
 				</view>
 				<!-- 右边查看详情按钮 -->
-				<navigator class="frameRightBtn" url='../../home/details/studentDetails'>查看详情</navigator>
+				<label class="frameRightBtn" @click="viewDetails(item.studentId)">查看详情</label>
 			</view>
 
 		</view>
@@ -37,16 +42,28 @@
 		<van-popup :show="show" position="bottom" style="height: 356rpx">
 			<van-picker show-toolbar title="选择班级" :columns="columns" @cancel="onCancel()" @confirm="onConfirm()" />
 		</van-popup>
+
+		<van-toast id="van-toast" />
+
+		<!-- 删除弹框 -->
+		<van-dialog confirm-button-color="#FFBB00 " cancel-button-color="#CCCCCC" use-slot :show="showDelect"
+		 show-cancel-button @confirm="onConfirmDel()" @cancel="onCancelDel()">
+			<view class="dialogText">是否确定删除班级？删除班级之后，原班级学生将在“<label class="yellowColor">审批学生-待分配</label>”里。</view>
+		</van-dialog>
 	</view>
 </template>
 
 <script>
+	import Dialog from '@/wxcomponents/dist/dialog/dialog';
+	import Toast from '@/wxcomponents/dist/toast/toast';
 	export default {
 		data() {
 			return {
 				show: false,
+				showDelect: false,
 				columns: ['一班', '二班', '三班'],
-				className:"一班"
+				className: "一班",
+				classLists: []
 			}
 		},
 		methods: {
@@ -57,26 +74,64 @@
 			},
 			// picker选择器
 			onConfirm(event) {
-					const {
-						picker,
-						value,
-						index
-					} = event.detail;
-					console.log((`当前值：${value}, 当前索引：${index}`));
-					this.show = false;
-					this.className=value
-				},
-				onCancel() {
-					this.show = false;
-				},
-				// 改变班级
-				changeRanking() {
-					console.log(222)
-					this.show = true;
-				},
+				const {
+					picker,
+					value,
+					index
+				} = event.detail;
+				console.log((`当前值：${value}, 当前索引：${index}`));
+				this.show = false;
+				this.className = value
+			},
+			onCancel() {
+				this.show = false;
+			},
+			// 改变班级
+			changeRanking() {
+				console.log(222)
+				this.show = true;
+			},
+			// 根据当前用户获取班级列表
+			classList() {
+				this.$minApi.classList({}).then(data => {
+					this.classLists = data.data[0]
+					this.className = data.data[0].className
+					console.log(data)
+				})
+			},
+			// 查看详情
+			viewDetails(studentId) {
+				uni.navigateTo({
+					url: '../../home/details/studentDetails?studentId=' + studentId
+				})
+			},
+			// 删除班级
+			delectClass() {
+				this.showDelect = true
+				console.log(this.showDelect)
+			},
+			// 删除班级弹框取消按钮
+			onConfirmDel() {
+				console.log("确认")
+				Toast("删除成功")
+				this.showDelect = false
+				console.log(this.showDelect)
+			},
+			onCancelDel() {
+				console.log("取消")
+				this.showDelect = false
+				console.log(this.showDelect)
+			},
+			// 修改班级信息页面跳转
+			linkTo() {
+				uni.navigateTo({
+					url: 'revisionClass'
+				})
+			}
+
 		},
 		created() {
-			
+			this.classList()
 		}
 
 	}
@@ -181,6 +236,39 @@
 				}
 			}
 
+			// 任务词汇量  右边
+			.taskRight {
+				float: right;
+				text-align: center;
+				font-size: 24rpx;
+				font-family: PingFang SC;
+				font-weight: 400;
+				line-height: 56rpx;
+				color: rgba(255, 255, 255, 1);
+				opacity: 1;
+				margin-top: 44rpx;
+
+				.editClass {
+					display: inline-block;
+					width: 112rpx;
+					height: 56rpx;
+					background: linear-gradient(90deg, rgba(254, 201, 27, 1) 0%, rgba(255, 187, 0, 1) 100%);
+					opacity: 1;
+					border-radius: 40rpx;
+
+				}
+
+				.delectClass {
+					display: inline-block;
+					width: 112rpx;
+					height: 56rpx;
+					background: rgba(254, 102, 28, 1);
+					opacity: 1;
+					border-radius: 40rpx;
+					margin-left: 32rpx;
+				}
+			}
+
 			// 右边查看排名按钮
 			.viewBtn {
 				width: 140rpx;
@@ -263,6 +351,21 @@
 				}
 			}
 
+		}
+
+		// 删除弹框内容
+		.dialogText {
+			width: 100%;
+			padding: 64rpx 44rpx;
+			font-size: 30rpx;
+			font-family: PingFang SC;
+			font-weight: 400;
+			line-height: 48rpx;
+			color: rgba(46, 53, 72, 1);
+			opacity: 1;
+			text-align: center;
+			box-sizing: border-box;
+			// height: 266rpx;
 		}
 	}
 </style>

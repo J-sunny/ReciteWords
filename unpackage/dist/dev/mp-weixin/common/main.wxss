@@ -41,10 +41,10 @@ page {
 
 /* 日历选择时样式 */
 
-.bigBox .uni-calender__body-date-week .uni-calender__date.uni-calender__date-current.uni-calender__active .uni-calender__circle-box {
-	background: #FFBB00;
+.uni-calender__body-date-week .uni-calender__date.uni-calender__date-current.uni-calender__active .uni-calender__circle-box {
+	background: #FFBB00 !important;
 	/* width:26px;
-height:26px; */
+	height:26px; */
 	border-radius: 50%;
 	opacity: 1;
 }
@@ -85,27 +85,26 @@ height:26px; */
 }
 
 .van-icon {
-font-size: 32rpx !important;
-line-height: 32rpx !important;
+	font-size: 32rpx !important;
+	line-height: 32rpx !important;
 }
 
 /* 搜索input框 */
 
 .van-field__input {
-font-size: 26rpx !important;
-height: 64rpx !important;
-min-height: 64rpx !important;
+	font-size: 26rpx !important;
+	height: 64rpx !important;
+	min-height: 64rpx !important;
 }
 
-.van-cell__left-icon-wrap,.van-cell__right-icon-wrap {
-height: 64rpx !important;
+.van-cell__left-icon-wrap,
+.van-cell__right-icon-wrap {
+	height: 64rpx !important;
 }
 
-.van-checkbox__icon-wrap,.van-checkbox__label {
- /* line-height:112rpx !important; */
+.van-checkbox__icon-wrap,
+.van-checkbox__label {
+	/* line-height:112rpx !important; */
 
 }
-
-
-
 

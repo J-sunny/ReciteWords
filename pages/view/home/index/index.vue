@@ -96,7 +96,7 @@
 					year: this.year,
 					month: this.month,
 				}).then(data => {
-					console.log(data)
+					// console.log(data)
 					if (data.data[0]) {
 						data.data.forEach(item => {
 							var data = {}

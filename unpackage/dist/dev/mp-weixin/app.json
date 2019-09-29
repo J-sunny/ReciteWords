@@ -8,6 +8,7 @@
     "pages/view/login/index",
     "pages/view/mine/approvalStudents/index",
     "pages/view/mine/classManagement/seeDetails",
+    "pages/view/mine/classManagement/revisionClass",
     "pages/view/mine/classManagement/index",
     "pages/view/home/arrangementTasks/checkSelected",
     "pages/component/byLetter/index",

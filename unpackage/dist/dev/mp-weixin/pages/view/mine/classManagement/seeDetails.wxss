@@ -104,6 +104,36 @@
 .missionDetailsBox .taskVocabulary .taskLeft .taskTime label {
           color: #2E3548;
 }
+.missionDetailsBox .taskVocabulary .taskRight {
+      float: right;
+      text-align: center;
+      font-size: 24rpx;
+      font-family: PingFang SC;
+      font-weight: 400;
+      line-height: 56rpx;
+      color: white;
+      opacity: 1;
+      margin-top: 44rpx;
+}
+.missionDetailsBox .taskVocabulary .taskRight .editClass {
+        display: inline-block;
+        width: 112rpx;
+        height: 56rpx;
+        background: -webkit-gradient(linear, left top, right top, from(#fec91b), to(#ffbb00));
+        background: -o-linear-gradient(left, #fec91b 0%, #ffbb00 100%);
+        background: linear-gradient(90deg, #fec91b 0%, #ffbb00 100%);
+        opacity: 1;
+        border-radius: 40rpx;
+}
+.missionDetailsBox .taskVocabulary .taskRight .delectClass {
+        display: inline-block;
+        width: 112rpx;
+        height: 56rpx;
+        background: #fe661c;
+        opacity: 1;
+        border-radius: 40rpx;
+        margin-left: 32rpx;
+}
 .missionDetailsBox .taskVocabulary .viewBtn {
       width: 140rpx;
       height: 56rpx;
@@ -167,5 +197,18 @@
         color: #ffbb00;
         opacity: 1;
         margin-top: 82rpx;
+}
+.missionDetailsBox .dialogText {
+    width: 100%;
+    padding: 64rpx 44rpx;
+    font-size: 30rpx;
+    font-family: PingFang SC;
+    font-weight: 400;
+    line-height: 48rpx;
+    color: #2e3548;
+    opacity: 1;
+    text-align: center;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
 }
 

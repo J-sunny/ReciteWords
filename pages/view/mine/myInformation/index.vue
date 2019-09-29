@@ -10,7 +10,7 @@
 			<!-- 头像 -->
 			<view class="touBox">
 				<view class="touXiang" @tap="show('headPic')">
-					<image src="../../../../static/images/touXiang@2x.png"></image>
+					<image :src="picSrc"></image>
 				</view>
 			</view>
 		</view>
@@ -23,12 +23,11 @@
 				<label class="name">工号</label><label class="con">{{getUserInfoList.teacherNum}}</label>
 			</view>
 			<view class="conBox" @tap="show1('gender')">
-				<label class="name">性别</label><label class="con cons">{{teacherGender==0?'女':'男'}}</label><label
-				 class="arrowRight" @tap="show1('gender')"></label>
+				<label class="name">性别</label><label class="con cons">{{teacherGender==0?'女':'男'}}</label><label class="arrowRight"
+				 @tap="show1('gender')"></label>
 			</view>
 			<view class="conBox" @tap="show2('')">
-				<label class="name">生日</label><label class="con cons">{{teacherBirth}}</label><label class="arrowRight"
-				 @tap="show2('')"></label>
+				<label class="name">生日</label><label class="con cons">{{teacherBirth}}</label><label class="arrowRight" @tap="show2('')"></label>
 			</view>
 			<view class="conBox">
 				<label class="name">学校</label><label class="con">{{getUserInfoList.belongSchoolId}}</label>
@@ -44,8 +43,8 @@
 			<popup-layer ref="headPic" :direction="'top'">
 				<view class="popupBox">
 					<view class="selectBox">
-						<view class="opcition">拍照</view>
-						<view class="">从手机相册选择</view>
+						<view class="opcition" @click="selectPic('camera')">拍照</view>
+						<view class="" @click="selectPic('album')">从手机相册选择</view>
 					</view>
 					<view class="cancel" @tap="close('headPic')">取消</view>
 				</view>
@@ -85,7 +84,7 @@
 				columns: ['女', '男'],
 				maxDate: new Date().getTime(),
 				teacherBirth: '',
-				teacherGender:'',
+				teacherGender: '',
 				formatter(type, value) {
 					if (type === 'year') {
 						return `${value}年`;
@@ -96,7 +95,8 @@
 					}
 					return value;
 				},
-				getUserInfoList: []
+				getUserInfoList: [],
+				picSrc:''
 			}
 		},
 		components: {
@@ -169,10 +169,24 @@
 				this.$minApi.getUserInfo({}).then(data => {
 					console.log(data)
 					this.getUserInfoList = data.data
-					this.teacherBirth=data.data.teacherBirth
-					this.teacherGender=data.data.teacherGender
+					this.teacherBirth = data.data.teacherBirth
+					this.teacherGender = data.data.teacherGender
 				})
 			},
+			// 从本地相册选择图片或使用相机拍照。
+			selectPic(type) {
+				let this_ = this
+				uni.chooseImage({
+					count: 1,
+					sourceType: [type],
+					success: function(res) {
+						console.log(res)
+						console.log(JSON.stringify(res.tempFilePaths));
+						this_.close('headPic')
+						this_.picSrc = res.tempFilePaths[0]
+					}
+				})
+			}
 		},
 		created() {
 			this.birthday = time.formatTime(new Date(this.birthday), 'Y-M-D')
@@ -235,6 +249,8 @@
 					width: 108rpx;
 					height: 108rpx;
 					margin: 0 auto;
+					background-color: #F1F1F1;
+					border-radius: 50%;
 				}
 			}
 		}

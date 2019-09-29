@@ -46,17 +46,18 @@
 
 		<!-- 内容 -->
 		<view class="courseConBox">
-			<view class="courseList" v-for="i in 4" :key=i>
-				<view class="Title"><label class="bigTitle">四级核心词汇</label><label class="smallTitle" for="">chapter 1-Lesson
-						2</label></view>
+			<view class="courseList" v-for="(item,index) in list" :key=index>
+				<view class="Title">
+					<label class="bigTitle">{{item.courseTitle}}</label>
+					<label class="smallTitle" for="">{{item.chapter}}</label></view>
 				<van-checkbox-group :value="result" @change="onChanges()">
-					<view class="checkedBox" v-for="(item , index2) in list" :key="index2">
+					<view class="checkedBox" v-for="(val , index2) in item.wordList" :key="index2">
 						<view class="box" :style="{height:'160rpx',padding:'40rpx 24rpx' ,'border-radius':'16rpx','margin-top':'32rpx',background:'#fff','box-sizing': 'border-box'}">
 							<!-- 复选框组 -->
-							<van-checkbox class="vanCheckBox" :name="item" checked-color="#FFBB00">
+							<van-checkbox class="vanCheckBox" :name="val.wordId" checked-color="#FFBB00">
 								<view class="words">
-									<view for="" class="word">{{item}}</view>
-									<view for="" class="Interpretation">n.同谋，从犯；附件</view>
+									<view for="" class="word">{{val.word}}</view>
+									<view for="" class="Interpretation">{{val.Interpretation}}</view>
 								</view>
 							</van-checkbox>
 						</view>
@@ -70,8 +71,8 @@
 			<!-- <checkbox  color="#FFBB00" style="transform:scale(1)" @tap="checkAll=!checkAll" :checked="checkAll"/>全选 -->
 			<van-checkbox class="radio" :value="checkAll" @change="onChange()" checked-color="#FFBB00">全选</van-checkbox>
 			<!-- </label> -->
-			<navigator url='/pages/view/home/arrangementTasks/checkSelected' class="lookCheck" :class="checkAll==true?'lookActive':''">
-				查看已选（4）
+			<navigator url='/pages/view/home/arrangementTasks/checkSelected' class="lookCheck" :class="lookSelects==false?'':'lookActive'">
+				查看已选（{{wordCount}}）
 			</navigator>
 		</view>
 
@@ -101,13 +102,83 @@
 				show2: false,
 				show3: false,
 				checkAll: false,
-				list: ['a', 'b', 'c'],
-				result: ['a', 'b'],
+				lookSelects:false,
+				wordCount:0,
+				list: [{
+						courseTitle: '四级词汇核心词汇',
+						chapter: 'chapter 1-Lesson 2',
+						wordList: [{
+								'word': 'accessory',
+								'wordId': 1,
+								'Interpretation': 'n.同谋，从犯；附件'
+							},
+							{
+								'word': 'accidental',
+								'wordId': 2,
+								'Interpretation': 'a.偶然的；非本质的'
+							},
+							{
+								'word': 'accommodate',
+								'wordId': 3,
+								'Interpretation': 'vt.容纳；供应，供给'
+							},
+							{
+								'word': 'accordance',
+								'wordId': 4,
+								'Interpretation': 'n.一致；和谐；授予'
+							},
+							{
+								'word': 'accordingly',
+								'wordId': 5,
+								'Interpretation': 'ad.因此，所以；照着'
+							},
+
+						]
+					},
+					{
+						courseTitle: '六级核心词汇',
+						chapter: 'chapter 5-Lesson 13',
+						wordList: [{
+								'word': 'bacon',
+								'wordId': 6,
+								'Interpretation': 'n.实例，情况，建议；vt.举...为例'
+							},
+							{
+								'word': 'ability',
+								'wordId': 7,
+								'Interpretation': 'vt.容纳；供应，供给'
+							},
+							{
+								'word': 'involve',
+								'wordId': 8,
+								'Interpretation': 'a.偶然的；非本质的'
+							},
+							{
+								'word': 'jail',
+								'wordId': 9,
+								'Interpretation': 'ad.因此，所以；照着'
+							},
+							{
+								'word': 'aboard',
+								'wordId': 10,
+								'Interpretation': 'n.一致；和谐；授予'
+							},
+
+						]
+					}
+				],
+				result: [],
 				thesaurusLists: [],
 				chapterLists: [],
 				lessonLists: []
 
 			};
+		},
+		watch: {
+			result() {
+
+				console.log(this.checkAll)
+			}
 		},
 		components: {
 			uniIcon
@@ -195,13 +266,33 @@
 				this.show3 = false
 				this.active3 = !this.active3
 			},
+			// 全选
 			onChange(event) {
-				console.log(event.detail)
+				if (event.detail == false) {
+					this.result = []
+				}
+				if (event.detail == true) {
+					this.list.forEach(data => {
+						console.log(data)
+						data.wordList.forEach(val => {
+							this.result.push(val.wordId.toString())
+						})
+					})
+					this.wordCount=this.result.length
+				}
+				console.log(this.result)
 				this.checkAll = event.detail
+				this.lookSelects=event.detail
 			},
 			onChanges(event) {
 				this.result = event.detail
 				console.log(this.result)
+				if (this.result.length == 0) {
+					this.lookSelects = false
+				} else {
+					this.lookSelects = true
+					this.wordCount=this.result.length
+				}
 			},
 			// 获取课程下拉列表
 			thesaurusList() {
@@ -220,8 +311,8 @@
 				})
 			},
 			// 获取节下拉列表
-			lessonList(thesauruName,chapter) {
-				console.log(chapter,thesauruName)
+			lessonList(thesauruName, chapter) {
+				console.log(chapter, thesauruName)
 				this.$minApi.lessonList({
 					chapter: chapter,
 					thesauruName: thesauruName

@@ -130,7 +130,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _toast = _interopRequireDefault(__webpack_require__(/*! ../../../wxcomponents/dist/toast/toast */ 14));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
+var _toast = _interopRequireDefault(__webpack_require__(/*! @/wxcomponents/dist/toast/toast */ 14));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
 //
 //
 //

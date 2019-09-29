@@ -95,84 +95,155 @@
       border-bottom: 4rpx solid #FFBB00;
 }
 .approvalStudents .approvalCon {
-  padding: 0 40rpx 50rpx;
+  padding-top: 128rpx;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
-.approvalStudents .approvalCon .frame {
-    width: 100%;
-    height: 201rpx;
-    background: white;
-    opacity: 1;
-    border-radius: 16rpx;
-    margin-top: 32rpx;
-    padding: 0 32rpx;
+.approvalStudents .approvalCon .van-tabs__line {
+    background-color: #FFBC01 !important;
+}
+.approvalStudents .approvalCon .van-tab--active {
+    color: #FFBC01 !important;
+}
+.approvalStudents .approvalCon .frameBox {
+    padding: 0 40rpx;
     -webkit-box-sizing: border-box;
-    box-sizing: border-box;
+            box-sizing: border-box;
 }
-.approvalStudents .approvalCon .frame .frameLeft {
-      float: left;
+.approvalStudents .approvalCon .frameBox .frame {
+      width: 100%;
+      height: 248rpx;
+      background: white;
+      opacity: 1;
+      border-radius: 16rpx;
+      margin-top: 32rpx;
+      padding: 0 32rpx;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
 }
-.approvalStudents .approvalCon .frame .frameLeft .studentName {
-        font-size: 30rpx;
-        font-weight: bold;
-        color: #2e3548;
-        margin-top: 32rpx;
+.approvalStudents .approvalCon .frameBox .frame .frameLeft {
+        float: left;
 }
-.approvalStudents .approvalCon .frame .frameLeft .stuName {
-        font-size: 26rpx;
-        font-family: PingFang SC;
-        font-weight: 400;
-        color: #2e3548;
-        opacity: 1;
-        margin-top: 12rpx;
+.approvalStudents .approvalCon .frameBox .frame .frameLeft .studentName {
+          font-size: 30rpx;
+          font-weight: bold;
+          color: #2e3548;
+          margin-top: 32rpx;
+          margin-bottom: 4rpx;
 }
-.approvalStudents .approvalCon .frame .frameLeft .stuName .stuNames {
+.approvalStudents .approvalCon .frameBox .frame .frameLeft .stuName {
           font-size: 26rpx;
+          font-family: PingFang SC;
           font-weight: 400;
-          color: #979dab;
+          color: #2e3548;
+          opacity: 1;
+          margin-top: 12rpx;
+}
+.approvalStudents .approvalCon .frameBox .frame .frameLeft .stuName .stuNames {
+            font-size: 26rpx;
+            font-weight: 400;
+            color: #979dab;
+            opacity: 1;
+}
+.approvalStudents .approvalCon .frameBox .frame .frameRight {
+        float: right;
+        font-size: 30rpx;
+        font-family: PingFang SC;
+        font-weight: 500;
+        line-height: 52rpx;
+        text-align: center;
+        margin-top: 98rpx;
+}
+.approvalStudents .approvalCon .frameBox .frame .frameRight .adopt {
+          display: inline-block;
+          width: 112rpx;
+          height: 52rpx;
+          background: -webkit-gradient(linear, left top, right top, from(#fec91b), to(#ffbb00));
+          background: -o-linear-gradient(left, #fec91b 0%, #ffbb00 100%);
+          background: linear-gradient(90deg, #fec91b 0%, #ffbb00 100%);
+          -webkit-box-shadow: 0px 2rpx 12rpx rgba(255, 187, 0, 0.4);
+                  box-shadow: 0px 2rpx 12rpx rgba(255, 187, 0, 0.4);
+          opacity: 1;
+          border-radius: 40rpx;
+          color: white;
+}
+.approvalStudents .approvalCon .frameBox .frame .frameRight .noPassage {
+          display: inline-block;
+          width: 128rpx;
+          height: 52rpx;
+          background: white;
+          border: 2rpx solid #fe661c;
+          opacity: 1;
+          border-radius: 40rpx;
+          margin-left: 24rpx;
+          color: #FE661C;
+}
+.approvalStudents .approvalCon .frameBox .frame .frameRights {
+        float: right;
+}
+.approvalStudents .approvalCon .frameBox .frame .frameRights .statused {
+          font-size: 30rpx;
+          font-weight: 500;
+          line-height: 202rpx;
+          color: #c9c9c9;
           opacity: 1;
 }
-.approvalStudents .approvalCon .frame .frameRight {
-      float: right;
-      text-align: center;
-      font-weight: 500;
-      font-size: 30rpx;
-      line-height: 52rpx;
-      margin-top: 74rpx;
+.approvalStudents .approvalCon .allocatedListBox {
+    padding: 0 40rpx;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
 }
-.approvalStudents .approvalCon .frame .frameRight .adopt {
-        display: inline-block;
-        width: 112rpx;
+.approvalStudents .approvalCon .allocatedListBox .allocatedBox {
+      width: 100%;
+      height: 202rpx;
+      background: white;
+      opacity: 1;
+      border-radius: 16rpx;
+      margin-top: 32rpx;
+      padding: 0 32rpx;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+}
+.approvalStudents .approvalCon .allocatedListBox .allocatedBox .frameLeft {
+        float: left;
+}
+.approvalStudents .approvalCon .allocatedListBox .allocatedBox .frameLeft .studentName {
+          font-size: 30rpx;
+          font-weight: bold;
+          color: #2e3548;
+          margin-top: 32rpx;
+          margin-bottom: 4rpx;
+}
+.approvalStudents .approvalCon .allocatedListBox .allocatedBox .frameLeft .stuName {
+          font-size: 26rpx;
+          font-family: PingFang SC;
+          font-weight: 400;
+          color: #2e3548;
+          opacity: 1;
+          margin-top: 12rpx;
+}
+.approvalStudents .approvalCon .allocatedListBox .allocatedBox .frameLeft .stuName .stuNames {
+            font-size: 26rpx;
+            font-weight: 400;
+            color: #979dab;
+            opacity: 1;
+}
+.approvalStudents .approvalCon .allocatedListBox .allocatedBox .frameRight {
+        float: right;
+        text-align: center;
+        font-weight: 500;
+        font-size: 30rpx;
+        line-height: 52rpx;
+        margin-top: 98rpx;
+        color: #FFFFFF;
+        width: 144rpx;
         height: 52rpx;
         background: -webkit-gradient(linear, left top, right top, from(#fec91b), to(#ffbb00));
         background: -o-linear-gradient(left, #fec91b 0%, #ffbb00 100%);
         background: linear-gradient(90deg, #fec91b 0%, #ffbb00 100%);
-        -webkit-box-shadow: 0px 1px 6px rgba(255, 187, 0, 0.4);
-                box-shadow: 0px 1px 6px rgba(255, 187, 0, 0.4);
+        -webkit-box-shadow: 0px 2rpx 12rpx rgba(255, 187, 0, 0.4);
+                box-shadow: 0px 2rpx 12rpx rgba(255, 187, 0, 0.4);
         opacity: 1;
         border-radius: 40rpx;
-        color: white;
-}
-.approvalStudents .approvalCon .frame .frameRight .noPassage {
-        display: inline-block;
-        color: #FE661C;
-        width: 112rpx;
-        height: 52rpx;
-        background: white;
-        border: 2rpx solid #fe661c;
-        opacity: 1;
-        border-radius: 40rpx;
-        margin-left: 24rpx;
-}
-.approvalStudents .approvalCon .frame .frameRights {
-      float: right;
-}
-.approvalStudents .approvalCon .frame .frameRights .statused {
-        font-size: 30rpx;
-        font-weight: 500;
-        line-height: 202rpx;
-        color: #c9c9c9;
-        opacity: 1;
 }
 

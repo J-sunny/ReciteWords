@@ -1,5 +1,7 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		
+		
 		{
 			"path": "pages/view/home/index/index",
 			"style": {
@@ -40,7 +42,6 @@
 				}
 			}
 		},
-
 		{
 			"path": "pages/view/login/index",
 			"style": {
@@ -53,17 +54,39 @@
 		{
 			"path": "pages/view/mine/approvalStudents/index",
 			"style": {
-				"navigationBarTitleText": "审批学生"
+				"navigationBarTitleText": "审批学生",
+				"usingComponents": {
+				  "van-tab": "../../../wxcomponents/dist/tab/index",
+				  "van-tabs": "../../../wxcomponents/dist/tabs/index",
+				  "van-toast": "../../../wxcomponents/dist/toast/index",
+				  "van-picker": "../../../wxcomponents/dist/picker/index",
+				  "van-checkbox": "../../../wxcomponents/dist/checkbox/index",
+				  "van-checkbox-group": "../../../wxcomponents/dist/checkbox-group/index",
+				  "van-popup": "../../../wxcomponents/dist/popup/index"
+				}
 			}
 		},
-
 		{
 			"path": "pages/view/mine/classManagement/seeDetails",
 			"style": {
 				"navigationBarTitleText": "班级管理",
 				"usingComponents": {
 					"van-picker": "../../../wxcomponents/dist/picker/index",
-					"van-popup": "../../../wxcomponents/dist/popup/index"
+					"van-popup": "../../../wxcomponents/dist/popup/index",
+					"van-dialog": "../../../wxcomponents/dist/dialog/index",
+					"van-toast": "../../../wxcomponents/dist/toast/index"
+				}
+			}
+		},
+		{
+			"path": "pages/view/mine/classManagement/revisionClass",
+			"style": {
+				"navigationBarTitleText": "修改班级信息",
+				"usingComponents": {
+					"van-picker": "../../../wxcomponents/dist/picker/index",
+					"van-popup": "../../../wxcomponents/dist/popup/index",
+					"van-dialog": "../../../wxcomponents/dist/dialog/index",
+					"van-toast": "../../../wxcomponents/dist/toast/index"
 				}
 			}
 		},
@@ -73,6 +96,7 @@
 				"navigationBarTitleText": "班级管理"
 			}
 		},
+		
 		{
 			"path": "pages/view/home/arrangementTasks/checkSelected",
 			"style": {
@@ -84,8 +108,6 @@
 				}
 			}
 		},
-
-
 
 		{
 			"path": "pages/component/byLetter/index",
@@ -130,7 +152,11 @@
 		{
 			"path": "pages/view/home/details/operationalDetails",
 			"style": {
-				"navigationBarTitleText": "任务详情"
+				"navigationBarTitleText": "任务详情",
+				"usingComponents": {
+					"van-dialog": "../../../wxcomponents/dist/dialog/index",
+					"van-toast": "../../../wxcomponents/dist/toast/index"
+				}
 			}
 		},
 

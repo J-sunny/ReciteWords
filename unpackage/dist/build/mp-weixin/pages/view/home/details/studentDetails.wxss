@@ -176,6 +176,12 @@
 .stuDetailsBox .conBox .histogram .lookChange .mouth {
           margin-left: 56rpx;
 }
+.stuDetailsBox .conBox .histogram .lookChange .active {
+          font-size: 15px;
+          font-family: PingFang SC;
+          font-weight: 800;
+          color: #2e3548;
+}
 .stuDetailsBox .conBox .todayStudyBox {
       margin-top: 32rpx;
       color: #979DAB;
