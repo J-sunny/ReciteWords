@@ -1,6 +1,6 @@
 <template>
 	<view class="checkSelectBox" :class="shows==true?'tripList_root':''">
-		 <view class="status_bar"></view>
+		<view class="status_bar"></view>
 		<!-- 顶部 -->
 		<view class="tasksHeadBox">
 			<view class="tasksBoxHead">
@@ -13,7 +13,7 @@
 		<!-- 内容 -->
 		<view class="selectCon">
 			<!-- 选择班级 -->
-			<view class="selectClass"  @tap="showBox()">
+			<view class="selectClass" @tap="showBox()">
 				<label class="classText">选择班级</label>
 				<label class="selected">（已选<label class="yellowColor">{{selectedClassNum==''?'0':selectedClassNum}}</label>个）</label>
 				<label class="lookClass"></label>
@@ -27,17 +27,17 @@
 			<!-- 已选单词 -->
 			<view class="selectClass">
 				<label class="classText">选择单词</label>
-				<label class="selected">（已选<label class="yellowColor">4</label>个）</label>
+				<label class="selected">（已选<label class="yellowColor">{{lookSelectedList.length}}</label>个）</label>
 			</view>
 			<!-- 已选单词列表 -->
 			<view class="checkedWordList">
 				<van-checkbox-group :value="result" @change="onChanges()">
-					<view class="checkedBox" v-for="(item , index2) in 5" :key="index2">
+					<view class="checkedBox" v-for="item in lookSelectedList" :key="item.wordId">
 						<view class="box" :style="{height:'160rpx',padding:'40rpx 24rpx' ,'border-radius':'16rpx','margin-top':'32rpx',background:'#fff','box-sizing': 'border-box'}">
-							<van-checkbox class="vanCheckBox" :name="item" checked-color="#FFBB00">
+							<van-checkbox class="vanCheckBox" :name="item.wordId" checked-color="#FFBB00">
 								<view class="words">
-									<view for="" class="word">{{item}}</view>
-									<view for="" class="Interpretation">n.同谋，从犯；附件</view>
+									<view for="" class="word">{{item.wordSpell}}</view>
+									<view for="" class="Interpretation">{{item.interpretation}}</view>
 								</view>
 							</van-checkbox>
 						</view>
@@ -50,8 +50,8 @@
 		<!-- 底部 发布-->
 		<view class="allCheck">
 			<label class="goBack" @tap="goBack()">返回</label>
-			<label v-if="fabu==true" class="lookCheck">发布（共4个）</label>
-			<label v-if="fabu==false" class="lookCheck" @click="confirmClass()">确认（共4个）</label>
+			<label v-if="fabu==true" class="lookCheck" @click="publish()">发布（共{{result.length}}个）</label>
+			<label v-if="fabu==false" class="lookCheck" @click="confirmClass()">确认（共{{results.length}}个）</label>
 		</view>
 
 		<!-- 弹框 -->
@@ -66,11 +66,13 @@
 				</scroll-view>
 			</van-popup>
 		</view>
+		<van-toast id="van-toast" />
 	</view>
 </template>
 
 <script>
-	import popupLayer from '../../../../components/popup-layer.vue'
+	import popupLayer from '@/components/popup-layer.vue'
+	import Toast from '@/wxcomponents/dist/toast/toast';
 	export default {
 		data() {
 			return {
@@ -79,9 +81,13 @@
 				fabu: true,
 				result: [],
 				results: [],
+				classId: [],
+				wordId: [],
 				classArr: [],
 				selectedClassList: [],
-				selectedClassNum: ''
+				lookSelectedList: [],
+				selectedClassNum: '',
+				taskDate:''
 			}
 		},
 		components: {
@@ -104,10 +110,15 @@
 				console.log(event)
 				this.results = event.detail
 				console.log(this.results)
+				this.classId = []
+				this.results.forEach(data => {
+					this.classId.push(parseInt(data))
+				})
+				console.log(this.classId)
 			},
 			// 确认选择班级
 			confirmClass() {
-				this.selectedClassList=[]
+				this.selectedClassList = []
 				this.results.forEach(data => {
 					this.classArr.forEach(val => {
 						if (data == val.classId) {
@@ -132,25 +143,73 @@
 			},
 			// 获取班级下拉列表
 			classList() {
-				this.$minApi.classList({
+				this.$minApi.getClassList({
 					schoolId: 1
 				}).then(data => {
 					this.classArr = data.data
 					console.log(data)
 				})
+			},
+			// 教师发布任务
+			publish() {
+				if (this.classId.length == 0) {
+					Toast("请选择班级！")
+					return false
+				}
+
+				console.log(this.classId)
+				this.$minApi.publish({
+					classId: this.classId.toString(),
+					taskDate: this.taskDate,
+					wordId: this.wordId.toString()
+				}).then(data => {
+					console.log(data)
+					if (data.code == 200) {
+						uni.switchTab({
+							url: "../index/index"
+						})
+						Toast("任务布置成功！")
+					} else {
+						Toast(data.msg)
+					}
+				})
 			}
 		},
 		created() {
 			this.classList()
+			uni.getStorage({
+				key: 'selectedWords',
+				success: (data) => {
+					// console.log(data)
+					this.lookSelectedList = data.data
+					console.log(this.lookSelectedList)
+					data.data.forEach(val => {
+						this.result.push(val.wordId.toString())
+						this.wordId.push(val.wordId)
+					})
+					console.log(this.result)
+				}
+			});
+			uni.getStorage({
+				key: 'taskDate',
+				success: (data) => {
+					this.taskDate=data.data
+					console.log(data)
+				}
+			});
+		},
+		onLoad() {
+
 		}
 	}
 </script>
 
 <style lang="scss">
-	 .status_bar {
-	      height: var(--status-bar-height);
-	      width: 100%;
-	  }
+	.status_bar {
+		height: var(--status-bar-height);
+		width: 100%;
+	}
+
 	.tripList_root {
 		top: 0px;
 		left: 0px;

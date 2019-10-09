@@ -52,15 +52,15 @@
 				</van-tab>
 				<van-tab title="待分配">
 					<view class="allocatedListBox">
-						<view class="allocatedBox">
+						<view class="allocatedBox" v-for="item in pendingLists" :key="item.studentId">
 							<!-- 左边 -->
 							<view class="frameLeft">
-								<view class="studentName">{{index}}张建科</view>
-								<view class="stuName">年级：<label class="stuNames">2018级</label></view>
-								<view class="stuName">学号：<label class="stuNames">20181227</label></view>
+								<view class="studentName">{{item.studentName}}</view>
+								<view class="stuName">年级：<label class="stuNames">{{item.studentGrade}}级</label></view>
+								<view class="stuName">学号：<label class="stuNames">{{item.studentNum}}</label></view>
 							</view>
 							<!-- 按钮 -->
-							<view class="frameRight" @click="changeRanking()">
+							<view class="frameRight" @click="changeRanking(item.studentId)">
 								分配班级
 							</view>
 						</view>
@@ -77,7 +77,7 @@
 
 		<!-- 选择班级  弹出框 -->
 		<van-popup :show="show" position="bottom" style="height: 356rpx">
-			<van-picker show-toolbar title="选择班级" :columns="columns" @cancel="onCancel()" @confirm="onConfirm()" />
+			<van-picker show-toolbar title="选择班级" :columns="classLists" @cancel="onCancel()" @confirm="onConfirm()" />
 		</van-popup>
 
 	</view>
@@ -92,7 +92,8 @@
 				pendingLists: [],
 				active: 0,
 				show: false,
-				columns: ['一班', '二班', '三班'],
+				studentId: "",
+				classLists: []
 			}
 		},
 		methods: {
@@ -109,7 +110,7 @@
 			pendingList() {
 				this.$minApi.pendingList({}).then(data => {
 					this.pendingLists = data.data
-					console.log(this.pendingLists[0].studentAccount)
+					// console.log(this.pendingLists[0].studentAccount)
 				})
 			},
 			// 选中mtab
@@ -125,28 +126,57 @@
 				Toast("不通过")
 			},
 			// 未分配
+
+			// 显示选择班级弹框
+			changeRanking(studentId) {
+				this.show = true;
+				this.studentId = studentId
+			},
 			// picker选择器
+
+			// 确认班级
 			onConfirm(event) {
 				const {
 					picker,
 					value,
 					index
 				} = event.detail;
-				console.log((`当前值：${value}, 当前索引：${index}`));
+				var classId = value.classId;
+				var text = value.text;
+				// console.log('当前值' + text + '当前索引' + keyId);
 				this.show = false;
-				Toast("加入班级成功！")
+				this.$minApi.assignStudent({
+					classId: classId,
+					studentId: this.studentId
+				}).then(data => {
+					if (data.code == 200) {
+						Toast("加入班级成功！")
+					} else {
+						Toast(data.msg)
+					}
+					// console.log(data)
+				})
 			},
+			// 取消按钮
 			onCancel() {
 				this.show = false;
 			},
-			// 显示选择班级弹框
-			changeRanking() {
-				this.show = true;
-			},
+			// 获取班级下拉列表
+			classList() {
+				this.$minApi.getClassList({
+					schoolId: 1
+				}).then(data => {
+					data.data.forEach(val => {
+						val.text = val.className
+					})
+					this.classLists = data.data
+				})
+			}
 
 		},
 		created() {
 			this.pendingList()
+			this.classList()
 		}
 
 	}
@@ -320,12 +350,12 @@
 
 						.noPassage {
 							display: inline-block;
-							width:128rpx;
-							height:52rpx;
-							background:rgba(255,255,255,1);
-							border:2rpx solid rgba(254,102,28,1);
-							opacity:1;
-							border-radius:40rpx;
+							width: 128rpx;
+							height: 52rpx;
+							background: rgba(255, 255, 255, 1);
+							border: 2rpx solid rgba(254, 102, 28, 1);
+							opacity: 1;
+							border-radius: 40rpx;
 							margin-left: 24rpx;
 							color: #FE661C;
 						}

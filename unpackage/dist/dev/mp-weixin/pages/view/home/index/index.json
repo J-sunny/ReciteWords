@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "学英语",
   "usingComponents": {
+    "van-toast": "../../../wxcomponents/dist/toast/index",
     "uni-calendar": "/components/uni-calendar/uni-calendar"
   }
 }

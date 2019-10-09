@@ -163,13 +163,14 @@ __webpack_require__.r(__webpack_exports__);
     return {
       list: ['a', 'b', 'c'],
       result: [],
-
       index: "",
       scrollTop: 0,
       disArray: [0],
       activeIndex: 0,
       fadeFlag: false,
-      Timer: null };
+      Timer: null,
+      arr: [],
+      b: [] };
 
   },
   props: {
@@ -336,12 +337,47 @@ __webpack_require__.r(__webpack_exports__);
     chooseItem: function chooseItem(item) {
       this.$emit('chooseItem', item);
     },
-
-
-    onChange: function onChange(event) {
+    onChange: function onChange(event) {var _this3 = this;
       this.result = event.detail;
       console.log(this.result);
-    } } };exports.default = _default2;
+      console.log(this.listData);
+      // 保存到storage里面
+      this.result.forEach(function (data) {
+        _this3.listData.forEach(function (val) {
+          val.list.forEach(function (nVal) {
+            if (data == nVal.wordId) {
+              _this3.arr.push(nVal);
+            }
+          });
+        });
+      });
+      console.log(this.arr);
+
+      this.arr.forEach(function (i) {
+        if (_this3.b.indexOf(i) === -1) {
+          _this3.b.push(i);
+        }
+      });
+      console.log(this.b);
+      uni.setStorage({
+        key: 'selectedWords',
+        data: this.b });
+
+    } },
+
+
+  created: function created() {var _this4 = this;
+    uni.getStorage({
+      key: 'selectedWords',
+      success: function success(data) {
+        console.log(data);
+        data.data.forEach(function (val) {
+          _this4.result.push(val.wordId.toString());
+        });
+        console.log(_this4.result);
+      } });
+
+  } };exports.default = _default2;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

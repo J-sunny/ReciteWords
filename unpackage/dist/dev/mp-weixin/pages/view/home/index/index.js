@@ -117,7 +117,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var uniCalendar = function uniCalendar() {return Promise.all(/*! import() | components/uni-calendar/uni-calendar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-calendar/uni-calendar")]).then(__webpack_require__.bind(null, /*! ../../../../components/uni-calendar/uni-calendar */ 156));};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
 
@@ -163,6 +163,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+var _toast = _interopRequireDefault(__webpack_require__(/*! @/wxcomponents/dist/toast/toast */ 14));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var uniCalendar = function uniCalendar() {return Promise.all(/*! import() | components/uni-calendar/uni-calendar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-calendar/uni-calendar")]).then(__webpack_require__.bind(null, /*! ../../../../components/uni-calendar/uni-calendar */ 156));};var _default =
 {
   components: {
     uniCalendar: uniCalendar },
@@ -201,13 +203,17 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     // 日历
     change: function change(e) {
-      // console.log(e)
+      console.log(e);
       this.year = e.year;
       this.month = e.month;
       this.day = e.date;
       // this.taskCalendar()
       this.falg = e.fulldate;
       this.getDayOfMissionList();
+      uni.setStorage({
+        key: 'taskDate',
+        data: e.fulldate });
+
     },
     // 获取任务日历数据
     taskCalendar: function taskCalendar() {var _this = this;

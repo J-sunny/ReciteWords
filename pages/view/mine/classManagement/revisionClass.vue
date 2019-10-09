@@ -14,7 +14,7 @@
 			<!-- 班级名称 -->
 			<view class="classNameBox">
 				<label class="className">班级名称</label>
-				<input class="classNameInput" type="text" value="44444">
+				<input class="classNameInput" type="text" :value="className">
 			</view>
 			<!-- 年级 -->
 			<view class="gradeBox" @click="changeRanking()">
@@ -29,17 +29,17 @@
 				<view class="title">班级学生</view>
 				<view class="studentListBox">
 
-					<view class="studentBox" v-for="item in 10" :key="item">
+					<view class="studentBox" v-for="item in classLists[0].studentInfo" :key="item.studentId">
 						<!-- 左边 -->
 						<view class="studentleft">
-							<view class="studentName">张江虎</view>
+							<view class="studentName">{{item.studentName}}</view>
 							<view class="studentInfo">
-								<label class="grade">年级：<label class="gradeNum">2018级</label></label>
-								<label class="grade">学号：<label class="gradeNum">20181227</label></label>
+								<label class="grade">年级：<label class="gradeNum">{{item.studentGrade}}级</label></label>
+								<label class="grade">学号：<label class="gradeNum">{{item.studentNum}}</label></label>
 							</view>
 						</view>
 						<!-- 删除学生 -->
-						<view class="delectStudent" @click="delectStudent()">删除学生</view>
+						<view class="delectStudent" @click="delectStudent(item.studentId,item.studentName)">删除学生</view>
 					</view>
 				</view>
 			</view>
@@ -60,8 +60,9 @@
 		<!-- 删除学生弹框 -->
 		<van-dialog confirm-button-color="#FFBB00 " cancel-button-color="#CCCCCC" use-slot :show="showDelect"
 		 show-cancel-button @confirm="onConfirmDel()" @cancel="onCancelDel()">
-			<view class="dialogText">是否确定将﻿张建科移出该班级？</view>
+			<view class="dialogText">是否确定将﻿{{delectedName}}移出该班级？</view>
 		</van-dialog>
+		<van-toast id="van-toast" />
 	</view>
 </template>
 
@@ -73,8 +74,12 @@
 			return {
 				show: false,
 				showDelect: false,
-				gradeName: "2014",
+				gradeName: "",
+				className: "",
 				columns: ['2014', '2015', '2016', '2017', '2018', '2019'],
+				classLists: [],
+				delectedId: "",
+				delectedName: ""
 			}
 		},
 		methods: {
@@ -103,25 +108,51 @@
 				this.show = true;
 			},
 			// 删除学生
-			delectStudent() {
+			delectStudent(delectedId, delectedName) {
 				this.showDelect = true
 				console.log(this.showDelect)
+				this.delectedId = delectedId
+				this.delectedName = delectedName
 			},
 			// 删除学生弹框取消按钮
 			onConfirmDel() {
-				console.log("确认")
-				Toast("删除成功")
+				// console.log("确认")
+				console.log(this.delectedId)
 				this.showDelect = false
 				console.log(this.showDelect)
+				this.$minApi.studentDelete({
+					studentId: this.delectedId
+				}).then(data => {
+					if (data.code == 200) {
+						Toast("删除成功")
+					} else {
+						Toast(data.msg)
+					}
+				})
 			},
 			onCancelDel() {
 				console.log("取消")
 				this.showDelect = false
 				console.log(this.showDelect)
 			},
+			// 获取班级学生信息
+			classList() {
+				this.$minApi.classList({}).then(data => {
+					this.classLists = data.data
+					this.gradeName = data.data[0].classYear
+					this.className = data.data[0].className
+				})
+			},
+			// 修改班级信息
+			classSave() {
+				this.$minApi.classSave({}).then(data => {
+
+				})
+			}
 		},
 		created() {
 			console.log(111)
+			this.classList()
 		}
 	}
 </script>

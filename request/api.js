@@ -51,7 +51,7 @@ export default {
 		},
 		// 登录
 		loginByAccount(data) {
-			return minRequest.get('/loginByAccount', data)
+			return minRequest.post('/loginByAccount', data)
 		},
 		// 退出登录
 		loginOut(data) {
@@ -78,7 +78,7 @@ export default {
 			return minRequest.get('/schoolList', data)
 		},
 		// 获取班级下拉列表
-		classList(data) {
+		getClassList(data) {
 			return minRequest.get('/classList', data)
 		},
 		// 获取所有单词列表
@@ -105,6 +105,31 @@ export default {
 		pendingList(data) {
 			return minRequest.get('/teacher/manager/pendingList', data)
 		},
+		// 删除班级
+		classDelete(data) {
+			return minRequest.post('/teacher/manager/classDelete', data)
+		},
+		// 修改班级信息
+		classSave(data) {
+			return minRequest.post('/teacher/manager/classSave', data)
+		},
+		// 删除学生
+		studentDelete(data) {
+			return minRequest.post('/teacher/manager/studentDelete', data)
+		},
+		// 分配学生
+		assignStudent(data) {
+			return minRequest.post('/teacher/manager/assignStudent', data)
+		},
+		// 通过课程章节获取单词列表
+		wordListByChapter(data) {
+			return minRequest.get('/teacher/word/wordListByChapter', data)
+		},
+		// 教师发布任务
+		publish(data) {
+			return minRequest.post('/teacher/task/publish', data)
+		}
+		
 
 	}
 }

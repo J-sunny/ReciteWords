@@ -1,6 +1,8 @@
 {
   "navigationBarTitleText": "布置任务",
   "usingComponents": {
+    "van-checkbox": "../../../wxcomponents/dist/checkbox/index",
+    "van-checkbox-group": "../../../wxcomponents/dist/checkbox-group/index",
     "by-course": "/pages/component/byCourse/index",
     "bu-letter": "/pages/component/byLetter/index"
   }

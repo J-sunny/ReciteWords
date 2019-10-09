@@ -1690,9 +1690,9 @@ Dialog;exports.default = _default;
 /***/ }),
 
 /***/ 105:
-/*!**************************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/main.js?{"page":"pages%2Fview%2Fmine%2FclassManagement%2Findex"} ***!
-  \**************************************************************************************************************************/
+/*!**********************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/main.js?{"page":"pages%2Fview%2Fmine%2FclassManagement%2FrevisionClass"} ***!
+  \**********************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1700,8 +1700,8 @@ Dialog;exports.default = _default;
 /* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
 
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
-var _index = _interopRequireDefault(__webpack_require__(/*! ./pages/view/mine/classManagement/index.vue */ 106));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-createPage(_index.default);
+var _revisionClass = _interopRequireDefault(__webpack_require__(/*! ./pages/view/mine/classManagement/revisionClass.vue */ 106));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_revisionClass.default);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
 
 /***/ }),
@@ -1718,9 +1718,9 @@ createPage(_index.default);
 /***/ }),
 
 /***/ 113:
-/*!**********************************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/main.js?{"page":"pages%2Fview%2Fmine%2FclassManagement%2FrevisionClass"} ***!
-  \**********************************************************************************************************************************/
+/*!**************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/ReciteWordsTeacher/main.js?{"page":"pages%2Fview%2Fmine%2FclassManagement%2Findex"} ***!
+  \**************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1728,8 +1728,8 @@ createPage(_index.default);
 /* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
 
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
-var _revisionClass = _interopRequireDefault(__webpack_require__(/*! ./pages/view/mine/classManagement/revisionClass.vue */ 114));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-createPage(_revisionClass.default);
+var _index = _interopRequireDefault(__webpack_require__(/*! ./pages/view/mine/classManagement/index.vue */ 114));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_index.default);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
 
 /***/ }),
@@ -1948,7 +1948,7 @@ minRequest.setConfig(function (config) {
     },
     // 登录
     loginByAccount: function loginByAccount(data) {
-      return minRequest.get('/loginByAccount', data);
+      return minRequest.post('/loginByAccount', data);
     },
     // 退出登录
     loginOut: function loginOut(data) {
@@ -1973,7 +1973,7 @@ minRequest.setConfig(function (config) {
 
   data) {
     return minRequest.get('/schoolList', data);
-  }), _defineProperty(_apis, "classList", function classList(
+  }), _defineProperty(_apis, "getClassList", function getClassList(
 
   data) {
     return minRequest.get('/classList', data);
@@ -2001,6 +2001,30 @@ minRequest.setConfig(function (config) {
 
   data) {
     return minRequest.get('/teacher/manager/pendingList', data);
+  }), _defineProperty(_apis, "classDelete", function classDelete(
+
+  data) {
+    return minRequest.post('/teacher/manager/classDelete', data);
+  }), _defineProperty(_apis, "classSave", function classSave(
+
+  data) {
+    return minRequest.post('/teacher/manager/classSave', data);
+  }), _defineProperty(_apis, "studentDelete", function studentDelete(
+
+  data) {
+    return minRequest.post('/teacher/manager/studentDelete', data);
+  }), _defineProperty(_apis, "assignStudent", function assignStudent(
+
+  data) {
+    return minRequest.post('/teacher/manager/assignStudent', data);
+  }), _defineProperty(_apis, "wordListByChapter", function wordListByChapter(
+
+  data) {
+    return minRequest.get('/teacher/word/wordListByChapter', data);
+  }), _defineProperty(_apis, "publish", function publish(
+
+  data) {
+    return minRequest.post('/teacher/task/publish', data);
   }), _apis) };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

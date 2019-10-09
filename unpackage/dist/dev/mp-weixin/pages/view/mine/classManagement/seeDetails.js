@@ -141,12 +141,21 @@ var _default = { data: function data() {return { show: false, showDelect: false,
     changeRanking: function changeRanking() {console.log(222);this.show = true;}, // 根据当前用户获取班级列表
     classList: function classList() {var _this = this;this.$minApi.classList({}).then(function (data) {_this.classLists = data.data[0];_this.className = data.data[0].className;console.log(data);});}, // 查看详情
     viewDetails: function viewDetails(studentId) {uni.navigateTo({ url: '../../home/details/studentDetails?studentId=' + studentId });}, // 删除班级
-    delectClass: function delectClass() {this.showDelect = true;console.log(this.showDelect);}, // 删除班级弹框取消按钮
-    onConfirmDel: function onConfirmDel() {console.log("确认");(0, _toast.default)("删除成功");this.showDelect = false;console.log(this.showDelect);},
+    delectClass: function delectClass() {this.showDelect = true;console.log(this.showDelect);}, // 删除班级弹框确认按钮
+    onConfirmDel: function onConfirmDel() {console.log("确认");this.showDelect = false; // console.log(this.showDelect)
+      // 删除班级
+      this.$minApi.classDelete({}).then(function (data) {if (data.code == 200) {(0, _toast.default)("删除成功");
+        } else {
+          (0, _toast.default)(data.msg);
+        }
+        console.log(data);
+      });
+    },
+    // 删除班级弹框取消按钮
     onCancelDel: function onCancelDel() {
       console.log("取消");
       this.showDelect = false;
-      console.log(this.showDelect);
+      // console.log(this.showDelect)
     },
     // 修改班级信息页面跳转
     linkTo: function linkTo() {
@@ -158,6 +167,9 @@ var _default = { data: function data() {return { show: false, showDelect: false,
 
   created: function created() {
     this.classList();
+  },
+  onLoad: function onLoad(options) {
+    console.log(options);
   } };
 
 

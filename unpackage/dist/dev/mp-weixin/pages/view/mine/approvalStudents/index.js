@@ -276,15 +276,21 @@ var _toast = _interopRequireDefault(__webpack_require__(/*! @/wxcomponents/dist/
 //
 //
 //
-var _default = { data: function data() {return { showPass: 'unapproval', pendingLists: [], active: 0, show: false, columns: ['一班', '二班', '三班'] };}, methods: { goBack: function goBack() {uni.navigateBack({ delta: 1 });}, // 切换审批状态
+var _default = { data: function data() {return { showPass: 'unapproval', pendingLists: [], active: 0, show: false, studentId: "", classLists: [] };}, methods: { goBack: function goBack() {uni.navigateBack({ delta: 1 });}, // 切换审批状态
     change: function change(val) {this.showPass = val;}, // 获取待分配的学生列表
-    pendingList: function pendingList() {var _this = this;this.$minApi.pendingList({}).then(function (data) {_this.pendingLists = data.data;console.log(_this.pendingLists[0].studentAccount);});}, // 选中mtab
+    pendingList: function pendingList() {var _this = this;this.$minApi.pendingList({}).then(function (data) {_this.pendingLists = data.data; // console.log(this.pendingLists[0].studentAccount)
+      });}, // 选中mtab
     onChange: function onChange(event) {console.log(event);}, // 通过
     adopt: function adopt() {(0, _toast.default)("通过");}, // 不通过
     notPass: function notPass() {(0, _toast.default)("不通过");}, // 未分配
-    // picker选择器
-    onConfirm: function onConfirm(event) {var _event$detail = event.detail,picker = _event$detail.picker,value = _event$detail.value,index = _event$detail.index;console.log("\u5F53\u524D\u503C\uFF1A".concat(value, ", \u5F53\u524D\u7D22\u5F15\uFF1A").concat(index));this.show = false;(0, _toast.default)("加入班级成功！");}, onCancel: function onCancel() {this.show = false;}, // 显示选择班级弹框
-    changeRanking: function changeRanking() {this.show = true;} }, created: function created() {this.pendingList();} };exports.default = _default;
+    // 显示选择班级弹框
+    changeRanking: function changeRanking(studentId) {this.show = true;this.studentId = studentId;}, // picker选择器
+    // 确认班级
+    onConfirm: function onConfirm(event) {var _event$detail = event.detail,picker = _event$detail.picker,value = _event$detail.value,index = _event$detail.index;var classId = value.classId;var text = value.text; // console.log('当前值' + text + '当前索引' + keyId);
+      this.show = false;this.$minApi.assignStudent({ classId: classId, studentId: this.studentId }).then(function (data) {if (data.code == 200) {(0, _toast.default)("加入班级成功！");} else {(0, _toast.default)(data.msg);} // console.log(data)
+      });}, // 取消按钮
+    onCancel: function onCancel() {this.show = false;}, // 获取班级下拉列表
+    classList: function classList() {var _this2 = this;this.$minApi.getClassList({ schoolId: 1 }).then(function (data) {data.data.forEach(function (val) {val.text = val.className;});_this2.classLists = data.data;});} }, created: function created() {this.pendingList();this.classList();} };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

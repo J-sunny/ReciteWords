@@ -105,7 +105,10 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _data$watch$component;function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var uniIcon = function uniIcon() {return __webpack_require__.e(/*! import() | node-modules/@dcloudio/uni-ui/lib/uni-icon/uni-icon */ "node-modules/@dcloudio/uni-ui/lib/uni-icon/uni-icon").then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-icon/uni-icon.vue */ 164));};var _default = (_data$watch$component = {
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _data$watch$component;function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}var uniIcon = function uniIcon() {return __webpack_require__.e(/*! import() | node-modules/@dcloudio/uni-ui/lib/uni-icon/uni-icon */ "node-modules/@dcloudio/uni-ui/lib/uni-icon/uni-icon").then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-icon/uni-icon.vue */ 164));};var _default = (_data$watch$component = {
+
+
+
 
 
 
@@ -198,9 +201,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
   data: function data() {
     return {
-      title1: '全部',
-      title2: '全部',
-      title3: '全部',
+      title1: '暂无数据',
+      title2: '暂无数据',
+      title3: '暂无数据',
       active1: 1,
       active2: 1,
       active3: 1,
@@ -211,80 +214,85 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       checkAll: false,
       lookSelects: false,
       wordCount: 0,
-      list: [{
-        courseTitle: '四级词汇核心词汇',
-        chapter: 'chapter 1-Lesson 2',
-        wordList: [{
-          'word': 'accessory',
-          'wordId': 1,
-          'Interpretation': 'n.同谋，从犯；附件' },
-
-        {
-          'word': 'accidental',
-          'wordId': 2,
-          'Interpretation': 'a.偶然的；非本质的' },
-
-        {
-          'word': 'accommodate',
-          'wordId': 3,
-          'Interpretation': 'vt.容纳；供应，供给' },
-
-        {
-          'word': 'accordance',
-          'wordId': 4,
-          'Interpretation': 'n.一致；和谐；授予' },
-
-        {
-          'word': 'accordingly',
-          'wordId': 5,
-          'Interpretation': 'ad.因此，所以；照着' }] },
-
-
-
-
-      {
-        courseTitle: '六级核心词汇',
-        chapter: 'chapter 5-Lesson 13',
-        wordList: [{
-          'word': 'bacon',
-          'wordId': 6,
-          'Interpretation': 'n.实例，情况，建议；vt.举...为例' },
-
-        {
-          'word': 'ability',
-          'wordId': 7,
-          'Interpretation': 'vt.容纳；供应，供给' },
-
-        {
-          'word': 'involve',
-          'wordId': 8,
-          'Interpretation': 'a.偶然的；非本质的' },
-
-        {
-          'word': 'jail',
-          'wordId': 9,
-          'Interpretation': 'ad.因此，所以；照着' },
-
-        {
-          'word': 'aboard',
-          'wordId': 10,
-          'Interpretation': 'n.一致；和谐；授予' }] }],
-
-
-
-
-
+      // 				list: [{
+      // 						courseTitle: '四级词汇核心词汇',
+      // 						chapter: 'chapter 1-Lesson 2',
+      // 						wordList: [{
+      // 								'word': 'accessory',
+      // 								'wordId': 1,
+      // 								'Interpretation': 'n.同谋，从犯；附件'
+      // 							},
+      // 							{
+      // 								'word': 'accidental',
+      // 								'wordId': 2,
+      // 								'Interpretation': 'a.偶然的；非本质的'
+      // 							},
+      // 							{
+      // 								'word': 'accommodate',
+      // 								'wordId': 3,
+      // 								'Interpretation': 'vt.容纳；供应，供给'
+      // 							},
+      // 							{
+      // 								'word': 'accordance',
+      // 								'wordId': 4,
+      // 								'Interpretation': 'n.一致；和谐；授予'
+      // 							},
+      // 							{
+      // 								'word': 'accordingly',
+      // 								'wordId': 5,
+      // 								'Interpretation': 'ad.因此，所以；照着'
+      // 							},
+      // 
+      // 						]
+      // 					},
+      // 					{
+      // 						courseTitle: '六级核心词汇',
+      // 						chapter: 'chapter 5-Lesson 13',
+      // 						wordList: [{
+      // 								'word': 'bacon',
+      // 								'wordId': 6,
+      // 								'Interpretation': 'n.实例，情况，建议；vt.举...为例'
+      // 							},
+      // 							{
+      // 								'word': 'ability',
+      // 								'wordId': 7,
+      // 								'Interpretation': 'vt.容纳；供应，供给'
+      // 							},
+      // 							{
+      // 								'word': 'involve',
+      // 								'wordId': 8,
+      // 								'Interpretation': 'a.偶然的；非本质的'
+      // 							},
+      // 							{
+      // 								'word': 'jail',
+      // 								'wordId': 9,
+      // 								'Interpretation': 'ad.因此，所以；照着'
+      // 							},
+      // 							{
+      // 								'word': 'aboard',
+      // 								'wordId': 10,
+      // 								'Interpretation': 'n.一致；和谐；授予'
+      // 							},
+      // 
+      // 						]
+      // 					}
+      // 				],
+      // 				
+      list: [],
       result: [],
       thesaurusLists: [],
       chapterLists: [],
-      lessonLists: [] };
+      lessonLists: [],
+      arr: [],
+      b: [],
+      qArr: [] };
 
 
   },
   watch: {
     result: function result() {
 
-      console.log(this.checkAll);
+      // console.log(this.checkAll)
     } },
 
   components: {
@@ -292,10 +300,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 {
   title1: function title1() {
-    console.log(this.title1);
+    // console.log(this.title1)
     this.chapterList(this.title1);
-    this.title2 = "全部";
-    this.title3 = "全部";
+    this.title2 = "暂无数据";
+    this.title3 = "暂无数据";
+    this.chapterLists = [],
+    this.lessonLists = [],
+    this.list = [];
   },
   title2: function title2() {
     this.lessonList(this.title1, this.title2);
@@ -305,22 +316,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   actives1: function actives1() {
     if (this.show == true && (this.show2 == true || this.show3 == true)) {
       this.show = this.show;
-      console.log(1);
+      // console.log(1)
     } else if (this.show == true && this.show1 == false) {
       this.show = false;
-      console.log(2);
+      // console.log(2)
     } else {
       this.show = !this.show;
-      console.log(3);
+      // console.log(3)
     }
-    console.log(this.show);
+    // console.log(this.show)
     this.active1 = !this.active1;
     this.show1 = !this.show1;
     this.show2 = false;
     this.show3 = false;
     this.active2 = false;
     this.active3 = false;
-    console.log(this.active1, 'active1');
+    // console.log(this.active1, 'active1')
   },
   actives2: function actives2() {
     if (this.show == true && (this.show1 == true || this.show3 == true)) {
@@ -335,7 +346,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     this.show3 = false;
     this.active1 = false;
     this.active3 = false;
-    console.log(this.active2, 'active2');
+    // console.log(this.active2, 'active2')
   },
   actives3: function actives3() {
     if (this.show == true && (this.show1 == true || this.show2 == true)) {
@@ -350,28 +361,36 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     this.active1 = false;
     this.active3 = !this.active3;
     this.show3 = !this.show3;
-    console.log(this.active3);
+    // console.log(this.active3)
   },
   optionsActive1: function optionsActive1(val) {
     this.title1 = val;
-    console.log(this.title1, this.thesaurusId1);
+    // console.log(this.title1, this.thesaurusId1)
     this.show = !this.show;
     this.show1 = false;
     this.active1 = !this.active1;
   },
   optionsActive2: function optionsActive2(val) {
     this.title2 = val;
-    console.log(val);
+    // console.log(val)
     this.show = !this.show;
     this.show2 = false;
     this.active2 = !this.active2;
   },
   optionsActive3: function optionsActive3(val) {
     this.title3 = val;
-    console.log(val);
+    // console.log(val)
     this.show = !this.show;
     this.show3 = false;
     this.active3 = !this.active3;
+
+
+    // console.log(999)
+    // console.log(this.title1)
+    // console.log(this.title2)
+    // console.log(this.title3)
+    this.wordListByChapter();
+
   },
   // 全选
   onChange: function onChange(event) {var _this = this;
@@ -379,59 +398,128 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       this.result = [];
     }
     if (event.detail == true) {
+      this.result = [];
       this.list.forEach(function (data) {
-        console.log(data);
-        data.wordList.forEach(function (val) {
-          _this.result.push(val.wordId.toString());
-        });
+        // console.log(data)						
+        _this.result.push(data.wordId.toString());
       });
-      this.wordCount = this.result.length;
+
+      // 保存到storage里面
+      uni.setStorage({
+        key: 'selectedWords',
+        data: this.list });
+
+
     }
     console.log(this.result);
+    this.wordCount = this.result.length;
     this.checkAll = event.detail;
     this.lookSelects = event.detail;
   },
-  onChanges: function onChanges(event) {
+
+  onChanges: function onChanges(event) {var _this2 = this;
+    console.log(this.qArr);
     this.result = event.detail;
     console.log(this.result);
     if (this.result.length == 0) {
       this.lookSelects = false;
     } else {
       this.lookSelects = true;
-      this.wordCount = this.result.length;
+      this.result.forEach(function (data) {
+        _this2.list.forEach(function (val) {
+          if (data == val.wordId) {
+            _this2.arr.push(val);
+          }
+        });
+      });
+      console.log(this.arr);
+
+      // this.arr.forEach(i => {
+      // 	if (this.b.indexOf(i) == -1) {
+      // 		this.b.push(i)
+      // 	}
+      // })
+      // 去除重复
+      this.b = _toConsumableArray(new Set(this.arr));
+      this.qArr = this.b;
+
+      console.log(this.b);
+      console.log(this.qArr);
     }
+    // console.log(this.arr)
+    // 保存到storage里面
+    uni.setStorage({
+      key: 'selectedWords',
+      data: this.b });
+
+    this.wordCount = this.result.length;
   },
   // 获取课程下拉列表
-  thesaurusList: function thesaurusList() {var _this2 = this;
+  thesaurusList: function thesaurusList() {var _this3 = this;
     this.$minApi.thesaurusList({}).then(function (data) {
-      console.log(data);
-      _this2.thesaurusLists = data.data;
+      // console.log(data)
+      _this3.thesaurusLists = data.data;
+      _this3.title1 = data.data[0].thesaurusName;
     });
+    console.log(this.title1);
+    // this.chapterList(this.title1)
   },
   // 获取章下拉列表
-  chapterList: function chapterList(thesauruName) {var _this3 = this;
+  chapterList: function chapterList(thesauruName) {var _this4 = this;
     this.$minApi.chapterList({
       thesauruName: thesauruName }).
     then(function (data) {
       console.log(data);
-      _this3.chapterLists = data.data;
+      _this4.chapterLists = data.data;
+      if (data.data.length != 0) {
+        _this4.title2 = data.data[0].belong_chapter;
+        // this.lessonList(this.title1, this.title2)
+      }
     });
   },
   // 获取节下拉列表
-  lessonList: function lessonList(thesauruName, chapter) {var _this4 = this;
-    console.log(chapter, thesauruName);
+  lessonList: function lessonList(thesauruName, chapter) {var _this5 = this;
+    // console.log(chapter, thesauruName)
     this.$minApi.lessonList({
       chapter: chapter,
       thesauruName: thesauruName }).
     then(function (data) {
       console.log(data);
-      _this4.lessonLists = data.data;
+      _this5.lessonLists = data.data;
+      if (data.data.length != 0) {
+        _this5.title3 = data.data[0].belong_lesson;
+        // console.log(data.data[0].belong_lesson)
+        _this5.wordListByChapter();
+      }
+    });
+  },
+  // 通过课程章节获取单词列表
+  wordListByChapter: function wordListByChapter() {var _this6 = this;
+    // console.log(this.title3,lesson)
+    this.$minApi.wordListByChapter({
+      thesauruName: this.title1,
+      chapter: this.title2,
+      lesson: this.title3 }).
+    then(function (data) {
+      _this6.list = data.data;
+      console.log(data);
     });
   } }), _defineProperty(_data$watch$component, "created", function created()
 
-{
+{var _this7 = this;
   this.thesaurusList();
+  uni.getStorage({
+    key: 'selectedWords',
+    success: function success(data) {
+      console.log(data);
+      data.data.forEach(function (val) {
+        _this7.result.push(val.wordId.toString());
+      });
+      console.log(_this7.result);
+    } });
+
 }), _data$watch$component);exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

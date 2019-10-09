@@ -21,12 +21,12 @@
 
 
 						<van-checkbox-group :value="result" @change="onChange()">
-							<view class="checkedBox" v-for="(city, index2) in sort.list" :key="index2">
+							<view class="checkedBox" v-for="(allWord, index2) in sort.list" :key="index2">
 								<view class="box" :style="{height:getListAttrItemHeight,padding:'40rpx 24rpx' ,'border-radius':'16rpx', borderBottom:getListAttrItemBorderBottom,'margin-top':getListAttrItemHeightMargin,background:getListAttrItemBackgroundColor}">
-									<van-checkbox class="vanCheckBox" :name="city.code" checked-color="#FFBB00">
+									<van-checkbox class="vanCheckBox" :name="allWord.wordId" checked-color="#FFBB00">
 										<view class="words">
-											<view for="" class="word">{{city.name}}</view>
-											<view for="" class="Interpretation">n.同谋，从犯；附件</view>
+											<view for="" class="word">{{allWord.wordSpell}}</view>
+											<view for="" class="Interpretation">{{allWord.interpretation}}</view>
 										</view>
 									</van-checkbox>
 								</view>
@@ -56,13 +56,14 @@
 			return {
 				list: ['a', 'b', 'c'],
 				result: [],
-
 				index: "",
 				scrollTop: 0,
 				disArray: [0],
 				activeIndex: 0,
 				fadeFlag: false,
-				Timer: null
+				Timer: null,
+				arr: [],
+				b: []
 			}
 		},
 		props: {
@@ -229,14 +230,47 @@
 			chooseItem(item) {
 				this.$emit('chooseItem', item)
 			},
-
-
 			onChange(event) {
 				this.result = event.detail
 				console.log(this.result)
+				console.log(this.listData)
+				// 保存到storage里面
+				this.result.forEach(data => {
+					this.listData.forEach(val => {
+						val.list.forEach(nVal => {
+							if (data == nVal.wordId) {
+								this.arr.push(nVal)
+							}
+						})
+					})
+				})
+				console.log(this.arr)
+
+				this.arr.forEach(i => {
+					if (this.b.indexOf(i) === -1) {
+						this.b.push(i)
+					}
+				})
+				console.log(this.b)
+				uni.setStorage({
+					key: 'selectedWords',
+					data: this.b
+				});
 			}
 
 		},
+		created() {
+			uni.getStorage({
+				key: 'selectedWords',
+				success: (data) => {
+					console.log(data)
+					data.data.forEach(val => {
+						this.result.push(val.wordId.toString())
+					})
+					console.log(this.result)
+				}
+			});
+		}
 
 	}
 </script>
@@ -254,7 +288,7 @@
 		font-weight: 400;
 		color: rgba(151, 157, 171, 1);
 		line-height: 40rpx;
-		
+
 	}
 
 	.select-page {

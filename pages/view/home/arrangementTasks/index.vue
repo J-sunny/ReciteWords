@@ -27,9 +27,25 @@
 		<!-- 内容 -->
 		<view class="contentBox">
 			<!-- 按课程 -->
-			<byCourse v-if="show=='course'"></byCourse>
+			<byCourse v-if="show=='course'" @checkedAll=""></byCourse>
 			<!-- 按字母 -->
 			<buLetter v-if="show=='word'"></buLetter>
+		</view>
+		<!-- 底部全选 -->
+		<view class="allCheck">
+			<!-- <label class="radio"> -->
+			<!-- <checkbox  color="#FFBB00" style="transform:scale(1)" @tap="checkAll=!checkAll" :checked="checkAll"/>全选 -->
+			<!-- 按课程全选 -->
+			<van-checkbox v-if="show=='course'" class="radio" :value="checkAllCourse" @change="selectAllCourse()" checked-color="#FFBB00">全选</van-checkbox>
+			<!-- 按字母全选 -->
+			<van-checkbox v-if="show=='word'" class="radio" :value="checkAllWord" @change="selectAllWord()" checked-color="#FFBB00">全选</van-checkbox>
+			<!-- </label> -->
+			<!-- <label v-if="wordCount!=0" url='/pages/view/home/arrangementTasks/checkSelected' class="lookCheck">
+				查看已选（{{wordCount}}）
+			</label> -->
+			<navigator  url='/pages/view/home/arrangementTasks/checkSelected' class="lookCheck lookActive">
+				查看已选（{{wordCount}}）
+			</navigator>
 		</view>
 	</view>
 </template>
@@ -41,7 +57,10 @@
 	export default {
 		data() {
 			return {
-				show: 'course'
+				show: 'course',
+				checkAllCourse: false,
+				checkAllWord: false,
+				wordCount: 0
 			}
 		},
 		components: {
@@ -55,11 +74,31 @@
 					delta: 1
 				});
 			},
-			// 切换选择类型
-			changeType() {
-
+			// 课程全选
+			selectAllCourse(event) {
+				// console.log(event.detail)
+				this.checkAllCourse = event.detail
 			},
+			// 字母全选
+			selectAllWord(event) {
+				// console.log(event.detail)
+				this.checkAllWord = event.detail
+			},
+
 		},
+		created() {
+			uni.getStorage({
+				key: 'selectedWords',
+				success: (data) => {
+					console.log(data)
+					this.wordCount=data.data.length
+					// data.data.forEach(val => {
+					// 	this.result.push(val.wordId.toString())
+					// })
+					// console.log(this.result)
+				}
+			});
+		}
 	}
 </script>
 
@@ -159,5 +198,52 @@
 		.contentBox {
 			margin-top: 24rpx;
 		}
+
+		// 底部
+		.allCheck {
+			padding: 0 32rpx;
+			box-sizing: border-box;
+			position: fixed;
+			bottom: 0;
+			width: 100%;
+			height: 112rpx;
+			background: #FFFFFF;
+			box-shadow: 0px -6rpx 24rpx rgba(201, 201, 201, 1);
+			opacity: 1;
+			z-index: 100;
+
+			.radio {
+				line-height: 112rpx;
+				font-size: 32rpx;
+				font-weight: 500;
+				color: rgba(46, 53, 72, 1);
+				margin-top: 40rpx;
+				display: inline-block;
+			}
+
+			.lookCheck {
+				display: inline-block;
+				width: 456rpx;
+				height: 84rpx;
+				opacity: 1;
+				border-radius: 44rpx;
+				float: right;
+				text-align: center;
+				font-size: 32rpx;
+				font-weight: 400;
+				line-height: 84rpx;
+				opacity: 1;
+				margin-top: 14rpx;
+				background-color: #EFEFF1;
+				color: #979DAB;
+
+			}
+
+			.lookActive {
+				background: rgba(255, 187, 0, 1);
+				color: rgba(255, 255, 255, 1);
+			}
+		}
+
 	}
 </style>

@@ -142,7 +142,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 var _city = _interopRequireDefault(__webpack_require__(/*! ../../commont/city.js */ 51));
-var _leeSelect = _interopRequireDefault(__webpack_require__(/*! ../../../components/lee-select/lee-select/lee-select.vue */ 52));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var uniIndexedList = function uniIndexedList() {return __webpack_require__.e(/*! import() | node-modules/@dcloudio/uni-ui/lib/uni-indexed-list/uni-indexed-list */ "node-modules/@dcloudio/uni-ui/lib/uni-indexed-list/uni-indexed-list").then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-indexed-list/uni-indexed-list.vue */ 171));};var uniSelect = function uniSelect() {return __webpack_require__.e(/*! import() | components/lee-selectIndex/lee-select/lee-select */ "components/lee-selectIndex/lee-select/lee-select").then(__webpack_require__.bind(null, /*! ../../../components/lee-selectIndex/lee-select/lee-select.vue */ 178));};var _default =
+var _leeSelect = _interopRequireDefault(__webpack_require__(/*! @/components/lee-select/lee-select/lee-select.vue */ 52));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var uniIndexedList = function uniIndexedList() {return __webpack_require__.e(/*! import() | node-modules/@dcloudio/uni-ui/lib/uni-indexed-list/uni-indexed-list */ "node-modules/@dcloudio/uni-ui/lib/uni-indexed-list/uni-indexed-list").then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-indexed-list/uni-indexed-list.vue */ 171));};var uniSelect = function uniSelect() {return __webpack_require__.e(/*! import() | components/lee-selectIndex/lee-select/lee-select */ "components/lee-selectIndex/lee-select/lee-select").then(__webpack_require__.bind(null, /*! @/components/lee-selectIndex/lee-select/lee-select.vue */ 178));};var _default =
 
 
 {
@@ -192,10 +192,19 @@ var _leeSelect = _interopRequireDefault(__webpack_require__(/*! ../../../compone
       // 	//取高度
       // 	console.log(res[0].height);
       // })
+    },
+    // 获取所有单词列表
+    allWordList: function allWordList() {var _this = this;
+      this.$minApi.allWordList().then(function (data) {
+        _this.listData = data.data;
+        console.log(data.data);
+      });
     } },
 
   created: function created() {
     this.getHeight();
+    this.allWordList();
+    // console.log(allWord)
   } };exports.default = _default;
 
 /***/ }),
@@ -363,13 +372,14 @@ __webpack_require__.r(__webpack_exports__);
     return {
       list: ['a', 'b', 'c'],
       result: [],
-
       index: "",
       scrollTop: 0,
       disArray: [0],
       activeIndex: 0,
       fadeFlag: false,
-      Timer: null };
+      Timer: null,
+      arr: [],
+      b: [] };
 
   },
   props: {
@@ -536,12 +546,47 @@ __webpack_require__.r(__webpack_exports__);
     chooseItem: function chooseItem(item) {
       this.$emit('chooseItem', item);
     },
-
-
-    onChange: function onChange(event) {
+    onChange: function onChange(event) {var _this3 = this;
       this.result = event.detail;
       console.log(this.result);
-    } } };exports.default = _default2;
+      console.log(this.listData);
+      // 保存到storage里面
+      this.result.forEach(function (data) {
+        _this3.listData.forEach(function (val) {
+          val.list.forEach(function (nVal) {
+            if (data == nVal.wordId) {
+              _this3.arr.push(nVal);
+            }
+          });
+        });
+      });
+      console.log(this.arr);
+
+      this.arr.forEach(function (i) {
+        if (_this3.b.indexOf(i) === -1) {
+          _this3.b.push(i);
+        }
+      });
+      console.log(this.b);
+      uni.setStorage({
+        key: 'selectedWords',
+        data: this.b });
+
+    } },
+
+
+  created: function created() {var _this4 = this;
+    uni.getStorage({
+      key: 'selectedWords',
+      success: function success(data) {
+        console.log(data);
+        data.data.forEach(function (val) {
+          _this4.result.push(val.wordId.toString());
+        });
+        console.log(_this4.result);
+      } });
+
+  } };exports.default = _default2;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

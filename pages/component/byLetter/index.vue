@@ -17,7 +17,7 @@
 			 itemHeight=160></lee-select>
 		</view>
 		<!-- 底部全选 -->
-		<view class="allCheck">
+		<view class="allCheck" v-if="false">
 			<!-- <label class="radio"> -->
 			<!-- <checkbox color="#FFBB00" style="transform:scale(1)" @tap="checkAll=!checkAll" :checked="checkAll" /> -->
 
@@ -34,15 +34,15 @@
 
 <script>
 	import uniIndexedList from '@dcloudio/uni-ui/lib/uni-indexed-list/uni-indexed-list.vue'
-	import city from '../../commont/city.js'
-	import leeSelect from '../../../components/lee-select/lee-select/lee-select.vue'
-	import uniSelect from '../../../components/lee-selectIndex/lee-select/lee-select.vue'
+	import allWord from '../../commont/city.js'
+	import leeSelect from '@/components/lee-select/lee-select/lee-select.vue'
+	import uniSelect from '@/components/lee-selectIndex/lee-select/lee-select.vue'
 
 	export default {
 		data() {
 			return {
 				checkAll: false,
-				listData: city,
+				listData: allWord,
 				value: '',
 				quickPanelData: [
 					// {
@@ -85,10 +85,19 @@
 				// 	//取高度
 				// 	console.log(res[0].height);
 				// })
+			},
+			// 获取所有单词列表
+			allWordList() {
+				this.$minApi.allWordList().then(data => {
+					this.listData = data.data
+					console.log(data.data)
+				})
 			}
 		},
 		created() {
 			this.getHeight()
+			this.allWordList()
+			// console.log(allWord)
 		}
 
 	}

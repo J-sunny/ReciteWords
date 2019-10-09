@@ -37,6 +37,7 @@
 			<image class="arrangementPic" src="../../../../static/images/ArrangementTB.png" mode=""></image>
 			<view class='arrangementTitle'>布置任务</view>
 		</navigator>
+		<van-toast id="van-toast" />
 	</view>
 </template>
 
@@ -44,6 +45,7 @@
 	import
 	uniCalendar
 	from "../../../../components/uni-calendar/uni-calendar"
+	import Toast from '@/wxcomponents/dist/toast/toast';
 	export default {
 		components: {
 			uniCalendar
@@ -82,13 +84,17 @@
 		methods: {
 			// 日历
 			change(e) {
-				// console.log(e)
+				console.log(e)
 				this.year = e.year
 				this.month = e.month
 				this.day = e.date
 				// this.taskCalendar()
 				this.falg = e.fulldate
 				this.getDayOfMissionList()
+				uni.setStorage({
+					key: 'taskDate',
+					data: e.fulldate
+				});
 			},
 			// 获取任务日历数据
 			taskCalendar() {

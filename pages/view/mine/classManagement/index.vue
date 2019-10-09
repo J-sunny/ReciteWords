@@ -11,30 +11,28 @@
 		</view>
 		<!-- 内容 -->
 		<view class="classConBox">
-			<view class="classCon" v-for="item in 10" :key='item'>
+			<view class="classCon" v-for="item in classLists" :key='item.classId'>
 				<view class="classConLeft">
-					<view class="className">英语系大三1班</view>
-					<view class="grade">年级：2016级</view>
-					<view class="grade">学生数量：26个</view>
+					<view class="className">{{item.className}}</view>
+					<view class="grade">年级：{{item.classYear}}级</view>
+					<view class="grade">学生数量：{{item.studentInfo.length}}个</view>
 				</view>
-				<label @click="linkTo()" class="classConright">
+				<label @click="linkTo(item.classId)" class="classConright">
 					查看详情
 				</label>
 			</view>
 		</view>
 
-		
+
 
 	</view>
 </template>
 
 <script>
-	
 	export default {
 		data() {
 			return {
-				show: true,
-				columns: ['一班', '二班', '三班'],
+				classLists: []
 			}
 		},
 		components: {
@@ -48,14 +46,22 @@
 				});
 			},
 			// 查看详情页面跳转
-			linkTo() {
+			linkTo(classId) {
 				uni.navigateTo({
-					url: 'seeDetails'
+					url: 'seeDetails?classId=' + classId
+				})
+			},
+			// 获取当前用户管理的班级列表
+			classList() {
+				this.$minApi.classList({}).then(data => {
+					console.log(data)
+					this.classLists = data.data
 				})
 			}
-
 		},
-		created() {}
+		created() {
+			this.classList()
+		}
 	}
 </script>
 

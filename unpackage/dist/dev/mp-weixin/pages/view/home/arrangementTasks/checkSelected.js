@@ -105,7 +105,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var popupLayer = function popupLayer() {return __webpack_require__.e(/*! import() | components/popup-layer */ "components/popup-layer").then(__webpack_require__.bind(null, /*! ../../../../components/popup-layer.vue */ 192));};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
 
@@ -178,6 +178,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+var _toast = _interopRequireDefault(__webpack_require__(/*! @/wxcomponents/dist/toast/toast */ 14));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var popupLayer = function popupLayer() {return __webpack_require__.e(/*! import() | components/popup-layer */ "components/popup-layer").then(__webpack_require__.bind(null, /*! @/components/popup-layer.vue */ 192));};var _default =
 {
   data: function data() {
     return {
@@ -186,9 +188,13 @@ __webpack_require__.r(__webpack_exports__);
       fabu: true,
       result: [],
       results: [],
+      classId: [],
+      wordId: [],
       classArr: [],
       selectedClassList: [],
-      selectedClassNum: '' };
+      lookSelectedList: [],
+      selectedClassNum: '',
+      taskDate: '' };
 
   },
   components: {
@@ -207,18 +213,23 @@ __webpack_require__.r(__webpack_exports__);
       console.log(this.result);
     },
     // 选择班级
-    onChangess: function onChangess(event) {
+    onChangess: function onChangess(event) {var _this = this;
       console.log(event);
       this.results = event.detail;
       console.log(this.results);
+      this.classId = [];
+      this.results.forEach(function (data) {
+        _this.classId.push(parseInt(data));
+      });
+      console.log(this.classId);
     },
     // 确认选择班级
-    confirmClass: function confirmClass() {var _this = this;
+    confirmClass: function confirmClass() {var _this2 = this;
       this.selectedClassList = [];
       this.results.forEach(function (data) {
-        _this.classArr.forEach(function (val) {
+        _this2.classArr.forEach(function (val) {
           if (data == val.classId) {
-            _this.selectedClassList.push(val.className);
+            _this2.selectedClassList.push(val.className);
           }
         });
       });
@@ -238,17 +249,64 @@ __webpack_require__.r(__webpack_exports__);
       this.fabu = false;
     },
     // 获取班级下拉列表
-    classList: function classList() {var _this2 = this;
-      this.$minApi.classList({
+    classList: function classList() {var _this3 = this;
+      this.$minApi.getClassList({
         schoolId: 1 }).
       then(function (data) {
-        _this2.classArr = data.data;
+        _this3.classArr = data.data;
         console.log(data);
+      });
+    },
+    // 教师发布任务
+    publish: function publish() {
+      if (this.classId.length == 0) {
+        (0, _toast.default)("请选择班级！");
+        return false;
+      }
+
+      console.log(this.classId);
+      this.$minApi.publish({
+        classId: this.classId.toString(),
+        taskDate: this.taskDate,
+        wordId: this.wordId.toString() }).
+      then(function (data) {
+        console.log(data);
+        if (data.code == 200) {
+          uni.switchTab({
+            url: "../index/index" });
+
+          (0, _toast.default)("任务布置成功！");
+        } else {
+          (0, _toast.default)(data.msg);
+        }
       });
     } },
 
-  created: function created() {
+  created: function created() {var _this4 = this;
     this.classList();
+    uni.getStorage({
+      key: 'selectedWords',
+      success: function success(data) {
+        // console.log(data)
+        _this4.lookSelectedList = data.data;
+        console.log(_this4.lookSelectedList);
+        data.data.forEach(function (val) {
+          _this4.result.push(val.wordId.toString());
+          _this4.wordId.push(val.wordId);
+        });
+        console.log(_this4.result);
+      } });
+
+    uni.getStorage({
+      key: 'taskDate',
+      success: function success(data) {
+        _this4.taskDate = data.data;
+        console.log(data);
+      } });
+
+  },
+  onLoad: function onLoad() {
+
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

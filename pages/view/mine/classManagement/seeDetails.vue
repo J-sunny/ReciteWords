@@ -110,17 +110,26 @@
 				this.showDelect = true
 				console.log(this.showDelect)
 			},
-			// 删除班级弹框取消按钮
+			// 删除班级弹框确认按钮
 			onConfirmDel() {
 				console.log("确认")
-				Toast("删除成功")
 				this.showDelect = false
-				console.log(this.showDelect)
+				// console.log(this.showDelect)
+				// 删除班级
+				this.$minApi.classDelete({}).then(data => {
+					if (data.code == 200) {
+						Toast("删除成功")
+					} else {
+						Toast(data.msg)
+					}
+					console.log(data)
+				})
 			},
+			// 删除班级弹框取消按钮
 			onCancelDel() {
 				console.log("取消")
 				this.showDelect = false
-				console.log(this.showDelect)
+				// console.log(this.showDelect)
 			},
 			// 修改班级信息页面跳转
 			linkTo() {
@@ -132,6 +141,9 @@
 		},
 		created() {
 			this.classList()
+		},
+		onLoad(options) {
+			console.log(options)
 		}
 
 	}
