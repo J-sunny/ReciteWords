@@ -40,12 +40,19 @@
 					userSchoolId: '1',
 					userIdenty: '1'
 				}).then(data => {
-					Toast(data.msg);
-					console.log(data)
-					uni.setStorageSync('token', data.data.token);
+					setTimeout(a => {
+						Toast(data.msg);
+					}, 500)
 					uni.switchTab({
 						url: '../home/index/index'
 					});
+					// console.log(data)
+					uni.setStorageSync('token', data.data.token);
+					this.$minApi.getUserInfo({}).then(res => {
+						console.log(res)
+						uni.setStorageSync('belongSchoolId', res.data.belongSchoolId);
+					})
+
 				})
 			}
 		}

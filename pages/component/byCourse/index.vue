@@ -71,12 +71,12 @@
 			<!-- <checkbox  color="#FFBB00" style="transform:scale(1)" @tap="checkAll=!checkAll" :checked="checkAll"/>全选 -->
 			<van-checkbox class="radio" :value="checkAll" @change="onChange()" checked-color="#FFBB00">全选</van-checkbox>
 			<!-- </label> -->
-			<label v-if='lookSelects==false' url='/pages/view/home/arrangementTasks/checkSelected' class="lookCheck">
+			<label v-if='lookSelects==false' class="lookCheck">
 				查看已选（{{wordCount}}）
 			</label>
-			<navigator v-if="lookSelects!=false" url='/pages/view/home/arrangementTasks/checkSelected' class="lookCheck lookActive">
+			<label v-if="lookSelects!=false" class="lookCheck lookActive">
 				查看已选（{{wordCount}}）
-			</navigator>
+			</label>
 		</view>
 
 		<!-- 遮罩层 -->
@@ -92,6 +92,7 @@
 		uniIcon
 	} from '@dcloudio/uni-ui/lib/uni-icon/uni-icon.vue'
 	export default {
+		props:['fSendWords'],
 		data() {
 			return {
 				title1: '暂无数据',
@@ -177,16 +178,15 @@
 				chapterLists: [],
 				lessonLists: [],
 				arr: [],
-				b: [],
-				qArr:[]
+				arrb: []
 
 			};
 		},
-		watch: {
-			result() {
-
-				// console.log(this.checkAll)
-			}
+		mounted() {
+			console.log(this.fSendWords)
+			this.fSendWords.forEach(val => {
+				this.result.push(val.wordId.toString())
+			})
 		},
 		components: {
 			uniIcon
@@ -307,46 +307,54 @@
 				console.log(this.result)
 				this.wordCount = this.result.length
 				this.checkAll = event.detail
-				this.lookSelects = event.detail
+				// this.lookSelects = event.detail
 			},
-			
+
 			onChanges(event) {
-				console.log(this.qArr)
 				this.result = event.detail
-				console.log(this.result)
+				// console.log(this.result)
+
+				this.result.forEach(data => {
+					this.list.forEach(val => {
+						if (data == val.wordId) {
+							this.arr.push(val)
+						}
+					})
+				})
+				// 去除重复
+				let hash = {}
+				this.arr = this.arr.reduce((preVal, curVal) => {
+					hash[curVal.wordId] ? '' : hash[curVal.wordId] = true && preVal.push(curVal);
+					return preVal
+				}, [])
+
+				// console.log(this.arr)
+
+				// 取消选择的单词
 				if (this.result.length == 0) {
-					this.lookSelects = false
+					this.arr = []
 				} else {
-					this.lookSelects = true
+					this.arrb = []
 					this.result.forEach(data => {
-						this.list.forEach(val => {
+						this.arr.forEach(val => {
 							if (data == val.wordId) {
-								this.arr.push(val)
+								console.log(val)
+								this.arrb.push(val)
 							}
 						})
 					})
-					console.log(this.arr)
-
-					// this.arr.forEach(i => {
-					// 	if (this.b.indexOf(i) == -1) {
-					// 		this.b.push(i)
-					// 	}
-					// })
-					// 去除重复
-					this.b = [...new Set(this.arr)]
-					this.qArr=this.b
-
-					console.log(this.b)
-					console.log(this.qArr)
 				}
-				// console.log(this.arr)
-				// 保存到storage里面
-				uni.setStorage({
-					key: 'selectedWords',
-					data: this.b
-				});
-				this.wordCount = this.result.length
+				// 去重复
+				let hashb = {}
+				this.arrb = this.arrb.reduce((preVal, curVal) => {
+					hashb[curVal.wordId] ? '' : hashb[curVal.wordId] = true && preVal.push(curVal);
+					return preVal
+				}, [])
+				console.log(this.arrb)
+				// 传值给父级
+				this.$emit('sendCwords', this.arrb)
 			},
+			
 			// 获取课程下拉列表
 			thesaurusList() {
 				this.$minApi.thesaurusList({}).then(data => {
@@ -397,20 +405,21 @@
 					this.list = data.data
 					console.log(data)
 				})
-			}
+			},
+		
 		},
 		created() {
 			this.thesaurusList()
-			uni.getStorage({
-				key: 'selectedWords',
-				success: (data) => {
-					console.log(data)
-					data.data.forEach(val => {
-						this.result.push(val.wordId.toString())
-					})
-					console.log(this.result)
-				}
-			});
+			// uni.getStorage({
+			// 	key: 'selectedWords',
+			// 	success: (data) => {
+			// 		console.log(data)
+			// 		data.data.forEach(val => {
+			// 			this.result.push(val.wordId.toString())
+			// 		})
+			// 		console.log(this.result)
+			// 	}
+			// });
 		}
 	}
 </script>

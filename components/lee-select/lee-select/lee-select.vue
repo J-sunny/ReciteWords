@@ -32,7 +32,6 @@
 								</view>
 							</view>
 						</van-checkbox-group>
-
 					</view>
 				</view>
 			</view>
@@ -63,7 +62,8 @@
 				fadeFlag: false,
 				Timer: null,
 				arr: [],
-				b: []
+				arrb: [],
+				// flag:false
 			}
 		},
 		props: {
@@ -91,6 +91,7 @@
 					return {}
 				}
 			},
+			fSelectWords: {}
 		},
 		computed: {
 			getNavData() {
@@ -188,6 +189,11 @@
 		},
 		mounted() {
 			this.getDisArray()
+			this.fSelectWords.forEach(val => {
+				this.result.push(val.wordId.toString())
+			})
+
+			// console.log(this.result)
 		},
 		methods: {
 			scrollSelect(index) {
@@ -226,6 +232,7 @@
 					// console.log(item.list.length)
 				})
 				// console.log(this.disArray)
+				// this.flag=true
 			},
 			chooseItem(item) {
 				this.$emit('chooseItem', item)
@@ -234,7 +241,6 @@
 				this.result = event.detail
 				console.log(this.result)
 				console.log(this.listData)
-				// 保存到storage里面
 				this.result.forEach(data => {
 					this.listData.forEach(val => {
 						val.list.forEach(nVal => {
@@ -246,32 +252,32 @@
 				})
 				console.log(this.arr)
 
-				this.arr.forEach(i => {
-					if (this.b.indexOf(i) === -1) {
-						this.b.push(i)
-					}
-				})
-				console.log(this.b)
-				uni.setStorage({
-					key: 'selectedWords',
-					data: this.b
-				});
-			}
+				if (this.result.length == 0) {
+					this.arr = []
+				} else {
+					this.arrb = []
+					this.result.forEach(data => {
+						this.arr.forEach(val => {
+							if (data == val.wordId) {
+								console.log(val)
+								this.arrb.push(val)
+							}
+						})
+					})
+				}
+				// 去重复
+				let hashb = {}
+				this.arrb = this.arrb.reduce((preVal, curVal) => {
+					hashb[curVal.wordId] ? '' : hashb[curVal.wordId] = true && preVal.push(curVal);
+					return preVal
+				}, [])
+				console.log(this.arrb)
+				// 传值给父级
+				this.$emit('sendFwords', this.arrb)
+
+			},
 
 		},
-		created() {
-			uni.getStorage({
-				key: 'selectedWords',
-				success: (data) => {
-					console.log(data)
-					data.data.forEach(val => {
-						this.result.push(val.wordId.toString())
-					})
-					console.log(this.result)
-				}
-			});
-		}
-
 	}
 </script>
 

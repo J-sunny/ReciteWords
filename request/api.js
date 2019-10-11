@@ -9,7 +9,9 @@ minRequest.interceptors.request((request) => {
 	if (token) {
 		request.header["X-Token"] = token;
 	} else {
-
+		uni.redirectTo({
+			url: '/pages/view/login/index'
+		});
 	}
 	return request
 })
@@ -113,7 +115,7 @@ export default {
 		classSave(data) {
 			return minRequest.post('/teacher/manager/classSave', data)
 		},
-		// 删除学生
+		// 提出学生
 		studentDelete(data) {
 			return minRequest.post('/teacher/manager/studentDelete', data)
 		},
@@ -129,7 +131,7 @@ export default {
 		publish(data) {
 			return minRequest.post('/teacher/task/publish', data)
 		}
-		
+
 
 	}
 }

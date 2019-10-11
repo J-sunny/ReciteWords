@@ -131,7 +131,8 @@
 	}
 
 	.uni-calender__body-date-week .uni-calender__date.uni-calender__date-current .uni-calender__circle-box {
-		background: #fd2e32
+		background: #FFBB00;
+		border-radius:50%
 	}
 
 	.uni-calender__body-date-week .uni-calender__date.uni-calender__date-current.uni-calender__active {
@@ -166,7 +167,7 @@
 		width: 10rpx;
 		height: 10rpx;
 		border-radius: 50%;
-		background: #ff5a5f;
+		background: #FFBB00;
 		border: 1px #fff solid;
 		z-index: 2
 	}

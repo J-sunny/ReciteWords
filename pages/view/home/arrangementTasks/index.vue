@@ -27,9 +27,9 @@
 		<!-- 内容 -->
 		<view class="contentBox">
 			<!-- 按课程 -->
-			<byCourse v-if="show=='course'" @checkedAll=""></byCourse>
+			<byCourse @sendCwords='getCwords()' :fSendWords='wordCount' v-if="show=='course'"></byCourse>
 			<!-- 按字母 -->
-			<buLetter v-if="show=='word'"></buLetter>
+			<buLetter @sendFlwords='getLwords()' :fSendWords='wordCount' v-if="show=='word'"></buLetter>
 		</view>
 		<!-- 底部全选 -->
 		<view class="allCheck">
@@ -43,9 +43,9 @@
 			<!-- <label v-if="wordCount!=0" url='/pages/view/home/arrangementTasks/checkSelected' class="lookCheck">
 				查看已选（{{wordCount}}）
 			</label> -->
-			<navigator  url='/pages/view/home/arrangementTasks/checkSelected' class="lookCheck lookActive">
-				查看已选（{{wordCount}}）
-			</navigator>
+			<label @click="linkTo()" class="lookCheck lookActive">
+				查看已选（{{wordCount.length}}）
+			</label>
 		</view>
 	</view>
 </template>
@@ -60,7 +60,7 @@
 				show: 'course',
 				checkAllCourse: false,
 				checkAllWord: false,
-				wordCount: 0
+				wordCount: []
 			}
 		},
 		components: {
@@ -68,6 +68,23 @@
 			buLetter
 		},
 		methods: {
+			// 查看已选单词跳转
+			linkTo() {
+				uni.navigateTo({
+					url: '/pages/view/home/arrangementTasks/checkSelected?selectWords=' + encodeURIComponent(JSON.stringify(this.wordCount)),
+				})
+			},
+			// 获取按课程传过来的数据
+			getCwords(data) {
+				console.log(data)
+				this.wordCount = data
+			},
+			// 获取按字母传过来的值
+			getLwords(data) {
+				console.log(data)
+				this.wordCount = data
+			},
+
 			// 返回
 			goBack() {
 				uni.navigateBack({
@@ -87,17 +104,17 @@
 
 		},
 		created() {
-			uni.getStorage({
-				key: 'selectedWords',
-				success: (data) => {
-					console.log(data)
-					this.wordCount=data.data.length
-					// data.data.forEach(val => {
-					// 	this.result.push(val.wordId.toString())
-					// })
-					// console.log(this.result)
-				}
-			});
+			// uni.getStorage({
+			// 	key: 'selectedWords',
+			// 	success: (data) => {
+			// 		console.log(data)
+			// 		this.wordCount = data.data.length
+			// 		// data.data.forEach(val => {
+			// 		// 	this.result.push(val.wordId.toString())
+			// 		// })
+			// 		// console.log(this.result)
+			// 	}
+			// });
 		}
 	}
 </script>

@@ -155,7 +155,13 @@ var _toast = _interopRequireDefault(__webpack_require__(/*! @/wxcomponents/dist/
 //
 //
 var _default = { data: function data() {return { password: '', username: '' };}, methods: { // 登录
-    loginByAccount: function loginByAccount() {this.$minApi.loginByAccount({ password: this.password, username: this.username, userSchoolId: '1', userIdenty: '1' }).then(function (data) {(0, _toast.default)(data.msg);console.log(data);uni.setStorageSync('token', data.data.token);uni.switchTab({ url: '../home/index/index' });});} } };exports.default = _default;
+    loginByAccount: function loginByAccount() {var _this = this;this.$minApi.loginByAccount({ password: this.password, username: this.username, userSchoolId: '1', userIdenty: '1' }).then(function (data) {setTimeout(function (a) {(0, _toast.default)(data.msg);}, 500);uni.switchTab({ url: '../home/index/index' }); // console.log(data)
+        uni.setStorageSync('token', data.data.token);_this.$minApi.getUserInfo({}).then(function (res) {console.log(res);
+          uni.setStorageSync('belongSchoolId', res.data.belongSchoolId);
+        });
+
+      });
+    } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

@@ -157,9 +157,9 @@ __webpack_require__.r(__webpack_exports__);
     // console.log(uni.getStorageSync('token'))
     // 没有登录则跳转到登录页面
     if (!uni.getStorageSync('token')) {
-      uni.redirectTo({
-        url: '../../../view/login/index' });
-
+      // uni.redirectTo({
+      // 	url: '../../../view/login/index'
+      // });
     }
     this.getUserInfo();
   },
@@ -181,7 +181,7 @@ __webpack_require__.r(__webpack_exports__);
     loginOut: function loginOut() {
       this.$minApi.loginOut({}).then(function (data) {
         // console.log(data)
-        uni.removeStorageSync('token');
+        uni.clearStorageSync();
         uni.redirectTo({
           url: '../../../view/login/index' });
 

@@ -28,7 +28,7 @@
 		<view class="contentBox">
 			<!-- 班级 -->
 			<view class="classMajor">
-				班级：<label class='major'> XX专业XX系301班（ <label class='yellowColor'>0</label> /21人）</label>
+				班级：<label class='major'> XX专业XX系{{className}}（ <label class='yellowColor'>0</label> /{{taskDetailsLists.length}}人）</label>
 			</view>
 			<!-- 框框 -->
 			<view class="frame" v-for="item in taskDetailsLists" :key='item.studentId'>
@@ -59,6 +59,7 @@
 				taskId: '',
 				allWordCount: '',
 				taskTime: '',
+				className:'',
 				taskDetailsLists: [],
 				show1: false,
 				show: true
@@ -119,6 +120,7 @@
 			this.taskId = options.taskId
 			this.taskTime = options.taskTime
 			this.allWordCount = options.allWordCount
+			this.className=options.className
 
 			this.taskDetailsList(options.taskId)
 

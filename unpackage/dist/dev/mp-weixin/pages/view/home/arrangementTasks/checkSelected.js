@@ -194,7 +194,8 @@ var _toast = _interopRequireDefault(__webpack_require__(/*! @/wxcomponents/dist/
       selectedClassList: [],
       lookSelectedList: [],
       selectedClassNum: '',
-      taskDate: '' };
+      taskDate: '',
+      belongSchoolId: "" };
 
   },
   components: {
@@ -251,7 +252,7 @@ var _toast = _interopRequireDefault(__webpack_require__(/*! @/wxcomponents/dist/
     // 获取班级下拉列表
     classList: function classList() {var _this3 = this;
       this.$minApi.getClassList({
-        schoolId: 1 }).
+        schoolId: uni.getStorageSync('belongSchoolId') }).
       then(function (data) {
         _this3.classArr = data.data;
         console.log(data);
@@ -275,38 +276,64 @@ var _toast = _interopRequireDefault(__webpack_require__(/*! @/wxcomponents/dist/
           uni.switchTab({
             url: "../index/index" });
 
-          (0, _toast.default)("任务布置成功！");
+          uni.removeStorage({
+            key: 'selectedWords',
+            success: function success(res) {
+              console.log(res);
+            } });
+
+          setTimeout(function (a) {
+            (0, _toast.default)("布置任务成功！");
+          }, 1000);
         } else {
-          (0, _toast.default)(data.msg);
+          setTimeout(function (a) {
+            (0, _toast.default)(data.msg);
+          }, 1000);
         }
       });
     } },
 
   created: function created() {var _this4 = this;
     this.classList();
-    uni.getStorage({
-      key: 'selectedWords',
-      success: function success(data) {
-        // console.log(data)
-        _this4.lookSelectedList = data.data;
-        console.log(_this4.lookSelectedList);
-        data.data.forEach(function (val) {
-          _this4.result.push(val.wordId.toString());
-          _this4.wordId.push(val.wordId);
-        });
-        console.log(_this4.result);
-      } });
-
+    // uni.getStorage({
+    // 	key: 'selectedWords',
+    // 	success: (data) => {
+    // 		// console.log(data)
+    // 		this.lookSelectedList = data.data
+    // 		console.log(this.lookSelectedList)
+    // 		data.data.forEach(val => {
+    // 			this.result.push(val.wordId.toString())
+    // 			this.wordId.push(val.wordId)
+    // 		})
+    // 		console.log(this.result)
+    // 	}
+    // });
+    // 获取发布任务的日期
     uni.getStorage({
       key: 'taskDate',
       success: function success(data) {
-        _this4.taskDate = data.data;
-        console.log(data);
+        _this4.taskDate = data.data.split("-");
+        console.log(_this4.taskDate);
+        if (_this4.taskDate[1] < 10) {
+          _this4.taskDate[1] = "0" + _this4.taskDate[1];
+        }
+        if (_this4.taskDate[2] < 10) {
+          _this4.taskDate[2] = "0" + _this4.taskDate[2];
+        }
+        _this4.taskDate = _this4.taskDate[0] + "-" + _this4.taskDate[1] + "-" + _this4.taskDate[2];
+        console.log(_this4.taskDate);
       } });
 
-  },
-  onLoad: function onLoad() {
 
+  },
+  onLoad: function onLoad(options) {var _this5 = this;
+    // console.log(options)
+    console.log(JSON.parse(decodeURIComponent(options.selectWords)));
+    this.lookSelectedList = JSON.parse(decodeURIComponent(options.selectWords));
+    this.lookSelectedList.forEach(function (val) {
+      _this5.result.push(val.wordId.toString());
+      _this5.wordId.push(val.wordId);
+    });
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

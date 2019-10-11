@@ -87,7 +87,8 @@
 				selectedClassList: [],
 				lookSelectedList: [],
 				selectedClassNum: '',
-				taskDate:''
+				taskDate: '',
+				belongSchoolId: ""
 			}
 		},
 		components: {
@@ -144,7 +145,7 @@
 			// 获取班级下拉列表
 			classList() {
 				this.$minApi.getClassList({
-					schoolId: 1
+					schoolId: uni.getStorageSync('belongSchoolId')
 				}).then(data => {
 					this.classArr = data.data
 					console.log(data)
@@ -168,38 +169,64 @@
 						uni.switchTab({
 							url: "../index/index"
 						})
-						Toast("任务布置成功！")
+						uni.removeStorage({
+							key: 'selectedWords',
+							success: function(res) {
+								console.log(res)
+							}
+						});
+						setTimeout(a => {
+							Toast("布置任务成功！");
+						}, 1000)
 					} else {
-						Toast(data.msg)
+						setTimeout(a => {
+							Toast(data.msg);
+						}, 1000)
 					}
 				})
 			}
 		},
 		created() {
 			this.classList()
-			uni.getStorage({
-				key: 'selectedWords',
-				success: (data) => {
-					// console.log(data)
-					this.lookSelectedList = data.data
-					console.log(this.lookSelectedList)
-					data.data.forEach(val => {
-						this.result.push(val.wordId.toString())
-						this.wordId.push(val.wordId)
-					})
-					console.log(this.result)
-				}
-			});
+			// uni.getStorage({
+			// 	key: 'selectedWords',
+			// 	success: (data) => {
+			// 		// console.log(data)
+			// 		this.lookSelectedList = data.data
+			// 		console.log(this.lookSelectedList)
+			// 		data.data.forEach(val => {
+			// 			this.result.push(val.wordId.toString())
+			// 			this.wordId.push(val.wordId)
+			// 		})
+			// 		console.log(this.result)
+			// 	}
+			// });
+			// 获取发布任务的日期
 			uni.getStorage({
 				key: 'taskDate',
 				success: (data) => {
-					this.taskDate=data.data
-					console.log(data)
+					this.taskDate = data.data.split("-")
+					console.log(this.taskDate)
+					if (this.taskDate[1] < 10) {
+						this.taskDate[1] = "0" + this.taskDate[1]
+					}
+					if (this.taskDate[2] < 10) {
+						this.taskDate[2] = "0" + this.taskDate[2]
+					}
+					this.taskDate = this.taskDate[0] + "-" + this.taskDate[1] + "-" + this.taskDate[2]
+					console.log(this.taskDate)
 				}
 			});
-		},
-		onLoad() {
 
+		},
+		onLoad(options) {
+			// console.log(options)
+			console.log(JSON.parse(decodeURIComponent(options.selectWords)))
+			this.lookSelectedList = JSON.parse(decodeURIComponent(options.selectWords))
+			this.lookSelectedList.forEach(val => {
+				this.result.push(val.wordId.toString())
+				this.wordId.push(val.wordId)
+			})
 		}
 	}
 </script>

@@ -23,7 +23,7 @@
 					<view class='vocData'>{{item.taskTime}}</view>
 				</view>
 				<!-- 右边   查看详情 -->
-				<label hover-class='none' class='seeDetails' @click="linkTo(item.allWordCount,item.taskTime,item.taskId)">查看详情</label>
+				<label hover-class='none' class='seeDetails' @click="linkTo(item.allWordCount,item.taskTime,item.taskId,item.className)">查看详情</label>
 			</view>
 		</view>
 		<!-- 暂无任务 -->
@@ -62,35 +62,53 @@
 				myDate: null
 			}
 		},
-		onShow() {
-			this.token = uni.getStorageSync('token')
-		},
+
 		watch: {
-			falg(val, now) {
+			falg(selectDate, beforData) {
+				// console.log(selectDate, beforData)
 				this.myDate = this.falg
-				this.taskCalendar()
-				let nowArr = []
-				let valArr = val.split("-")
-				if (now == null) {
-					nowArr = valArr
-				} else {
-					nowArr = now.split("-")
-				}
-				if ((valArr[0] != nowArr[0] && valArr[1] != nowArr[1]) ||(now = null) ) {
-					
+				if (beforData != null) {
+					this.getDayOfMissionList()
+					if (selectDate.split("-")[0] != beforData.split("-")[0] || selectDate.split("-")[1] != beforData.split("-")[1]) {
+						this.taskCalendar()
+					}
 				}
 			},
+		},
+		created() {
+			console.log("Creade")
+			uni.getStorage({
+				key: 'taskDate',
+				success: (data) => {
+					// console.log(data)
+					this.year = data.data.split("-")[0]
+					this.month = data.data.split("-")[1]
+					this.day = data.data.split("-")[2]
+				}
+			});
+		},
+		onLoad() {
+			// console.log("onLode")
+			// console.log(this.year,this.month,this.day)
+		},
+		onShow() {
+			this.token = uni.getStorageSync('token')
+			if (!this.token) {
+				Toast("登录失效，请重新登录！")
+			}
+			this.taskCalendar()
+			this.getDayOfMissionList()
 		},
 		methods: {
 			// 日历
 			change(e) {
-				console.log(e)
+				// console.log(e)
 				this.year = e.year
 				this.month = e.month
 				this.day = e.date
 				// this.taskCalendar()
 				this.falg = e.fulldate
-				this.getDayOfMissionList()
+				// this.getDayOfMissionList()
 				uni.setStorage({
 					key: 'taskDate',
 					data: e.fulldate
@@ -102,73 +120,23 @@
 					year: this.year,
 					month: this.month,
 				}).then(data => {
-					// console.log(data)
-					if (data.data[0]) {
-						data.data.forEach(item => {
-							var data = {}
-							data.date = item.taskTime
-							this.selected.push(data)
-						})
-					// 	this.selecteds = [{
-					// 			date: '2019-09-05'
-					// 		},
-					// 		{
-					// 			date: '2019-09-06'
-					// 		},
-					// 		{
-					// 			date: '2019-09-07'
-					// 		},
-					// 		{
-					// 			date: '2019-09-08'
-					// 		},
-					// 		{
-					// 			date: '2019-09-09'
-					// 		},
-					// 		{
-					// 			date: '2019-09-10'
-					// 		},
-					// 		{
-					// 			date: '2019-09-15'
-					// 		},
-					// 		{
-					// 			date: '2019-09-17'
-					// 		},
-					// 		{
-					// 			date: '2019-09-19'
-					// 		},
-					// 		{
-					// 			date: '2019-09-20'
-					// 		},
-					// 		{
-					// 			date: '2019-09-26'
-					// 		},
-					// 		{
-					// 			date: '2019-09-28'
-					// 		},
-					// 		{
-					// 			date: '2019-09-29'
-					// 		},
-					// 		{
-					// 			date: '2019-08-29'
-					// 		},
-					// 		{
-					// 			date: '2019-08-22'
-					// 		},
-					// 		{
-					// 			date: '2019-08-20'
-					// 		},
-					// 		{
-					// 			date: '2019-08-23'
-					// 		},
-					// 	]
-					// 
-					// 
+					if (data.code == 200) {
+						if (data.data[0]) {
+							data.data.forEach(item => {
+								var data = {}
+								data.date = item.taskTime
+								this.selected.push(data)
+							})
+						}
 					}
+
+					// console.log(data)
 				})
 
 			},
 			// 单日任务详情列表
 			getDayOfMissionList() {
+				// console.log(this.year, this.month, this.day)
 				this.$minApi.dayOfMissionList({
 					month: this.month,
 					year: this.year,
@@ -181,10 +149,10 @@
 				})
 			},
 			// 页面跳转
-			linkTo(allWordCount, taskTime, taskId) {
+			linkTo(allWordCount, taskTime, taskId,className) {
 				uni.navigateTo({
 					url: '../details/operationalDetails?taskId=' + taskId + '&allWordCount=' + allWordCount + '&taskTime=' +
-						taskTime
+						taskTime+'&className='+className
 				})
 			}
 		},

@@ -211,7 +211,7 @@ var _toast = _interopRequireDefault(__webpack_require__(/*! @/wxcomponents/dist/
 //
 //
 //
-var _default = { data: function data() {return { taskId: '', allWordCount: '', taskTime: '', taskDetailsLists: [], show1: false, show: true };}, methods: { // 返回
+var _default = { data: function data() {return { taskId: '', allWordCount: '', taskTime: '', className: '', taskDetailsLists: [], show1: false, show: true };}, methods: { // 返回
     goBack: function goBack() {uni.navigateBack({ delta: 1 });}, // 查看详情跳转
     linkTo: function linkTo(studentId) {uni.navigateTo({ url: 'studentDetails?studentId=' + studentId });}, // 查看排名跳转
     linkToRanking: function linkToRanking() {uni.navigateTo({ url: 'ranking?taskId=' + this.taskId + '&allWordCount=' + this.allWordCount });}, // 任务详情列表
@@ -220,12 +220,14 @@ var _default = { data: function data() {return { taskId: '', allWordCount: '', t
     delectTask: function delectTask() {_dialog.default.confirm({ title: '  ', message: '是否确定删除任务？' }).then(function () {console.log("确认");(0, _toast.default)("删除成功"); // on confirm
       }).catch(function () {// on cancel
         console.log("取消");});} },
+
   onLoad: function onLoad(options) {
     // var data = JSON.parse(options.index); // 字符串转对象
     console.log(options);
     this.taskId = options.taskId;
     this.taskTime = options.taskTime;
     this.allWordCount = options.allWordCount;
+    this.className = options.className;
 
     this.taskDetailsList(options.taskId);
 

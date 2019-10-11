@@ -181,129 +181,97 @@ var _toast = _interopRequireDefault(__webpack_require__(/*! @/wxcomponents/dist/
       myDate: null };
 
   },
-  onShow: function onShow() {
-    this.token = uni.getStorageSync('token');
-  },
-  watch: {
-    falg: function falg(val, now) {
-      this.myDate = this.falg;
-      this.taskCalendar();
-      var nowArr = [];
-      var valArr = val.split("-");
-      if (now == null) {
-        nowArr = valArr;
-      } else {
-        nowArr = now.split("-");
-      }
-      if (valArr[0] != nowArr[0] && valArr[1] != nowArr[1] || (now = null)) {
 
+  watch: {
+    falg: function falg(selectDate, beforData) {
+      // console.log(selectDate, beforData)
+      this.myDate = this.falg;
+      if (beforData != null) {
+        this.getDayOfMissionList();
+        if (selectDate.split("-")[0] != beforData.split("-")[0] || selectDate.split("-")[1] != beforData.split("-")[1]) {
+          this.taskCalendar();
+        }
       }
     } },
 
+  created: function created() {var _this = this;
+    console.log("Creade");
+    uni.getStorage({
+      key: 'taskDate',
+      success: function success(data) {
+        // console.log(data)
+        _this.year = data.data.split("-")[0];
+        _this.month = data.data.split("-")[1];
+        _this.day = data.data.split("-")[2];
+      } });
+
+  },
+  onLoad: function onLoad() {
+    // console.log("onLode")
+    // console.log(this.year,this.month,this.day)
+  },
+  onShow: function onShow() {
+    this.token = uni.getStorageSync('token');
+    if (!this.token) {
+      (0, _toast.default)("登录失效，请重新登录！");
+    }
+    this.taskCalendar();
+    this.getDayOfMissionList();
+  },
   methods: {
     // 日历
     change: function change(e) {
-      console.log(e);
+      // console.log(e)
       this.year = e.year;
       this.month = e.month;
       this.day = e.date;
       // this.taskCalendar()
       this.falg = e.fulldate;
-      this.getDayOfMissionList();
+      // this.getDayOfMissionList()
       uni.setStorage({
         key: 'taskDate',
         data: e.fulldate });
 
     },
     // 获取任务日历数据
-    taskCalendar: function taskCalendar() {var _this = this;
+    taskCalendar: function taskCalendar() {var _this2 = this;
       this.$minApi.taskCalendar({
         year: this.year,
         month: this.month }).
       then(function (data) {
-        // console.log(data)
-        if (data.data[0]) {
-          data.data.forEach(function (item) {
-            var data = {};
-            data.date = item.taskTime;
-            _this.selected.push(data);
-          });
-          // 	this.selecteds = [{
-          // 			date: '2019-09-05'
-          // 		},
-          // 		{
-          // 			date: '2019-09-06'
-          // 		},
-          // 		{
-          // 			date: '2019-09-07'
-          // 		},
-          // 		{
-          // 			date: '2019-09-08'
-          // 		},
-          // 		{
-          // 			date: '2019-09-09'
-          // 		},
-          // 		{
-          // 			date: '2019-09-10'
-          // 		},
-          // 		{
-          // 			date: '2019-09-15'
-          // 		},
-          // 		{
-          // 			date: '2019-09-17'
-          // 		},
-          // 		{
-          // 			date: '2019-09-19'
-          // 		},
-          // 		{
-          // 			date: '2019-09-20'
-          // 		},
-          // 		{
-          // 			date: '2019-09-26'
-          // 		},
-          // 		{
-          // 			date: '2019-09-28'
-          // 		},
-          // 		{
-          // 			date: '2019-09-29'
-          // 		},
-          // 		{
-          // 			date: '2019-08-29'
-          // 		},
-          // 		{
-          // 			date: '2019-08-22'
-          // 		},
-          // 		{
-          // 			date: '2019-08-20'
-          // 		},
-          // 		{
-          // 			date: '2019-08-23'
-          // 		},
-          // 	]
-          // 
-          // 
+        if (data.code == 200) {
+          if (data.data[0]) {
+            data.data.forEach(function (item) {
+              var data = {};
+              data.date = item.taskTime;
+              _this2.selected.push(data);
+            });
+          }
         }
+
+        // console.log(data)
       });
 
     },
     // 单日任务详情列表
-    getDayOfMissionList: function getDayOfMissionList() {var _this2 = this;
+    getDayOfMissionList: function getDayOfMissionList() {var _this3 = this;
+      // console.log(this.year, this.month, this.day)
       this.$minApi.dayOfMissionList({
         month: this.month,
         year: this.year,
         day: this.day }).
       then(function (data) {
-        _this2.dayOfMissionList = data.data;
+        _this3.dayOfMissionList = data.data;
         // console.log(data)
       }).catch(function (err) {
         // console.log(err)
       });
     },
     // 页面跳转
-    linkTo: function linkTo(allWordCount, taskTime, taskId) {
+    linkTo: function linkTo(allWordCount, taskTime, taskId, className) {
       uni.navigateTo({
         url: '../details/operationalDetails?taskId=' + taskId + '&allWordCount=' + allWordCount + '&taskTime=' +
-        taskTime });
+        taskTime + '&className=' + className });
 
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

@@ -13,8 +13,8 @@
 		<view class="indexList">
 			<!-- <uni-indexed-list :options="list" :showSelect="true"></uni-indexed-list> -->
 			<!-- <uni-select :listData="listData" :quickPanelData="quickPanelData" @chooseItem="chooseItem"></uni-select> -->
-			<lee-select listBackgroundColor='#fff' :listData="listData" :quickPanelData="quickPanelData" @chooseItem="chooseItem"
-			 itemHeight=160></lee-select>
+			<lee-select @sendFwords='getZWords' :fSelectWords='fSendWords' listBackgroundColor='#fff' :listData="listData"
+			 :quickPanelData="quickPanelData" @chooseItem="chooseItem" itemHeight=160></lee-select>
 		</view>
 		<!-- 底部全选 -->
 		<view class="allCheck" v-if="false">
@@ -39,6 +39,7 @@
 	import uniSelect from '@/components/lee-selectIndex/lee-select/lee-select.vue'
 
 	export default {
+		props: ['fSendWords'],
 		data() {
 			return {
 				checkAll: false,
@@ -66,6 +67,12 @@
 			uniSelect
 		},
 		methods: {
+			// 获取子组件传过来的数据
+			getZWords(data) {
+				console.log(data)
+				this.$emit("sendFlwords",data)
+				
+			},
 			onChange(event) {
 				console.log(event.detail)
 				this.checkAll = event.detail
@@ -90,7 +97,7 @@
 			allWordList() {
 				this.$minApi.allWordList().then(data => {
 					this.listData = data.data
-					console.log(data.data)
+					// console.log(data.data)
 				})
 			}
 		},
@@ -98,6 +105,7 @@
 			this.getHeight()
 			this.allWordList()
 			// console.log(allWord)
+			// console.log(this.fSendWords)
 		}
 
 	}

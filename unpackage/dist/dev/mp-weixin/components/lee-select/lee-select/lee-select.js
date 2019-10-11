@@ -154,7 +154,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 {
   components: {
     baseClasses: baseClasses },
@@ -170,8 +169,9 @@ __webpack_require__.r(__webpack_exports__);
       fadeFlag: false,
       Timer: null,
       arr: [],
-      b: [] };
-
+      arrb: []
+      // flag:false
+    };
   },
   props: {
     listData: {
@@ -196,8 +196,9 @@ __webpack_require__.r(__webpack_exports__);
       type: Object,
       default: function _default() {
         return {};
-      } } },
+      } },
 
+    fSelectWords: {} },
 
   computed: {
     getNavData: function getNavData() {
@@ -293,11 +294,16 @@ __webpack_require__.r(__webpack_exports__);
       }
     } },
 
-  mounted: function mounted() {
+  mounted: function mounted() {var _this = this;
     this.getDisArray();
+    this.fSelectWords.forEach(function (val) {
+      _this.result.push(val.wordId.toString());
+    });
+
+    // console.log(this.result)
   },
   methods: {
-    scrollSelect: function scrollSelect(index) {var _this = this;
+    scrollSelect: function scrollSelect(index) {var _this2 = this;
       // console.log(index)
       clearTimeout(this.Timer);
       this.scrollTop = this.disArray[index];
@@ -305,7 +311,7 @@ __webpack_require__.r(__webpack_exports__);
       this.activeIndex = index;
       this.fadeFlag = true;
       this.Timer = setTimeout(function () {
-        _this.fadeFlag = false;
+        _this2.fadeFlag = false;
       }, 1000);
     },
     scroll: function scroll(e) {
@@ -318,66 +324,65 @@ __webpack_require__.r(__webpack_exports__);
         }
       }
     },
-    getDisArray: function getDisArray() {var _this2 = this;
+    getDisArray: function getDisArray() {var _this3 = this;
       var dis = this.disArray[0];
       this.quickPanelData.forEach(function (item, index) {
         dis = dis + uni.upx2px(item.height || 84);
-        _this2.disArray.push(dis);
+        _this3.disArray.push(dis);
       });
       this.listData.forEach(function (item, index) {
-        var length = _this2.disArray.length - 1;
-        dis = _this2.disArray[length] + (parseInt(_this2.getListAttrTitleHeight) + (parseInt(_this2.getListAttrItemHeight) +
-        parseInt(_this2.getListAttrItemHeightMargin)) *
+        var length = _this3.disArray.length - 1;
+        dis = _this3.disArray[length] + (parseInt(_this3.getListAttrTitleHeight) + (parseInt(_this3.getListAttrItemHeight) +
+        parseInt(_this3.getListAttrItemHeightMargin)) *
         item.list.length);
-        _this2.disArray.push(dis);
+        _this3.disArray.push(dis);
         // console.log(item.list.length)
       });
       // console.log(this.disArray)
+      // this.flag=true
     },
     chooseItem: function chooseItem(item) {
       this.$emit('chooseItem', item);
     },
-    onChange: function onChange(event) {var _this3 = this;
+    onChange: function onChange(event) {var _this4 = this;
       this.result = event.detail;
       console.log(this.result);
       console.log(this.listData);
-      // 保存到storage里面
       this.result.forEach(function (data) {
-        _this3.listData.forEach(function (val) {
+        _this4.listData.forEach(function (val) {
           val.list.forEach(function (nVal) {
             if (data == nVal.wordId) {
-              _this3.arr.push(nVal);
+              _this4.arr.push(nVal);
             }
           });
         });
       });
       console.log(this.arr);
 
-      this.arr.forEach(function (i) {
-        if (_this3.b.indexOf(i) === -1) {
-          _this3.b.push(i);
-        }
-      });
-      console.log(this.b);
-      uni.setStorage({
-        key: 'selectedWords',
-        data: this.b });
-
-    } },
-
-
-  created: function created() {var _this4 = this;
-    uni.getStorage({
-      key: 'selectedWords',
-      success: function success(data) {
-        console.log(data);
-        data.data.forEach(function (val) {
-          _this4.result.push(val.wordId.toString());
+      if (this.result.length == 0) {
+        this.arr = [];
+      } else {
+        this.arrb = [];
+        this.result.forEach(function (data) {
+          _this4.arr.forEach(function (val) {
+            if (data == val.wordId) {
+              console.log(val);
+              _this4.arrb.push(val);
+            }
+          });
         });
-        console.log(_this4.result);
-      } });
+      }
+      // 去重复
+      var hashb = {};
+      this.arrb = this.arrb.reduce(function (preVal, curVal) {
+        hashb[curVal.wordId] ? '' : hashb[curVal.wordId] =  true && preVal.push(curVal);
+        return preVal;
+      }, []);
+      console.log(this.arrb);
+      // 传值给父级
+      this.$emit('sendFwords', this.arrb);
 
-  } };exports.default = _default2;
+    } } };exports.default = _default2;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
